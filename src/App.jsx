@@ -6,7 +6,7 @@ import './App.css'
 function App() {
   const [count, setCount] = useState(0)
 
-  return ( // Testing workflow - Akira
+  return ( // Testing workflow - Baguio Strawberry Jam
     <>
       <div>
         <a href="https://vite.dev" target="_blank">
