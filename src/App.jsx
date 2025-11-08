@@ -1,11 +1,9 @@
-import { useState } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from "react-router"
 import Login from "./pages/Login/Login"
 import Register from "./pages/Register/Register"
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
