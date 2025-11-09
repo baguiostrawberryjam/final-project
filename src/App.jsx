@@ -10,6 +10,7 @@ import Register from "./pages/register/Register"
 import EditProfile from "./pages/setup/editProfile/EditProfile";
 import AddToDo from "./pages/dashboard/todos/addToDo/AddToDo";
 import EditToDo from "./pages/dashboard/todos/editToDo/EditToDo";
+import Setup from "./pages/setup/Setup"
 import './App.css';
 
 
