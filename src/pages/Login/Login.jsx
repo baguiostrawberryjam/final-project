@@ -4,6 +4,8 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase-config';
 import { useState } from 'react';
 
+// Test: Login folder still exists
+
 function Login() {
   
   const [email, setEmail] = useState('');
