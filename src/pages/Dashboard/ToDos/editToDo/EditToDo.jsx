@@ -41,7 +41,7 @@ function EditToDo() {
     })
     .then(() => {
         alert('Task updated successfully!');
-        window.location.href = '/dashboard';
+        window.location.href = '/final-project/dashboard';
     })
     .catch((error) => {
         console.log('Error updating task: ' + error.message);
@@ -61,7 +61,6 @@ function EditToDo() {
             <option value="pending">Pending</option>
             <option value="ongoing">Ongoing</option>
             <option value="complete">Complete</option>
-            <option value="cancelled">Cancelled</option>
         </select>
         <br /><br />
 
