@@ -5,6 +5,8 @@ import { onValue, ref, update } from 'firebase/database';
 import { NavLink } from 'react-router';
 import './dashboard.css';
 
+// Test: Dashboard folder still exists
+
 function Dashboard() {
 
     {/* Shows when user is logged in */}
