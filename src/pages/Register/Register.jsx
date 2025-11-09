@@ -14,6 +14,7 @@ function Register() {
     createUserWithEmailAndPassword(auth, email, password)
     .then((userInfo)=>{
       alert("Registered Successfully\nEmail: "+userInfo.user.email);
+      window.location.href = "./setup";
     })
     .catch((error)=>{
       console.log(error);
