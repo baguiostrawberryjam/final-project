@@ -48,7 +48,7 @@ function EditProfile() {
     update(ref(db, `/users/${user.uid}`), userData)
     .then(()=>{
       alert('Data Updated Successfully');
-      window.location.href='/dashboard';
+      window.location.href='/final-project/dashboard';
     })
     .catch((error)=>{
       console.log(error);

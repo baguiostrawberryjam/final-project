@@ -67,7 +67,7 @@ function App() {
             {/* Public Routes */}
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/*" element={<Navigate to="/login" />} />
+            <Route path="*" element={<Navigate to="/login" />} />
           </>
         )}
 
@@ -86,7 +86,7 @@ function App() {
             <Route path="/edit-profile" element={<EditProfile />} />
             <Route path="/add-todo" element={<AddToDo />} />
             <Route path="/edit-todo/:id" element={<EditToDo />} />
-            <Route path="/*" element={<Navigate to="/dashboard" />} />
+            <Route path="*" element={<Navigate to="/dashboard" />} />
           </>
         )}
       </Routes>
