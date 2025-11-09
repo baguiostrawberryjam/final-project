@@ -64,7 +64,6 @@ function EditToDo() {
         <label htmlFor="title">Task Title:</label>
             <input type="text"  id="title" value={title} onChange={(e) => checkTitle(e)}  placeholder="Enter task title" />
             <p className='txtError' id='eTitle'></p>
-        <br /><br />
 
         <label>Status:</label>
         <select value={status} onChange={(e) => setStatus(e.target.value)}>

@@ -12,6 +12,9 @@ function EditProfile() {
   const [contactNumber, setContactNumber] = useState('');
   const [user, setUser] = useState(null);
   const [userData, setUserData] = useState({});
+  const [isFirstNameValid, setIsFirstNameValid] = useState(false);
+  const [isLastNameValid, setIsLastNameValid] = useState(false);
+  const [isContactValid, setIsContactValid] = useState(false);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -55,6 +58,63 @@ function EditProfile() {
     });
   }
 
+  function checkFirstName(e){
+        let fName = e.target.value
+        let eFName = document.querySelector('#eFirstName');
+        eFName.innerHTML = ""
+
+        setFirstName(fName);
+
+        if(fName.trim().length <= 0){
+            eFName.innerHTML = "Blankspaces are not allowed"
+            setIsFirstNameValid(false);
+        } else if(fName.trim().length <= 3){
+            eFName.innerHTML = "Atleast 3 Characters"
+            setIsFirstNameValid(false);
+        } else {
+            setIsFirstNameValid(true);
+        }
+    }
+
+    function checkLastName(e){
+        let lName = e.target.value
+        let eLName = document.querySelector('#eLastName');
+        eLName.innerHTML = ""
+
+        setLastName(lName);
+
+        if(lName.trim().length <= 0){
+            eLName.innerHTML = "Blankspaces are not allowed";
+            setIsLastNameValid(false);
+        } else if(lName.trim().length <= 3){
+            eLName.innerHTML = "Atleast 3 Characters";
+            setIsLastNameValid(false);
+        } else {
+            setIsLastNameValid(true);
+        }
+    }
+
+    function checkContact(e){
+        let contact = e.target.value
+        let eCont = document.querySelector('#eContact');
+        eCont.innerHTML = ""
+
+        setContactNumber(contact)
+
+        if(contact.trim().length <= 0){
+            eCont.innerHTML = "Input Required"
+            setIsContactValid(false);
+        } else if(!contact.startsWith("09")){
+            eCont.innerHTML = "Must Start with 09"
+            setIsContactValid(false);
+        } else if(contact.trim().length !== 11){
+            eCont.innerHTML = "11 Digits only"
+        }  else {
+            setIsContactValid(true);
+        }
+    }
+
+
   return (
     <>
       {/* To make sure that we have both User and their Data */}
@@ -64,11 +124,17 @@ function EditProfile() {
         <div className='setup-card'>
 
           <h1>Edit Information Page</h1>
-          <input value={firstName} onChange={(e)=>setFirstName(e.target.value)} type="text" placeholder='First Name'/>
-          <input value={lastName} onChange={(e)=>setLastName(e.target.value)} type="text" placeholder='Last Name'/>
-          <input value={contactNumber} onChange={(e)=>setContactNumber(e.target.value)} type="text" placeholder='Contact Number'/>
-          <button onClick={updateData}>Setup</button>
-          <NavLink to="/dashboard"><button>Return</button></NavLink>
+          <input value={firstName} onChange={(e)=>checkFirstName(e)} type="text" placeholder='First Name'/>
+          <p className='txtError' id='eFirstName'></p>
+
+          <input value={lastName} onChange={(e)=>checkLastName(e)} type="text" placeholder='Last Name'/>
+          <p className='txtError' id='eLastName'></p>
+
+          <input value={contactNumber} onChange={(e)=>checkContact(e)} type="text" placeholder='Contact Number'/>
+          <p className='txtError' id='eContact'></p>
+
+          <button onClick={updateData} disabled={!isFirstNameValid || !isLastNameValid || !isContactValid}>Confirm Edit</button>
+          <NavLink to="/final-project/dashboard"><button>Return</button></NavLink>
           
         </div>
 
