@@ -1,0 +1,78 @@
+
+
+/* Main container */
+.login-container{
+    background-color: var(--gray);
+    border-radius: 10px; 
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    min-height: 100vh; /* full viewport minus top+bottom margin */
+    box-sizing: border-box; /* include padding in size calculations */
+}
+
+.login-left-section, .login-right-section {
+    flex: 1 1 400px;      /* grow/shrink, min width 400px */
+    margin: 10px;
+}
+
+/* Login left container */
+.login-left-section{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(149, 145, 145);
+    margin: 10px;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.login-left-section img{
+    width: 100%;       /* fill the container */
+    max-width: 500px;  /* don’t exceed original size */
+    height: auto;      /* maintain aspect ratio */
+    object-fit: cover;
+    background-position: center;
+}
+
+/* Login right container */
+.login-right-section{
+    max-width: 450px;
+}
+
+.login-right-section .header{
+    text-align: center;
+}
+.header{
+    display: grid;
+
+}
+
+.title-bold{
+    font-family: var(--font-title);
+    font-weight: var(--dosis-700);
+}
+
+.subtitle-regular{
+    font-family: var(--font-subtitle);
+    font-weight: var(--quicksand-400);
+}
+
+.login-forms{
+    display: grid;
+}
+
+.login-right-section p{
+    text-align: center;
+}
+
+.quick-login{
+    display: grid;
+}
+
+input{
+    border-radius: 10px;
+}
+
