@@ -5,6 +5,7 @@ import { getDatabase } from "firebase/database";
 const firebaseConfig = {
   apiKey: "AIzaSyBNBQ7jm98KUN2P_Nb-jLHLz0i42SkVN3s",
   authDomain: "project-management-syste-8eed5.firebaseapp.com",
+  databaseURL: "https://project-management-syste-8eed5-default-rtdb.asia-southeast1.firebasedatabase.app",
   projectId: "project-management-syste-8eed5",
   storageBucket: "project-management-syste-8eed5.firebasestorage.app",
   messagingSenderId: "93060568407",
