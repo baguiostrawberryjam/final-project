@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "./firebase-config";
@@ -51,7 +51,7 @@ function App() {
   }
 
   return (
-    <BrowserRouter basename="/final-project">
+    <BrowserRouter basename="/final-project/">
       <Routes>
         {user && isAdmin && (
           <>
@@ -66,7 +66,7 @@ function App() {
             {/* Public Routes */}
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="*" element={<Navigate to="/login" />} />
+            <Route path="/*" element={<Navigate to="/login" />} />
           </>
         )}
 
@@ -85,7 +85,7 @@ function App() {
             <Route path="/edit-profile" element={<EditProfile />} />
             <Route path="/add-todo" element={<AddToDo />} />
             <Route path="/edit-todo/:id" element={<EditToDo />} />
-            <Route path="*" element={<Navigate to="/dashboard" />} />
+            <Route path="/*" element={<Navigate to="/dashboard" />} />
           </>
         )}
       </Routes>
