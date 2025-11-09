@@ -1,15 +1,15 @@
-import { BrowserRouter, Route, Routes } from "react-router";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router";
 import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "./firebase-config";
 import { onValue, ref } from "firebase/database";
-import AdminDashboard from "./pages/admin/AdminDashboard";
-import Dashboard from "./pages/dashboard/Dashboard"
-import Login from "./pages/login/Login";
-import Register from "./pages/register/Register"
-import EditProfile from "./pages/setup/editProfile/EditProfile";
-import AddToDo from "./pages/dashboard/todos/addToDo/AddToDo";
-import EditToDo from "./pages/dashboard/todos/editToDo/EditToDo";
+import AdminDashboard from "./pages/Admin/AdminDashboard";
+import Dashboard from "./pages/Dashboard/Dashboard"
+import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register"
+import EditProfile from "./pages/Setup/EditProfile/EditProfile";
+import AddToDo from "./pages/Dashboard/ToDos/addToDo/AddToDo";
+import EditToDo from "./pages/Dashboard/ToDos/editToDo/EditToDo";
 
 
 function App() {
@@ -49,30 +49,30 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/final-project">
       <Routes>
         {user && isAdmin && (
           <>
             {/* Admin Routes */}
             <Route path="/admin" element={<AdminDashboard />} />
-            <Route path="/*" element={<AdminDashboard />} />
+            <Route path="*" element={<AdminDashboard />} />
           </>
         )}
 
         {!user && (
           <>
-            {/* Public Route */}
-            <Route path="/" element={<Login />} />
+            {/* Public Routes */}
+            <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/*" element={<Login />} />
+            <Route path="*" element={<Navigate to="/login" />} />
           </>
         )}
 
         {user && !isAdmin && !hasData && (
           <>
             {/* User setup routes */}
-            <Route path="/" element={<Setup />} />
-            <Route path="/*" element={<Setup />} />
+            <Route path="/setup" element={<Setup />} />
+            <Route path="*" element={<Navigate to="/setup" />} />
           </>
         )}
 
@@ -83,7 +83,7 @@ function App() {
             <Route path="/edit-profile" element={<EditProfile />} />
             <Route path="/add-todo" element={<AddToDo />} />
             <Route path="/edit-todo/:id" element={<EditToDo />} />
-            <Route path="/*" element={<Dashboard />} />
+            <Route path="*" element={<Navigate to="/dashboard" />} />
           </>
         )}
       </Routes>
