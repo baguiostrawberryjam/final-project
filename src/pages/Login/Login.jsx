@@ -4,6 +4,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase-config';
 import { useState } from 'react';
 import loginHero from "../../assets/images/login-hero.jpg";
+import { FaGoogle, FaApple } from 'react-icons/fa';
 
 
 function Login() {
@@ -12,6 +13,8 @@ function Login() {
   const [password, setPassword] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [isPasswordValid, setIsPasswordValid] = useState(false);
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
 
   {/* Handle Login Verification */}
   function handleLogin() {
@@ -26,27 +29,26 @@ function Login() {
 
   function checkEmail(e){
     let email = e.target.value
-    let eMail = document.querySelector('#eEmail');
-    eMail.innerHTML = ""
+    setEmail(email);
     
     // Always update the email state
     setEmail(email)
 
     if(email.trim().length <= 0){
-        eMail.innerHTML = "Input Required"
+        setEmailError("Input Required");
         setIsEmailValid(false);
     } else if(email.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)==null){
-        eMail.innerHTML = "Invalid Email"
+        setEmailError("Invalid Email");
         setIsEmailValid(false);
     } else {
+        setEmailError("");
         setIsEmailValid(true);
     }
   }
 
   function checkPassword(e){
       let pass = e.target.value
-      let ePass = document.querySelector('#ePassword');
-      ePass.innerHTML = ""
+      
 
       // Always update the password state
       setPassword(pass)
@@ -54,12 +56,13 @@ function Login() {
       const passwordRegex = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&+=])(?=\S+$).{8,20}$/
 
       if(pass.trim().length <= 0){
-          ePass.innerHTML = "Input Required"
+          setPasswordError("Input Required");
           setIsPasswordValid(false);
       } else if(!passwordRegex.test(pass)){
-          ePass.innerHTML = "Invalid Password"
+          setPasswordError("Invalid Password");
           setIsPasswordValid(false);
       } else {
+          setPasswordError("");
           setIsPasswordValid(true);
       }
   }
@@ -74,24 +77,33 @@ function Login() {
       <div className='login-right-section'>
 
         <div className='header'>
-          <h1 className='title-bold'>Login Page</h1>
-          <p className='subtitle-regular'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi commodi exercitationem, fuga quisquam molestias dolorem hic cumque ratione eveniet, omnis distinctio repellat nesciu</p>
+          <h1 className='title-bold'>WELCOME</h1>
+          <p className='subtitle-regular'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi commodi exercitationem</p>
         </div>
 
         <div className='login-forms'>
-          <input onChange={(e)=>checkEmail(e)} type="email" placeholder='Email'/>
-          <p className='txtError' id='eEmail'></p>
 
-          <input onChange={(e)=>checkPassword(e)} type="password" placeholder='Password'/>
-          <p className='txtError' id='ePassword'></p>
+          <div className='input-container'>
+            <input onChange={(e)=>checkEmail(e)} type="email" placeholder='Email' className={emailError ? 'input-error': ''}/>
+            {emailError && <p className='txtError'>{emailError}</p>}
+          </div>
+          
+          <div className='input-container'>
+            <input onChange={(e)=>checkPassword(e)} type="password" placeholder='Password' className={passwordError ? 'input-error' : ''}/>
+            {passwordError && <p className='txtError'>{passwordError}</p>}
+          </div>
 
-          <button onClick={handleLogin} disabled={!isEmailValid || !isPasswordValid}>Login</button>
+          <button className='login-btn' onClick={handleLogin} disabled={!isEmailValid || !isPasswordValid}>Login</button>
         </div>
         <p>or</p>
 
         <div className='quick-login'>
-          <button>Continue with Google</button>
-          <button>Continue with Apple</button>
+          <button>
+            <FaGoogle /> Continue with Google
+          </button>
+          <button>
+            <FaApple /> Continue with Apple
+          </button>
         </div>
         
         
