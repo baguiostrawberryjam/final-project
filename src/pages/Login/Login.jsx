@@ -3,6 +3,7 @@ import './login.css'
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase-config';
 import { useState } from 'react';
+import loginHero from "../../assets/images/login-hero.jpg";
 
 
 function Login() {
@@ -65,9 +66,9 @@ function Login() {
 
   return (
     <div className='login-container'>
-
+      
       <div className='login-left-section'>
-        <img src={logo} alt="" />
+        <img src={loginHero} alt="" />
       </div>
 
       <div className='login-right-section'>
