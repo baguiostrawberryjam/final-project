@@ -3,10 +3,8 @@ import './login.css'
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase-config';
 import { useState } from 'react';
-
 import logo from "../../assets/images/react.svg";
 
-// Test: Login folder still exists
 
 function Login() {
   
@@ -30,6 +28,9 @@ function Login() {
     let email = e.target.value
     let eMail = document.querySelector('#eEmail');
     eMail.innerHTML = ""
+    
+    // Always update the email state
+    setEmail(email)
 
     if(email.trim().length <= 0){
         eMail.innerHTML = "Input Required"
@@ -37,8 +38,7 @@ function Login() {
     } else if(email.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)==null){
         eMail.innerHTML = "Invalid Email"
         setIsEmailValid(false);
-    }   else {
-        setEmail(email)
+    } else {
         setIsEmailValid(true);
     }
   }
@@ -47,6 +47,9 @@ function Login() {
       let pass = e.target.value
       let ePass = document.querySelector('#ePassword');
       ePass.innerHTML = ""
+
+      // Always update the password state
+      setPassword(pass)
 
       const passwordRegex = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&+=])(?=\S+$).{8,20}$/
 
@@ -57,7 +60,6 @@ function Login() {
           ePass.innerHTML = "Invalid Password"
           setIsPasswordValid(false);
       } else {
-          setPassword(pass)
           setIsPasswordValid(true);
       }
   }
@@ -77,9 +79,13 @@ function Login() {
         </div>
 
         <div className='login-forms'>
-          <input onChange={(e)=>setEmail(e.target.value)} type="email" placeholder='Email'/>
-          <input onChange={(e)=>setPassword(e.target.value)} type="password" placeholder='Password'/>
-          <button onClick={handleLogin}>Login</button>
+          <input onChange={(e)=>checkEmail(e)} type="email" placeholder='Email'/>
+          <p className='txtError' id='eEmail'></p>
+
+          <input onChange={(e)=>checkPassword(e)} type="password" placeholder='Password'/>
+          <p className='txtError' id='ePassword'></p>
+
+          <button onClick={handleLogin} disabled={!isEmailValid || !isPasswordValid}>Login</button>
         </div>
         <p>or</p>
 

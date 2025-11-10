@@ -1,9 +1,10 @@
 import { onAuthStateChanged } from 'firebase/auth';
 import { useEffect, useState } from 'react'
-import { auth, db } from '../../firebase-config';
+import { auth, db, storage } from '../../firebase-config';
 import { onValue, ref, update } from 'firebase/database';
 import { NavLink } from 'react-router';
 import './dashboard.css';
+import { getDownloadURL, uploadBytes, ref as sref } from 'firebase/storage';
 
 // Test: Dashboard folder still exists
 
@@ -23,7 +24,7 @@ function Dashboard() {
 
                 {/* Gets the user info from database */}
                 onValue(ref(db,`users/${u.uid}`),(snapshot)=>{
-                    setUserData(snapshot.val());
+                    setUserData( snapshot.val());
                 })
                 
                 {/* Gets the todo info from database */}
@@ -31,9 +32,7 @@ function Dashboard() {
                     const data = snapshot.val();
                     setTodos(data);
                 })
-            } else {
-                setUser(null);
-            }
+            } 
         })
     },[])
 
@@ -46,23 +45,34 @@ function Dashboard() {
     function triggerUpload(){
         document.getElementById('inpProfilePicture').click();
     }
+    
+    function handleFile(f){
+        uploadBytes(sref(storage, `/profile/${user.uid}`), f)
+        .then(() => {    
+            getDownloadURL(sref(storage, `/profile/${user.uid}`)).then((url) => {
+                update(ref(db, `/users/${user.uid}`),{profileURL:url}).then(()=>{
+                    alert("Profile Picture Updated Successfully!");
+                })
+            });
+        });
+    }
 
     {/* Delete a ToDo List by their ID */}
     function handleDelete(todoId) {
-    if (window.confirm('Are you sure you want to delete this todo?')) {
-        update(ref(db, `users/${user.uid}/todos/${todoId}`), {
-            status: 'deleted',
-            deletedAt: new Date().toISOString()
-        })
-        .then(() => {
-            alert('ToDo Item deleted successfully!');
-        })
-        .catch((error) => {
-            console.error('Error deleting todo:', error);
-            alert('Failed to delete todo. Please try again.');
-        });
+        if (window.confirm('Are you sure you want to delete this task?')) {
+            update(ref(db, `users/${user.uid}/todos/${todoId}`), {
+                status: 'deleted',
+                deletedAt: new Date().toISOString()
+            })
+            .then(() => {
+                alert('Task item deleted successfully!');
+            })
+            .catch((error) => {
+                console.error('Error deleting task:', error);
+                alert('Failed to delete task. Please try again.');
+            });
+        }
     }
-}
 
 
   return (
@@ -77,7 +87,7 @@ function Dashboard() {
                     <div className="nav-right">
                         <img
                             className="nav-avatar"
-                            src={`https://avatar.iran.liara.run/username?username=${userData.firstName}+${userData.lastName}&background=000000&color=FFFFFF`}
+                            src={userData.profileURL || `https://avatar.iran.liara.run/username?username=${userData.firstName}+${userData.lastName}&background=1F2937&color=F9FAFB`}
                             alt={`${userData.firstName} ${userData.lastName}`}
                         />
                         <div className="nav-user">
@@ -94,9 +104,10 @@ function Dashboard() {
                     <div className="profile-details">
                         <h1>User Profile</h1>
 
-                        <img src={`https://avatar.iran.liara.run/username?username=${userData.firstName}+${userData.lastName}&background=000000&color=FFFFFF`} alt={`${userData.firstName} ${userData.lastName}`}/>
+                        <img src={userData.profileURL || `https://avatar.iran.liara.run/username?username=${userData.firstName}+${userData.lastName}&background=000000&color=FFFFFF`} 
+                        alt={`${userData.firstName} ${userData.lastName}`}/>
                         <button onClick={triggerUpload}><i className="fa fa-upload"/></button>
-                        <input id="inpProfilePicture" style={{display: "none"}} type="file"/>
+                        <input onChange={(e)=>handleFile(e.target.files[0])} id="inpProfilePicture" style={{display: "none"}} type="file"/>
                         
                         <h1>{userData.firstName} {userData.lastName}</h1>
                         <h3>{userData.contactNumber}</h3>

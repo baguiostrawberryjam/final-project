@@ -85,7 +85,9 @@ function Setup() {
     let userData = {
       firstName: firstName,
       lastName: lastName,
-      contactNumber: contactNumber
+      contactNumber: contactNumber,
+      todos: null,
+      profileURL: null
     };
 
     {/* Pushing data in to the database */}
