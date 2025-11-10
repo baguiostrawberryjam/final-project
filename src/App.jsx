@@ -12,6 +12,7 @@ import AddToDo from "./pages/Dashboard/ToDos/addToDo/AddToDo";
 import EditToDo from "./pages/Dashboard/ToDos/editToDo/EditToDo";
 import Setup from "./pages/Setup/Setup";
 import './App.css';
+import './components/styles/main.css';
 
 
 function App() {

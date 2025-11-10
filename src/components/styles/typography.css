@@ -1,0 +1,82 @@
+/* Dosis weights */
+@import "@fontsource/dosis/200.css";
+@import "@fontsource/dosis/300.css";
+@import "@fontsource/dosis/400.css";
+@import "@fontsource/dosis/500.css";
+@import "@fontsource/dosis/600.css";
+@import "@fontsource/dosis/700.css";
+
+/* Quicksand weights */
+@import "@fontsource/quicksand/300.css";
+@import "@fontsource/quicksand/400.css";
+@import "@fontsource/quicksand/500.css";
+@import "@fontsource/quicksand/600.css";
+@import "@fontsource/quicksand/700.css";
+
+:root {
+  /* Font families */
+  --font-title: "Dosis", sans-serif;
+  --font-subtitle: "Quicksand", sans-serif;
+
+  /* Font weights - Dosis */
+  --dosis-200: 200;
+  --dosis-300: 300;
+  --dosis-400: 400;
+  --dosis-500: 500;
+  --dosis-600: 600;
+  --dosis-700: 700;
+
+  /* Font weights - Quicksand */
+  --quicksand-300: 300;
+  --quicksand-400: 400;
+  --quicksand-500: 500;
+  --quicksand-600: 600;
+  --quicksand-700: 700;
+}
+
+/* Classname font structures*/
+/* .title-light {
+  font-family: var(--font-title);
+  font-weight: var(--dosis-200);
+}
+
+.title-regular {
+  font-family: var(--font-title);
+  font-weight: var(--dosis-400);
+}
+
+.title-semibold {
+  font-family: var(--font-title);
+  font-weight: var(--dosis-600);
+}
+
+.title-bold {
+  font-family: var(--font-title);
+  font-weight: var(--dosis-700);
+} */
+
+/* Subtitles / Body */
+/* .subtitle-light {
+  font-family: var(--font-subtitle);
+  font-weight: var(--quicksand-300);
+}
+
+.subtitle-regular {
+  font-family: var(--font-subtitle);
+  font-weight: var(--quicksand-400);
+}
+
+.subtitle-medium {
+  font-family: var(--font-subtitle);
+  font-weight: var(--quicksand-500);
+}
+
+.subtitle-semibold {
+  font-family: var(--font-subtitle);
+  font-weight: var(--quicksand-600);
+}
+
+.subtitle-bold {
+  font-family: var(--font-subtitle);
+  font-weight: var(--quicksand-700);
+} */
