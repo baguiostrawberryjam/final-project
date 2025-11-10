@@ -55,7 +55,7 @@ function Dashboard() {
             deletedAt: new Date().toISOString()
         })
         .then(() => {
-            alert('Todo deleted successfully!');
+            alert('ToDo Item deleted successfully!');
         })
         .catch((error) => {
             console.error('Error deleting todo:', error);

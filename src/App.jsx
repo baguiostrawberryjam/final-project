@@ -6,7 +6,7 @@ import { onValue, ref } from "firebase/database";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 import Dashboard from "./pages/Dashboard/Dashboard"
 import Login from "./pages/Login/Login";
-import Register from "./pages/register/Register"
+import Register from "./pages/Register/Register"
 import EditProfile from "./pages/Setup/editProfile/EditProfile";
 import AddToDo from "./pages/Dashboard/ToDos/addToDo/AddToDo";
 import EditToDo from "./pages/Dashboard/ToDos/editToDo/EditToDo";

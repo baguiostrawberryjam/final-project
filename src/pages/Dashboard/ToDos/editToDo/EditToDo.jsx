@@ -27,11 +27,20 @@ function EditToDo() {
       });
   }, [id]);
 
-  function updateToDo() {
-    if (!title.trim()) {
-      alert('Task title cannot be empty');
-      return;
+  function checkTitle(e){
+        let title = e.target.value
+        let eTitle = document.querySelector('#eTitle');
+        eTitle.innerHTML = ""
+        
+        // update the state first
+        setTitle(title);
+
+        if(title.trim().length <= 0){
+            eTitle.innerHTML = "Blankspaces are not allowed"
+        }
     }
+
+  function updateToDo() {
     const user = auth.currentUser;
 
     update(ref(db, `users/${user.uid}/todos/${id}`), {
@@ -53,8 +62,8 @@ function EditToDo() {
         <h2>Edit Task</h2>
 
         <label htmlFor="title">Task Title:</label>
-            <input type="text"  id="title" value={title} onChange={(e) => setTitle(e.target.value)}  placeholder="Enter task title" />
-        <br /><br />
+            <input type="text"  id="title" value={title} onChange={(e) => checkTitle(e)}  placeholder="Enter task title" />
+            <p className='txtError' id='eTitle'></p>
 
         <label>Status:</label>
         <select value={status} onChange={(e) => setStatus(e.target.value)}>

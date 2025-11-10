@@ -9,13 +9,21 @@ function AddToDo() {
     const [status, setStatus] = useState('pending');
     const [due, setDue] = useState('');
 
+    function checkTitle(e){
+        let title = e.target.value
+        let eTitle = document.querySelector('#eTitle');
+        eTitle.innerHTML = ""
+        
+        // update the state first
+        setTitle(title);
+
+        if(title.trim().length <= 0){
+            eTitle.innerHTML = "Blankspaces are not allowed"
+        }
+    }
+
     function handleSubmit() {
         {/* Add New To-Do Items */}
-        if (!title.trim()) {
-            alert('Please enter a task title');
-            return;
-        }
-
         const user = auth.currentUser;
         
         if (!user) {
@@ -48,8 +56,8 @@ function AddToDo() {
             {/* User Interface where we collect Task Information */}
             <h2>Add New Task</h2>
             <label htmlFor="title">Task Title:</label>
-                <input type="text" id="title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Enter task title" />
-                <br /><br />
+                <input type="text" id="title" value={title} onChange={(e) => checkTitle(e)} placeholder="Enter task title" />
+                <p className='txtError' id='eTitle'></p>
             <label>Status:</label>
                 <select value={status} onChange={(e) => setStatus(e.target.value)}>
                     <option value="pending">Pending</option>
