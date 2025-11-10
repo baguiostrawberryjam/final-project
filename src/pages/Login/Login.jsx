@@ -3,7 +3,8 @@ import './login.css'
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase-config';
 import { useState } from 'react';
-import logo from "../../assets/images/react.svg";
+
+import logo from "../../assets/images/login-hero.png";
 
 
 function Login() {
@@ -79,13 +80,9 @@ function Login() {
         </div>
 
         <div className='login-forms'>
-          <input onChange={(e)=>checkEmail(e)} type="email" placeholder='Email'/>
-          <p className='txtError' id='eEmail'></p>
-
-          <input onChange={(e)=>checkPassword(e)} type="password" placeholder='Password'/>
-          <p className='txtError' id='ePassword'></p>
-
-          <button onClick={handleLogin} disabled={!isEmailValid || !isPasswordValid}>Login</button>
+          <input onChange={(e)=>setEmail(e.target.value)} type="email" placeholder='Email'/>
+          <input onChange={(e)=>setPassword(e.target.value)} type="password" placeholder='Password'/>
+          <button onClick={handleLogin}>Login</button>
         </div>
         <p>or</p>
 
