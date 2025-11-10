@@ -3,7 +3,6 @@ import './login.css'
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase-config';
 import { useState } from 'react';
-import logo from "../../assets/images/react.svg";
 
 
 function Login() {
