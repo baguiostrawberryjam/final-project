@@ -11,6 +11,8 @@ function Login() {
   const [password, setPassword] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [isPasswordValid, setIsPasswordValid] = useState(false);
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
 
   {/* Handle Login Verification */}
   function handleLogin() {
@@ -32,12 +34,13 @@ function Login() {
     setEmail(email)
 
     if(email.trim().length <= 0){
-        eMail.innerHTML = "Input Required"
+        setEmailError("Input Required");
         setIsEmailValid(false);
     } else if(email.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)==null){
-        eMail.innerHTML = "Invalid Email"
+        setEmailError("Invalid Email");
         setIsEmailValid(false);
     } else {
+        setEmailError("");
         setIsEmailValid(true);
     }
   }
@@ -53,12 +56,13 @@ function Login() {
       const passwordRegex = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&+=])(?=\S+$).{8,20}$/
 
       if(pass.trim().length <= 0){
-          ePass.innerHTML = "Input Required"
+          setPasswordError("Input Required");
           setIsPasswordValid(false);
       } else if(!passwordRegex.test(pass)){
-          ePass.innerHTML = "Invalid Password"
+          setPasswordError("Invalid Password");
           setIsPasswordValid(false);
       } else {
+          setPasswordError("");
           setIsPasswordValid(true);
       }
   }
@@ -78,11 +82,16 @@ function Login() {
         </div>
 
         <div className='login-forms'>
-          <input onChange={(e)=>checkEmail(e)} type="email" placeholder='Email'/>
-          <p className='txtError' id='eEmail'></p>
-
-          <input onChange={(e)=>checkPassword(e)} type="password" placeholder='Password'/>
-          <p className='txtError' id='ePassword'></p>
+          
+          <div className='input-container'>
+            <input onChange={(e)=>checkEmail(e)} type="email" placeholder='Email' className={emailError ? 'input-error': ''}/>
+            {emailError && <p className='txtError'>{emailError}</p>}
+          </div>
+          
+          <div className='input-container'>
+            <input onChange={(e)=>checkPassword(e)} type="password" placeholder='Password' className={passwordError ? 'input-error' : ''}/>
+            {passwordError && <p className='txtError'>{passwordError}</p>}
+          </div>
 
           <button onClick={handleLogin} disabled={!isEmailValid || !isPasswordValid}>Login</button>
         </div>
