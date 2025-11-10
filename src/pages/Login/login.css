@@ -1,8 +1,5 @@
-
-
 /* Main container */
 .login-container{
-    background-color: var(--gray);
     border-radius: 10px; 
     display: flex; 
     justify-content: center;
@@ -23,7 +20,7 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    background-color: rgb(149, 145, 145);
+    background-color: rgb(248, 248, 248);
     margin: 10px;
     border-radius: 10px;
     padding: 10px;
@@ -31,15 +28,18 @@
 
 .login-left-section img{
     width: 100%;       /* fill the container */
-    max-width: 500px;  /* don’t exceed original size */
+    max-width: 600px;  /* don’t exceed original size */
     height: auto;      /* maintain aspect ratio */
     object-fit: cover;
     background-position: center;
+    border-radius: 10px;
 }
 
 /* Login right container */
 .login-right-section{
-    max-width: 450px;
+    max-width: 350px;
+    margin-left: 150px;
+    margin-right: 150px;
 }
 
 .login-right-section .header{
@@ -50,29 +50,157 @@
 
 }
 
-.title-bold{
+.title-bold {
     font-family: var(--font-title);
     font-weight: var(--dosis-700);
+    color: var(--text-primary);
+    font-size: 2.5rem;
+    margin: 0;
 }
 
-.subtitle-regular{
+.subtitle-regular {
     font-family: var(--font-subtitle);
     font-weight: var(--quicksand-400);
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 0;
 }
 
 .login-forms{
     display: grid;
 }
+.login-forms {
+    gap: 1rem;
+}
 
-.login-right-section p{
+.login-forms input {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--input-border);
+    border-radius: 8px;
+    background-color: var(--input-bg);
+    color: var(--input-text);
+    font-family: var(--font-subtitle);
+    font-weight: var(--quicksand-400);
+    font-size: 1rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.login-forms input::placeholder {
+    color: var(--input-placeholder);
+    font-weight: var(--quicksand-300);
+}
+
+.login-forms input:focus {
+    outline: none;
+    border-color: var(--input-border-focus);
+    box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+.login-forms input:hover {
+    border-color: var(--secondary);
+    background-color: var(--hover-bg);
+}
+
+.login-right-section p {
     text-align: center;
+    color: var(--text-secondary);
+    font-family: var(--font-subtitle);
+    font-weight: var(--quicksand-400);
+    margin: 1rem 0;
 }
 
-.quick-login{
+.login-forms button {
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-family: var(--font-subtitle);
+    font-weight: var(--quicksand-600);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.login-forms button:hover {
+    background-color: var(--secondary);
+    transform: translateY(-1px);
+}
+
+.login-forms button:active {
+    background-color: var(--active-bg);
+    transform: translateY(0);
+}
+
+/* Form options (Remember me & Forgot password) */
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: -0.5rem;
+    font-family: var(--font-subtitle);
+    font-size: 0.875rem;
+}
+
+.remember-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+}
+
+.remember-option input[type="checkbox"] {
+    width: 1rem;
+    height: 1rem;
+    border: 1.5px solid var(--input-border);
+    border-radius: 4px;
+    cursor: pointer;
+    accent-color: var(--primary);
+}
+
+.remember-option span {
+    font-weight: var(--quicksand-500);
+}
+
+.forgot-pass {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: var(--quicksand-500);
+    transition: all 0.2s ease;
+}
+
+.forgot-pass:hover {
+    color: var(--secondary);
+    text-decoration: underline;
+}
+
+.quick-login {
     display: grid;
+    gap: 0.75rem;
 }
 
-input{
-    border-radius: 10px;
+.quick-login button {
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--card-bg);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: var(--font-subtitle);
+    font-weight: var(--quicksand-500);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
 }
 
+.quick-login button:hover {
+    background-color: var(--hover-bg);
+    border-color: var(--secondary);
+}
