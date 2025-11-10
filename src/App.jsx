@@ -13,6 +13,7 @@ import EditToDo from "./pages/Dashboard/ToDos/editToDo/EditToDo";
 import Setup from "./pages/Setup/Setup";
 import './App.css';
 import './components/styles/main.css';
+import Profile from "./pages/Profile/Profile";
 
 
 function App() {
@@ -57,7 +58,7 @@ function App() {
         {user && isAdmin && (
           <>
             {/* Admin Routes */}
-            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/dashboard" element={<AdminDashboard />} />
             <Route path="*" element={<AdminDashboard />} />
           </>
         )}
