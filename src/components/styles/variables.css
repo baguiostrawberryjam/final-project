@@ -1,10 +1,51 @@
 :root{
     /* Theme */
-    
+
     /* Font Colors */
+    --text-primary: #1F2937;   /* Titles, main text */
+    --text-secondary: #4B5563; /* Subtitles, muted text */
+    --muted-text: #6B7280;     /* Small labels, placeholders */
 
     /* Backgrounds */
-    --gray: rgb(175, 175, 175);
-    /* Icons color */
+    --background: #F9FAFB;     /* Page background */
+    --card-bg: #FFFFFF;        /* Cards, panels, modals */
+    --hover-bg: #EEF2FF;       /* Button or card hover background */
+    --active-bg: #E0E7FF;      /* Active state background */
 
+    /* Core Colors */
+    --primary: #4F46E5;        /* Main brand color */
+    --secondary: #A5B4FC;      /* Accent and hover highlights */
+    --border: #E5E7EB;         /* Card and input borders */
+    --shadow: rgba(0, 0, 0, 0.05); /* Light shadow for cards */
+
+    /* Icons color */
+    --icon-primary: #4F46E5;   /* Active icons */
+    --icon-secondary: #6B7280; /* Inactive or muted icons */
+
+    /* Inputs */
+    --input-bg: #FFFFFF;       /* Input field background */
+    --input-border: #E5E7EB;   /* Default border */
+    --input-border-focus: #4F46E5; /* Border when focused */
+    --input-text: #1F2937;     /* Text inside input */
+    --input-placeholder: #9CA3AF; /* Placeholder text */
+
+      /* States */
+    --hover-bg: #EEF2FF;       /* Hover background for buttons/cards */
+    --active-bg: #E0E7FF;      /* Active or selected state background */
+    --focus-ring: #A5B4FC;     /* Outline glow when focused */
+    --disabled-bg: #E5E7EB;    /* Disabled background */
+    --disabled-text: #9CA3AF;  /* Disabled text color */
+
+    /* Status Colors */
+    --success-bg: #ECFDF5;
+    --success-text: #065F46;
+    --warning-bg: #FEFCE8;
+    --warning-text: #92400E;
+    --danger-bg: #FEF2F2;
+    --danger-text: #991B1B;
+
+    /* Dark Mode (optional) */
+    --dark-bg: #0F172A;
+    --dark-card: #1E293B;
+    --dark-text: #E2E8F0;
 }
