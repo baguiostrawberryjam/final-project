@@ -59,17 +59,17 @@ function Dashboard() {
 
     {/* Delete a ToDo List by their ID */}
     function handleDelete(todoId) {
-        if (window.confirm('Are you sure you want to delete this todo?')) {
+        if (window.confirm('Are you sure you want to delete this task?')) {
             update(ref(db, `users/${user.uid}/todos/${todoId}`), {
                 status: 'deleted',
                 deletedAt: new Date().toISOString()
             })
             .then(() => {
-                alert('ToDo Item deleted successfully!');
+                alert('Task item deleted successfully!');
             })
             .catch((error) => {
-                console.error('Error deleting todo:', error);
-                alert('Failed to delete todo. Please try again.');
+                console.error('Error deleting task:', error);
+                alert('Failed to delete task. Please try again.');
             });
         }
     }
@@ -87,7 +87,7 @@ function Dashboard() {
                     <div className="nav-right">
                         <img
                             className="nav-avatar"
-                            src={userData.profileURL || `https://avatar.iran.liara.run/username?username=${userData.firstName}+${userData.lastName}&background=000000&color=FFFFFF`}
+                            src={userData.profileURL || `https://avatar.iran.liara.run/username?username=${userData.firstName}+${userData.lastName}&background=1F2937&color=F9FAFB`}
                             alt={`${userData.firstName} ${userData.lastName}`}
                         />
                         <div className="nav-user">
