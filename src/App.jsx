@@ -84,6 +84,7 @@ function App() {
             {/* User dashboard routes */}
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/edit-profile" element={<EditProfile />} />
+            <Route path="/profile" element={<Profile />} />
             <Route path="/add-todo" element={<AddToDo />} />
             <Route path="/edit-todo/:id" element={<EditToDo />} />
             <Route path="*" element={<Navigate to="/dashboard" />} />
