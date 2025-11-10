@@ -79,7 +79,11 @@ function Login() {
 
         <div className='login-forms'>
           <input onChange={(e)=>checkEmail(e)} type="email" placeholder='Email'/>
+          <p className='txtError' id='eEmail'></p>
+
           <input onChange={(e)=>checkPassword(e)} type="password" placeholder='Password'/>
+          <p className='txtError' id='ePassword'></p>
+
           <button onClick={handleLogin} disabled={!isEmailValid || !isPasswordValid}>Login</button>
         </div>
         <p>or</p>
