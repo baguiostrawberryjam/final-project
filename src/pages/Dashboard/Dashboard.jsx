@@ -15,6 +15,7 @@ function Dashboard() {
     const [user, setUser] = useState();
     const [userData, setUserData] = useState();
     const [todos, setTodos] = useState(null);
+    const [projects, setProjects] = useState(null);
     const [statusFilter, setStatusFilter] = useState('all');
 
     useEffect(()=>{
@@ -24,13 +25,17 @@ function Dashboard() {
 
                 {/* Gets the user info from database */}
                 onValue(ref(db,`users/${u.uid}`),(snapshot)=>{
-                    setUserData( snapshot.val());
+                    setUserData(snapshot.val());
                 })
                 
                 {/* Gets the todo info from database */}
                 onValue(ref(db,`users/${u.uid}/todos`),(snapshot)=>{
-                    const data = snapshot.val();
-                    setTodos(data);
+                    setTodos(snapshot.val());
+                })
+
+                {/* Gets the projects info from database */}
+                onValue(ref(db,`users/${u.uid}/projects`),(snapshot)=>{
+                    setProjects(snapshot.val());
                 })
             } 
         })
@@ -81,6 +86,7 @@ function Dashboard() {
             <>
                 {/* Top navigation bar with user info */}
                 <header className="dashboard-nav">
+                    
                     <div className="nav-left">
                         <h2>Dashboard</h2>
                     </div>
@@ -114,6 +120,44 @@ function Dashboard() {
                         <h4>{user.email}</h4>
                         <NavLink to="/edit-profile"><button>Edit</button></NavLink>
                         <button onClick={logOut}>Sign Out</button>
+                    </div>
+                </div>
+
+                <div className='project-container'>
+
+                    <div className='project-card'>
+
+                        <div className='project-header'>
+                            <div>
+                                <h1>Your Projects</h1>
+                            </div>
+                            <div>
+                                <NavLink to={`/view-project`}><button>View All Projects</button></NavLink>
+                            </div>
+                        </div>
+
+                        <div className='project-details'>
+                            <div className='project-list'>
+                                {projects ? Object.keys(projects)
+                                .map((key) => (
+                                    <div key={key} className='project-item'>
+                                        <div className="project-icon">
+                                            <h3>{projects[key].title}</h3>
+                                            <i
+                                            className="fa fa-folder"
+                                            style={{ color: projects[key].folderColor || '#888', fontSize: '3rem' }}
+                                            ></i>
+                                        </div>
+                                        <div>
+                                            <p>Description: {projects[key].description}</p>
+                                        </div>
+                                        <div>
+                                            <p>Date Created: {projects[key].createdAt}</p>
+                                        </div>  
+                                    </div>
+                                )) : <p>No projects found. Add a new project!</p>}
+                            </div>
+                        </div>
                     </div>
                 </div>
 
