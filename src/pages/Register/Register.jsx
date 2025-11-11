@@ -1,15 +1,24 @@
 import { useState } from 'react';
-import './register.css';
+import "../../components/styles/auth-forms.css";
 import { NavLink } from 'react-router';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase-config';
+import registerHero from "../../assets/images/login-hero.jpg";
+import { FaGoogle, FaApple } from 'react-icons/fa';
 
 function Register() {
 
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-    const [isEmailValid, setIsEmailValid] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState('');
+  
+  const [isEmailValid, setIsEmailValid] = useState(false);
   const [isPasswordValid, setIsPasswordValid] = useState(false);
+  const [isConfirmValid, setIsConfirmValid] = useState(false);
+
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [confirmError, setConfirmError] = useState('');
 
   {/* Handle Registration of Information */}
   function handleRegister(){
@@ -26,54 +35,112 @@ function Register() {
 
   function checkEmail(e){
     let email = e.target.value
-    let eMail = document.querySelector('#eEmail');
-    eMail.innerHTML = ""
+    setEmail(email);
+
 
     if(email.trim().length <= 0){
-        eMail.innerHTML = "Input Required"
+        setEmailError("Input required");
         setIsEmailValid(false);
     } else if(email.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)==null){
-        eMail.innerHTML = "Invalid Email"
+        setEmailError("Invalid email");
         setIsEmailValid(false);
     }   else {
-        setEmail(email)
+        setEmailError("");
         setIsEmailValid(true);
     }
   }
 
   function checkPassword(e){
       let pass = e.target.value
-      let ePass = document.querySelector('#ePassword');
-      ePass.innerHTML = ""
+      setPassword(pass);
 
       const passwordRegex = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&+=])(?=\S+$).{8,20}$/
 
       if(pass.trim().length <= 0){
-          ePass.innerHTML = "Input Required"
+          setPasswordError("Input required");
           setIsPasswordValid(false);
       } else if(!passwordRegex.test(pass)){
-          ePass.innerHTML = "Invalid Password"
+          setPasswordError("Invalid Password (8-20 chars, upper, lower, number, symbol)");
           setIsPasswordValid(false);
       } else {
-          setPassword(pass)
+          setPasswordError("");
           setIsPasswordValid(true);
       }
   }
 
+  function checkConfirmPassword(e){
+    let confirm = e.target.value;
+
+    setConfirmPassword(confirm);
+
+    if (confirm.trim().length <= 0) {
+      setConfirmError("Input Required");
+      setIsConfirmValid(false);
+    } else if (confirm !== password) {
+      setConfirmError("Passwords do not match");
+      setIsConfirmValid(false);
+    } else {
+      setConfirmError("");
+      setIsConfirmValid(true);
+    }
+  }
+
   return (
-    <div className='register-container'>
+    <div className='main-container'>
 
-      <div className='register-card'>
-          <h1>Register Page</h1>
+      <div className='left-section'>
+        <img src={registerHero} alt="" />
+      </div>
 
-          <input onInput={(e)=>checkEmail(e)} type="email" placeholder="Email" />
-          <p className='txtError' id='eEmail'></p>
+      <div className='right-section'>
 
-          <input onChange={(e)=>checkPassword(e)} type="password" placeholder="Password" />
-          <p className='txtError' id='ePassword'></p>
+        <div className='header'>
+          <h1 className='title-bold'>SIGNUP</h1>
+          <p className='subtitle-regular'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi commodi exercitationem</p>
+        </div>
 
-          <button onClick={handleRegister} disabled={!isEmailValid || !isPasswordValid}>Register</button>
-          <p>Already have an Account? <NavLink to='./login'>Login</NavLink></p>
+        <div className='forms'>
+
+          <div className='input-container'>
+            <input onInput={(e)=>checkEmail(e)} type="email" placeholder="Email" className={emailError ? 'input-error':''}/>
+            {emailError && <p className='txtError'>{emailError}</p>}
+          </div>
+
+          <div className='input-container'> 
+            <input onChange={(e)=>checkPassword(e)} type="password" placeholder="Password" className={passwordError ? 'input-error' : ''}/>
+            {passwordError && <p className='txtError'>{passwordError}</p>}
+          </div>
+
+          <div className='input-container'>
+            <input onChange={(e)=>checkConfirmPassword(e)} type="password" placeholder="Confirm Password" className={confirmError ? 'input-error' : ''}/>
+            {confirmError && <p className='txtError'>{confirmError}</p>}
+          </div>
+
+          <div className='form-options'>
+            <label className='remember-option'>
+              <input type="checkbox"/>
+              <span>I agree with the Terms and Conditions</span>
+            </label>
+          </div>
+
+          <button className='auth-btn' onClick={handleRegister} 
+          disabled={!isEmailValid || !isPasswordValid ||!isConfirmValid}>Continue</button>
+        </div>
+          
+
+        <p>or</p>
+          
+        <div className='social-btn'>
+          <button>
+            <FaGoogle /> Continue with Google
+          </button>
+
+          <button>
+            <FaApple /> Continue with Apple
+          </button>
+        </div>
+
+          <p>Already have an Account? <NavLink to='./login' className="link-text">Login</NavLink></p>
       </div>
 
     </div>

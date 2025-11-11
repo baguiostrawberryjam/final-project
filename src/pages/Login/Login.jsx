@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router';
-import './login.css'
+import "../../components/styles/auth-forms.css";
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase-config';
 import { useState } from 'react';
@@ -14,6 +14,7 @@ function Login() {
   const [isPasswordValid, setIsPasswordValid] = useState(false);
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
+  const [remember, setRemember] = useState(false);
 
   {/* Handle Login Verification */}
   function handleLogin() {
@@ -30,8 +31,6 @@ function Login() {
     let email = e.target.value
     setEmail(email);
     
-    // Always update the email state
-    setEmail(email)
 
     if(email.trim().length <= 0){
         setEmailError("Input required");
@@ -50,7 +49,7 @@ function Login() {
       
 
       // Always update the password state
-      setPassword(pass)
+      setPassword(pass);
 
       const passwordRegex = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&+=])(?=\S+$).{8,20}$/
 
@@ -67,20 +66,20 @@ function Login() {
   }
 
   return (
-    <div className='login-container'>
+    <div className='main-container'>
 
-      <div className='login-left-section'>
+      <div className='left-section'>
         <img src={loginHero} alt="" />
       </div>
 
-      <div className='login-right-section'>
+      <div className='right-section'>
 
         <div className='header'>
           <h1 className='title-bold'>WELCOME</h1>
           <p className='subtitle-regular'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi commodi exercitationem</p>
         </div>
 
-        <div className='login-forms'>
+        <div className='forms'>
           
           <div className='input-container'>
             <input onChange={(e)=>checkEmail(e)} type="email" placeholder='Email' className={emailError ? 'input-error': ''}/>
@@ -92,11 +91,21 @@ function Login() {
             {passwordError && <p className='txtError'>{passwordError}</p>}
           </div>
 
-          <button className='login-btn' onClick={handleLogin} disabled={!isEmailValid || !isPasswordValid}>Login</button>
+          <div className='form-options'>
+            <label className='remember-option'>
+              <input type="checkbox" checked={remember} onChange={(e)=>setRemember(e.target.checked)} />
+              <span>Remember me</span>
+            </label>
+            <NavLink to="/forgot" className='forgot-pass'>Forgot Password?</NavLink>
+          </div>
+
+          <button className='auth-btn' onClick={handleLogin} disabled={!isEmailValid || !isPasswordValid}>Login</button>
+          
         </div>
+
         <p>or</p>
 
-        <div className='quick-login'>
+        <div className='social-btn'>
           <button>
             <FaGoogle /> Continue with Google
           </button>
