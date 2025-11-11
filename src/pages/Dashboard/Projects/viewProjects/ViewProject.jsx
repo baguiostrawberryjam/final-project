@@ -34,7 +34,6 @@ function ViewProject() {
     update(ref(db, `users/${user.uid}/projects/${projectKey}`), {status: 'completed'})
       .then(() => {
         alert("Project marked as done!");
-        window.location.reload();
       })
       .catch((error) => {
         console.log("Error updating project status: " + error.message);
@@ -61,7 +60,7 @@ function ViewProject() {
       </div>
       <div className="project-list">
 
-        {projects ? ( Object.keys(projects).filter(key => projects[key].status !== 'completed').map((key) => (
+        {projects ? ( Object.keys(projects).filter(key => projects[key].status !== "completed").map((key) => (
 
             <div key={key} className="project-item">
 

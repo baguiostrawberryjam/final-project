@@ -139,6 +139,7 @@ function Dashboard() {
                         <div className='project-details'>
                             <div className='project-list'>
                                 {projects ? Object.keys(projects)
+                                .filter(key => projects[key].status !== 'completed')
                                 .map((key) => (
                                     <div key={key} className='project-item'>
                                         <div className="project-icon">
