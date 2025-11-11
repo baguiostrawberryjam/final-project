@@ -153,3 +153,18 @@
 	font-weight: bold;
 }
 
+.project-container{
+	max-width:900px;
+	margin:24px auto;
+	padding:18px;
+	background:#fff;
+	border-radius:8px;
+	box-shadow:0 6px 18px rgba(30,30,31,0.04);
+}
+
+.project-header{
+	display:flex;
+	justify-content:space-between;
+	align-items:center;
+	margin-bottom:12px;
+}

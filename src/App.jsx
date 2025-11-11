@@ -4,17 +4,19 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "./firebase-config";
 import { onValue, ref } from "firebase/database";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
-import Dashboard from "./pages/Dashboard/Dashboard"
+import Dashboard from "./pages/Dashboard/Dashboard";
 import Login from "./pages/Login/Login";
-import Register from "./pages/Register/Register"
+import Register from "./pages/Register/Register";
 import EditProfile from "./pages/Setup/editProfile/EditProfile";
 import AddToDo from "./pages/Dashboard/ToDos/addToDo/AddToDo";
 import EditToDo from "./pages/Dashboard/ToDos/editToDo/EditToDo";
 import Setup from "./pages/Setup/Setup";
-import './App.css';
-import './components/styles/main.css';
+import "./App.css";
+import "./components/styles/main.css";
 import Profile from "./pages/Profile/Profile";
-
+import AddProject from "./pages/Dashboard/Projects/addProjects/AddProject";
+import ViewProject from "./pages/Dashboard/Projects/viewProjects/ViewProject";
+import VPAddTodo from "./pages/Dashboard/Projects/viewProjects/vpAddToDo/VPAddToDo";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -37,7 +39,6 @@ function App() {
           setHasData(snapshot.exists());
           setLoading(false); // Set loading to false after DB check completes
         });
-
       } else {
         setUser(null);
         setIsAdmin(false);
@@ -45,7 +46,6 @@ function App() {
         setLoading(false);
       }
     });
-
   }, []);
 
   if (loading) {
@@ -88,6 +88,12 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/add-todo" element={<AddToDo />} />
             <Route path="/edit-todo/:id" element={<EditToDo />} />
+            <Route path="/add-project/:id" element={<AddProject />} />
+            <Route path="/view-project" element={<ViewProject />} />
+            <Route
+              path="/view-project/add-todo/:projectKey"
+              element={<VPAddTodo />}
+            />
             <Route path="*" element={<Navigate to="/dashboard" />} />
           </>
         )}
