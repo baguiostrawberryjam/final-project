@@ -1,14 +1,31 @@
-import { useState } from "react";
-import { ref, push } from "firebase/database";
+import { useEffect, useState } from "react";
+import { ref, push, onValue } from "firebase/database";
 import "./vp-add-to-do.css";
-import { NavLink, useParams } from "react-router";
+import { NavLink } from "react-router";
 import { auth, db } from "../../../../../firebase-config";
+import { onAuthStateChanged } from "firebase/auth";
 
 function VPAddTodo() {
-  const { projectKey } = useParams(); // Get the project key from URL
   const [title, setTitle] = useState("");
   const [status, setStatus] = useState("pending");
   const [due, setDue] = useState("");
+  const [project, setProject] = useState([]);
+  const [selectedProject, setSelectedProject] = useState(null);
+
+  const today = new Date().toISOString().split("T")[0];
+
+  useEffect(()=>{
+    onAuthStateChanged(auth, (u)=>{
+      if(u) {
+
+        {/*Retrieve projects from the database*/}
+        onValue(ref(db,`users/${u.uid}/projects`),(snapshot)=>{
+            setProject(snapshot.val());
+        })
+
+      }
+    })
+  },[])
 
   function checkTitle(e) {
     let title = e.target.value;
@@ -39,7 +56,7 @@ function VPAddTodo() {
     {
       /* Add to-do's information in the FRD */
     }
-    push(ref(db, `users/${user.uid}/projects/${projectKey}/todos`), {
+    push(ref(db, `users/${user.uid}/projects/`+selectedProject+`/todos`), {
       title: title.trim(),
       status: status,
       due: due || null,
@@ -63,33 +80,37 @@ function VPAddTodo() {
     <div className="add-todo-container">
       {/* User Interface where we collect Task Information */}
       <h2>Add New Task</h2>
-      <label htmlFor="title">Task Title:</label>
-      <input
-        type="text"
-        id="title"
-        value={title}
-        onChange={(e) => checkTitle(e)}
-        placeholder="Enter task title"
-      />
+      <label>Task Title:</label>
+
+      <input type="text" id="title" value={title} onChange={(e) => checkTitle(e)} placeholder="Enter task title" />
+
       <p className="txtError" id="eTitle"></p>
+
       <label>Status:</label>
       <select value={status} onChange={(e) => setStatus(e.target.value)}>
         <option value="pending">Pending</option>
         <option value="ongoing">Ongoing</option>
         <option value="complete">Complete</option>
       </select>
+
+      <br />
+      <br />
+      <label>Select which project: </label> 
+      <select onChange={(e)=>setSelectedProject(e.target.value)}>
+        {project && Object.keys(project).map((key) => (
+          <option value={key}>{project[key].title}</option>
+        ))}
+      </select>
+
       <br />
       <br />
       <label>Due Date:</label>
-      <input type="date" value={due} onChange={(e) => setDue(e.target.value)} />
+      <input type="date" value={due} onChange={(e) => setDue(e.target.value)} min={today} />
+
       <br />
       <br />
-      <button type="submit" onClick={handleSubmit}>
-        Add Task
-      </button>
-      <NavLink to="/view-project">
-        <button className="return-btn">Return to Projects</button>
-      </NavLink>
+      <button type="submit" onClick={handleSubmit}> Add Task</button>
+      <NavLink to="/view-project"><button className="return-btn">Return to Projects</button></NavLink>
     </div>
   );
 }

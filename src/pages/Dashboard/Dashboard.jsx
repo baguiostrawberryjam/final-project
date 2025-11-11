@@ -129,7 +129,7 @@ function Dashboard() {
 
                         <div className='project-header'>
                             <div>
-                                <h1>Your Projects</h1>
+                                <h1>Projects</h1>
                             </div>
                             <div>
                                 <NavLink to={`/view-project`}><button>View All Projects</button></NavLink>
@@ -167,7 +167,7 @@ function Dashboard() {
                     <div className='to-do-table'>
 
                         <div className='to-do-header'>
-                            <h1>Your To-Do List</h1>
+                            <h1>Task List:</h1>
                             <NavLink to='/add-todo'><button><i className="fa fa-plus"/></button></NavLink>
                         </div>
 

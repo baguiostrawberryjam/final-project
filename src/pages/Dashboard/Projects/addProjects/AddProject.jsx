@@ -10,6 +10,8 @@ function AddProject() {
   const [targetDate, setTargetDate] = useState("");
   const [folderColor, setFolderColor] = useState("#000000");
 
+  const today = new Date().toISOString().split("T")[0];
+
   function handleAddProject() {
     const user = auth.currentUser; 
     if (!user) {
@@ -25,6 +27,7 @@ function AddProject() {
       targetDate: targetDate,
       folderColor: folderColor,
       createdAt: getDate,
+      status: 'pending',
     })
       .then(() => {
         alert("Project added successfully!");
@@ -46,34 +49,17 @@ function AddProject() {
       <div className="add-project-card">
         <h2>Add New Project</h2>
 
-        <input
-          type="text"
-          placeholder="Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
+        <input type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
 
-        <textarea
-          placeholder="Description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        ></textarea>
+        <textarea placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} ></textarea>
 
         <label>Target Date to finish the project: </label>
-        <input
-          type="date"
-          value={targetDate}
-          onChange={(e) => setTargetDate(e.target.value)}
-        />
+        <input type="date"value={targetDate}onChange={(e) => setTargetDate(e.target.value)} min={today}/>
 
         <label>Folder Color: </label>
-        <input
-          type="color"
-          value={folderColor}
-          onChange={(e) => setFolderColor(e.target.value)}
-        />
+        <input type="color" value={folderColor} onChange={(e) => setFolderColor(e.target.value)} />
 
-        <button onClick={handleAddProject}>Add Project</button>
+        <button onClick={handleAddProject}>New Project</button>
 
         {user && (
           <NavLink to={`/view-project`}>
