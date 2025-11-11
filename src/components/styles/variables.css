@@ -39,10 +39,10 @@
     /* Status Colors */
     --success-bg: #ECFDF5;
     --success-text: #065F46;
-    --warning-bg: #FEFCE8;
-    --warning-text: #92400E;
+    --warning-bg: #fff2ed;
+    --warning-text: #ff2b2b;
     --danger-bg: #FEF2F2;
-    --danger-text: #991B1B;
+    --danger-text: #ff2b2b;
 
     /* Dark Mode (optional) */
     --dark-bg: #0F172A;
