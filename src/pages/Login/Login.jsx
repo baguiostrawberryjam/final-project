@@ -4,6 +4,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase-config';
 import { useState } from 'react';
 import loginHero from "../../assets/images/login-hero.jpg";
+import { FaGoogle, FaApple } from 'react-icons/fa';
 
 function Login() {
   
@@ -27,8 +28,7 @@ function Login() {
 
   function checkEmail(e){
     let email = e.target.value
-    let eMail = document.querySelector('#eEmail');
-    eMail.innerHTML = ""
+    setEmail(email);
     
     // Always update the email state
     setEmail(email)
@@ -47,8 +47,7 @@ function Login() {
 
   function checkPassword(e){
       let pass = e.target.value
-      let ePass = document.querySelector('#ePassword');
-      ePass.innerHTML = ""
+      
 
       // Always update the password state
       setPassword(pass)
@@ -77,8 +76,8 @@ function Login() {
       <div className='login-right-section'>
 
         <div className='header'>
-          <h1 className='title-bold'>Login Page</h1>
-          <p className='subtitle-regular'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi commodi exercitationem, fuga quisquam molestias dolorem hic cumque ratione eveniet, omnis distinctio repellat nesciu</p>
+          <h1 className='title-bold'>WELCOME</h1>
+          <p className='subtitle-regular'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi commodi exercitationem</p>
         </div>
 
         <div className='login-forms'>
@@ -93,13 +92,17 @@ function Login() {
             {passwordError && <p className='txtError'>{passwordError}</p>}
           </div>
 
-          <button onClick={handleLogin} disabled={!isEmailValid || !isPasswordValid}>Login</button>
+          <button className='login-btn' onClick={handleLogin} disabled={!isEmailValid || !isPasswordValid}>Login</button>
         </div>
         <p>or</p>
 
         <div className='quick-login'>
-          <button>Continue with Google</button>
-          <button>Continue with Apple</button>
+          <button>
+            <FaGoogle /> Continue with Google
+          </button>
+          <button>
+            <FaApple /> Continue with Apple
+          </button>
         </div>
         
         
