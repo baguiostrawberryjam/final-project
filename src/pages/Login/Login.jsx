@@ -6,7 +6,6 @@ import { useState } from 'react';
 import loginHero from "../../assets/images/login-hero.jpg";
 import { FaGoogle, FaApple } from 'react-icons/fa';
 
-
 function Login() {
   
   const [email, setEmail] = useState('');
@@ -82,7 +81,7 @@ function Login() {
         </div>
 
         <div className='login-forms'>
-
+          
           <div className='input-container'>
             <input onChange={(e)=>checkEmail(e)} type="email" placeholder='Email' className={emailError ? 'input-error': ''}/>
             {emailError && <p className='txtError'>{emailError}</p>}
