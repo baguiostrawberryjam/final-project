@@ -55,10 +55,10 @@ function Login() {
       const passwordRegex = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&+=])(?=\S+$).{8,20}$/
 
       if(pass.trim().length <= 0){
-          setPasswordError("Input Required");
+          setPasswordError("Input required");
           setIsPasswordValid(false);
       } else if(!passwordRegex.test(pass)){
-          setPasswordError("Invalid Password");
+          setPasswordError("Invalid password");
           setIsPasswordValid(false);
       } else {
           setPasswordError("");

@@ -238,7 +238,7 @@ html, body {
 .input-error {
   border-color: var(--danger-text) !important;
   background-color: var(--warning-bg) !important;
-  box-shadow: 0 0 0 3px var(--warning-text);
+  box-shadow: 0 0 0 1px var(--danger-text);
   transition: all 0.2s ease-in-out;
 }
 
