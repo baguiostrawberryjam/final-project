@@ -10,19 +10,17 @@ function VPAddTodo() {
   const [status, setStatus] = useState("pending");
   const [due, setDue] = useState("");
   const [project, setProject] = useState([]);
-  const [selectedProject, setSelectedProject] = useState(null);
+  const [selectedProject, setSelectedProject] = useState("");
 
   const today = new Date().toISOString().split("T")[0];
 
   useEffect(()=>{
     onAuthStateChanged(auth, (u)=>{
       if(u) {
-
         {/*Retrieve projects from the database*/}
         onValue(ref(db,`users/${u.uid}/projects`),(snapshot)=>{
             setProject(snapshot.val());
         })
-
       }
     })
   },[])
@@ -56,7 +54,12 @@ function VPAddTodo() {
     {
       /* Add to-do's information in the FRD */
     }
-    push(ref(db, `users/${user.uid}/projects/`+selectedProject+`/todos`), {
+    if (!selectedProject) {
+      alert('Please select a project before adding a task');
+      return;
+    }
+
+    push(ref(db, `users/${user.uid}/projects/${selectedProject}/todos`), {
       title: title.trim(),
       status: status,
       due: due || null,
@@ -70,6 +73,8 @@ function VPAddTodo() {
         setTitle("");
         setStatus("pending");
         setDue("");
+        setSelectedProject("");
+        window.location.href = `/final-project/view-project`;
       })
       .catch((error) => {
         console.log("Error adding task: " + error.message);
@@ -96,10 +101,15 @@ function VPAddTodo() {
       <br />
       <br />
       <label>Select which project: </label> 
-      <select onChange={(e)=>setSelectedProject(e.target.value)}>
-        {project && Object.keys(project).map((key) => (
-          <option value={key}>{project[key].title}</option>
-        ))}
+      <select value={selectedProject} onChange={(e) => setSelectedProject(e.target.value)}>
+        <option value="">-- Select project --</option>
+        {project && Object.keys(project)
+          .filter((key) => project[key].status !== "completed")
+          .map((key) => (
+            <option key={key} value={key}>
+              {project[key].title}
+            </option>
+          ))}
       </select>
 
       <br />
@@ -110,7 +120,7 @@ function VPAddTodo() {
       <br />
       <br />
       <button type="submit" onClick={handleSubmit}> Add Task</button>
-      <NavLink to="/view-project"><button className="return-btn">Return to Projects</button></NavLink>
+      <NavLink to={`/view-project`}><button className="return-btn">Return to Projects</button></NavLink>
     </div>
   );
 }

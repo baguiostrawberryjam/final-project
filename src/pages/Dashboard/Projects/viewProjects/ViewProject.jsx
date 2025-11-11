@@ -31,14 +31,14 @@ function ViewProject() {
   };
 
   function handleStatus(projectKey) {
-  update(ref(db, `users/${user.uid}/projects/${projectKey}`), {status: 'completed'})
-    .then(() => {
-      alert("Project marked as done!");
-      window.location.reload();
-    })
-    .catch((error) => {
-      console.log("Error updating project status: " + error.message);
-    });
+    update(ref(db, `users/${user.uid}/projects/${projectKey}`), {status: 'completed'})
+      .then(() => {
+        alert("Project marked as done!");
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.log("Error updating project status: " + error.message);
+      });
   }
 
   return (
@@ -74,7 +74,7 @@ function ViewProject() {
                   </div>
                   <div>
                     <button onClick={()=>handleStatus(key)}><i className="fa fa-check"></i> Mark as Done</button>
-                    <NavLink to={`/view-project/add-todo/${key}`}> <button><i className="fa fa-plus"></i> Add Task</button></NavLink>
+                    <NavLink to={`/view-project/add-todo/${key}`}><button><i className="fa fa-plus"></i> Add Task</button></NavLink>
                   </div>
 
                 </div>
@@ -96,7 +96,8 @@ function ViewProject() {
                     {projects[key].todos ? (Object.keys(projects[key].todos).map((todoKey) => (
 
                         <div key={todoKey} className="todo-item">
-                            <p> - {projects[key].todos[todoKey].title} <i className="fa fa-calendar"></i> {projects[key].todos[todoKey].due} Status: {projects[key].todos[todoKey].status}</p>
+                            <p> - {projects[key].todos[todoKey].title} <i className="fa fa-calendar"></i> {projects[key].todos[todoKey].due} Status:
+                            <span className={`status-${projects[key].todos[todoKey].status}`}> {projects[key].todos[todoKey].status.charAt(0).toUpperCase() + projects[key].todos[todoKey].status.slice(1)}</span></p>
                         </div>
                       ))
                     ) : (<p className="no-todos">No tasks yet for this project.</p> )}

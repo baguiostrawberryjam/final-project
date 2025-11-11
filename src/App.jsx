@@ -88,8 +88,8 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/add-todo" element={<AddToDo />} />
             <Route path="/edit-todo/:id" element={<EditToDo />} />
-            <Route path="/add-project/" element={<AddProject />} />
-            <Route path="/view-project" element={<ViewProject />} />
+            <Route path="/add-project/:id" element={<AddProject />} />
+            <Route path="/view-project/" element={<ViewProject />} />
             <Route
               path="/view-project/add-todo/:projectKey"
               element={<VPAddTodo />}
