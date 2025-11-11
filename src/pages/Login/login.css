@@ -1,11 +1,16 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
 /* Main container */
 .login-container{
     border-radius: 10px; 
     display: flex; 
     justify-content: center;
     align-items: center;
-    padding: 10px;
     min-height: 100vh; /* full viewport minus top+bottom margin */
+    padding: 24px;
     box-sizing: border-box; /* include padding in size calculations */
 }
 
@@ -15,24 +20,26 @@
 }
 
 /* Login left container */
-.login-left-section{
+.login-left-section {
+    flex: 1 1 400px;
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    height: calc(100vh - 48px);
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
     background-color: rgb(248, 248, 248);
-    margin: 10px;
-    border-radius: 10px;
-    padding: 10px;
+    box-sizing: border-box; /* include padding in size calculations */
+    border-radius: 16px;
 }
 
-.login-left-section img{
-    width: 100%;       /* fill the container */
-    max-width: 600px;  /* don’t exceed original size */
-    height: auto;      /* maintain aspect ratio */
-    object-fit: cover;
-    background-position: center;
-    border-radius: 10px;
+.login-left-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;      /* fills container while maintaining aspect ratio */
+    object-position: center; /* ensures image stays centered when cropped */
+    display: block;          /* removes any bottom inline spacing */
 }
 
 /* Login right container */
@@ -231,6 +238,10 @@
 .input-error {
   border-color: var(--danger-text) !important;
   background-color: var(--warning-bg) !important;
-  box-shadow: 0 0 0 3px var(--warning-text);
+  box-shadow: 0 0 0 1px var(--danger-text);
   transition: all 0.2s ease-in-out;
+}
+
+.link-text {
+    text-decoration: none;
 }
