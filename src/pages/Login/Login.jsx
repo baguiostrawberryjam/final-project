@@ -34,10 +34,10 @@ function Login() {
     setEmail(email)
 
     if(email.trim().length <= 0){
-        setEmailError("Input Required");
+        setEmailError("Input required");
         setIsEmailValid(false);
     } else if(email.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)==null){
-        setEmailError("Invalid Email");
+        setEmailError("Invalid email");
         setIsEmailValid(false);
     } else {
         setEmailError("");
@@ -106,7 +106,7 @@ function Login() {
         </div>
         
         
-        <p>Don't have an Account? <NavLink to="/register">Register</NavLink></p>
+        <p>Don't have an account? <NavLink to="/register" className="link-text">Register</NavLink></p>
 
       </div>
       
