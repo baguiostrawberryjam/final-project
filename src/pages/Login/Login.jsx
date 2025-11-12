@@ -46,9 +46,6 @@ function Login() {
 
   function checkPassword(e){
       let pass = e.target.value
-      
-
-      // Always update the password state
       setPassword(pass);
 
       const passwordRegex = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&+=])(?=\S+$).{8,20}$/
@@ -82,13 +79,25 @@ function Login() {
         <div className='forms'>
           
           <div className='input-container'>
-            <input onChange={(e)=>checkEmail(e)} type="email" placeholder='Email' className={emailError ? 'input-error': ''}/>
+            <label htmlFor="email" className='input-label'>Email</label>
+            <input 
+              id='email'
+              type="email"
+              placeholder='Enter your email'
+              onChange={(e)=>checkEmail(e)}   
+              className={emailError ? 'input-error': ''}/>
             {emailError && <p className='txtError'>{emailError}</p>}
           </div>
           
           <div className='input-container'>
-            <input onChange={(e)=>checkPassword(e)} type="password" placeholder='Password' className={passwordError ? 'input-error' : ''}/>
-            {passwordError && <p className='txtError'>{passwordError}</p>}
+            <label htmlFor="password" className='input-label'>Password</label>
+            <input
+              id='password'
+              type="password"
+              placeholder='Enter your Password' 
+              onChange={(e)=>checkPassword(e)}  
+              className={passwordError ? 'input-error' : ''}/>
+              {passwordError && <p className='txtError'>{passwordError}</p>}
           </div>
 
           <div className='form-options'>
@@ -96,7 +105,7 @@ function Login() {
               <input type="checkbox" checked={remember} onChange={(e)=>setRemember(e.target.checked)} />
               <span>Remember me</span>
             </label>
-            <NavLink to="/forgot" className='forgot-pass'>Forgot Password?</NavLink>
+            <NavLink to="/forgot" className='link-text'>Forgot Password?</NavLink>
           </div>
 
           <button className='auth-btn' onClick={handleLogin} disabled={!isEmailValid || !isPasswordValid}>Login</button>
@@ -115,7 +124,7 @@ function Login() {
         </div>
         
         
-        <p>Don't have an account? <NavLink to="/register" className="link-text">Register</NavLink></p>
+        <p className='form-footer'>Don't have an account? <NavLink to="/register" className="link-text">Register</NavLink></p>
 
       </div>
       

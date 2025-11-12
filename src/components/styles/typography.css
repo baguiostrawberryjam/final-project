@@ -32,6 +32,46 @@
   --quicksand-500: 500;
   --quicksand-600: 600;
   --quicksand-700: 700;
+
+  /* SPACING SYSTEM */
+  --space-xs: 0.5rem;    /* 8px */
+  --space-sm: 0.75rem;   /* 12px */
+  --space-md: 1rem;      /* 16px */
+  --space-lg: 1.5rem;    /* 24px */
+  --space-xl: 2rem;      /* 32px */
+
+  /* BORDER RADIUS  */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 16px;
+
+  /* FONT SIZES */
+  --font-xs: 0.75rem;   /* 12px */
+  --font-sm: 0.875rem;  /* 14px */
+  --font-md: 1rem;      /* 16px */
+  --font-ml: 1.25rem;
+  --font-lg: 2.5rem;    /* 40px */
+
+  /* SHADOW */
+  --shadow-light: 0 4px 12px var(--shadow);
+
+  /* WIDTHS */
+  --container-max: 350px;
+  --avatar-size: 100px;
+
+  /* MARGINS (commonly used) */
+  --margin-sm: 5px;
+  --margin-md: 10px;
+  --margin-lg: 24px;
+  --margin-xl: 150px;
+
+  /* PADDINGS  */
+  --padding-sm: 0.75rem;
+  --padding-md: 1rem;
+  --padding-lg: 1.5rem;
+
+
 }
 
 /* Classname font structures*/

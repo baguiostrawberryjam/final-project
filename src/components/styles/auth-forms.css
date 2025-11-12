@@ -5,21 +5,20 @@ html, body {
 
 /* Main container */
 .main-container{
-    border-radius: 10px; 
+    border-radius: var(--radius-lg); 
     display: flex; 
     justify-content: center;
     align-items: center;
     min-height: 100vh; /* full viewport minus top+bottom margin */
-    padding: 24px;
+    padding: var(--padding-lg);
     box-sizing: border-box; /* include padding in size calculations */
 }
 
 .left-section, .right-section {
     flex: 1 1 400px;      /* grow/shrink, min width 400px */
-    margin: 10px;
+    margin: var(--margin-md);
 }
 
-/* Login left container */
 .left-section {
     flex: 1 1 400px;
     display: flex;
@@ -29,9 +28,9 @@ html, body {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: rgb(248, 248, 248);
+    background-color: var(--background);
     box-sizing: border-box; /* include padding in size calculations */
-    border-radius: 16px;
+    border-radius: var(--radius-xl);
 }
 
 .left-section img {
@@ -61,7 +60,7 @@ html, body {
     font-family: var(--font-title);
     font-weight: var(--dosis-700);
     color: var(--text-primary);
-    font-size: 2.5rem;
+    font-size: var(--font-lg);
     margin: 0;
 }
 
@@ -69,7 +68,7 @@ html, body {
     font-family: var(--font-subtitle);
     font-weight: var(--quicksand-400);
     color: var(--text-secondary);
-    font-size: 1rem;
+    font-size: var(--font-md);
     line-height: 1.5;
     margin: 0;
 }
@@ -82,18 +81,26 @@ html, body {
 .input-container{
     display: flex;
     flex-direction: column;
-     /* small space between input and error */
+    gap: var(--space-xs);
+}
+
+.input-label {
+    font-family: var(--font-subtitle);
+    font-weight: var(--quicksand-600);
+    font-size: var(--font-sm);
+    color: var(--text-primary);
+    text-transform: none;
 }
 
 .input-container input{
-    padding: 0.75rem 1rem;
+    padding: var(--padding-sm) var(--padding-md);
     border: 1px solid var(--input-border);
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     background-color: var(--input-bg);
     color: var(--input-text);
     font-family: var(--font-subtitle);
     font-weight: var(--quicksand-400);
-    font-size: 1rem;
+    font-size: var(--font-md);
     transition: all 0.2s ease-in-out;
 }
 
@@ -118,7 +125,7 @@ html, body {
     color: var(--text-secondary);
     font-family: var(--font-subtitle);
     font-weight: var(--quicksand-400);
-    margin: 1rem 0;
+    margin: var(--space-md) 0;
 }
 
 .auth-btn{
@@ -127,10 +134,10 @@ html, body {
     background-color: var(--primary);
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     font-family: var(--font-subtitle);
     font-weight: var(--quicksand-600);
-    font-size: 1rem;
+    font-size: var(--font-md);
     cursor: pointer;
     transition: all 0.2s ease-in-out;
 }
@@ -158,13 +165,13 @@ html, body {
     align-items: center;
     margin-top: -0.5rem;
     font-family: var(--font-subtitle);
-    font-size: 0.875rem;
+    font-size: var(--font-sm);
 }
 
 .remember-option {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: var(--space-xs);
     color: var(--text-secondary);
     cursor: pointer;
 }
@@ -173,7 +180,7 @@ html, body {
     width: 1rem;
     height: 1rem;
     border: 1.5px solid var(--input-border);
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
     cursor: pointer;
     accent-color: var(--primary);
 }
@@ -196,29 +203,29 @@ html, body {
 
 .social-btn {
     display: grid;
-    gap: 0.75rem;
+    gap: var(--space-sm);
 }
 
 .social-btn button {
     width: 100%;
-    padding: 0.75rem 1.5rem;
+    padding: var(--space-sm) var(--space-lg);
     background-color: var(--card-bg);
     color: var(--text-primary);
     border: 1px solid var(--border);
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     font-family: var(--font-subtitle);
     font-weight: var(--quicksand-500);
-    font-size: 1rem;
+    font-size: var(--font-md);
     cursor: pointer;
     transition: all 0.2s ease-in-out;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.75rem;
+    gap: var(--space-md);
 }
 
 .social-btn button svg {
-    font-size: 1.25rem;
+    font-size: var(--font-ml);
 }
 
 .social-btn button:hover {
@@ -229,9 +236,9 @@ html, body {
 .input-container .txtError{
     font-weight: var(--quicksand-500);
     color: var(--warning-text);
-    font-size: 0.875rem;
+    font-size: var(--font-sm);
     transition: all 0.2s ease-in-out;
-    margin: 5px;
+    margin: var(--margin-sm);
     text-align: left;
 }
 
@@ -242,6 +249,80 @@ html, body {
     transition: all 0.2s ease-in-out;
 }
 
+
+
 .link-text {
     text-decoration: none;
+    color: var(--primary);
+    font-weight: var(--quicksand-600);
 }
+
+.form-footer{
+    font-size: var(--font-sm);
+}
+
+.link-text:hover{
+    color: var(--secondary);
+    transition: all 0.2s ease-in-out;
+}
+
+
+/* Setup page specific styles */
+.profile-picture {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: var(--space-sm) auto var(--space-lg) auto;
+    width: var(--avatar-size);
+    height: var(--avatar-size);
+    cursor: pointer;
+}
+
+.setup-avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--primary);
+    box-shadow: 0 4px 12px var(--shadow);
+    transition: all 0.2s ease-in-out;
+    display: block;
+}
+
+.upload-btn {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    color: var(--background);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    transition: all 0.2s ease-in-out;
+    padding: 0;
+    opacity: 0;
+}
+
+.profile-picture:hover .upload-btn {
+    background-color: var(--profile-hover);
+    opacity: 1;
+}
+
+.upload-btn:hover {
+    background-color: var(--upload-hover);
+}
+
+.upload-btn:active {
+    background-color: var(--upload-active);
+}
+
+.setup-avatar:hover {
+    filter: brightness(0.95);
+}
+

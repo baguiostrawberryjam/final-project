@@ -42,13 +42,23 @@ function Dashboard() {
     }
     
     function handleFile(f){
+        if (!f) return;
+        
         uploadBytes(sref(storage, `/profile/${user.uid}`), f)
         .then(() => {    
             getDownloadURL(sref(storage, `/profile/${user.uid}`)).then((url) => {
                 update(ref(db, `/users/${user.uid}`),{profileURL:url}).then(()=>{
                     alert("Profile Picture Updated Successfully!");
                 })
+                .catch((error) => {
+                    console.log("Update error:", error);
+                    alert("Error updating profile picture");
+                });
             });
+        })
+        .catch((error) => {
+            console.log("Upload error:", error);
+            alert("Error uploading profile picture");
         });
     }
     

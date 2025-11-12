@@ -35,6 +35,11 @@
     --focus-ring: #A5B4FC;     /* Outline glow when focused */
     --disabled-bg: #E5E7EB;    /* Disabled background */
     --disabled-text: #9CA3AF;  /* Disabled text color */
+    
+    /* States for Uploading Profile Picture */
+    --profile-hover: rgba(79, 70, 229, 0.6);
+    --upload-hover: rgba(79, 70, 229, 0.7);
+    --upload-active: rgba(79, 70, 229, 0.8);
 
     /* Status Colors */
     --success-bg: #ECFDF5;
