@@ -70,7 +70,6 @@ function Register() {
 
   function checkConfirmPassword(e){
     let confirm = e.target.value;
-
     setConfirmPassword(confirm);
 
     if (confirm.trim().length <= 0) {
@@ -100,19 +99,39 @@ function Register() {
         </div>
 
         <div className='forms'>
-
           <div className='input-container'>
-            <input onInput={(e)=>checkEmail(e)} type="email" placeholder="Email" className={emailError ? 'input-error':''}/>
+            <label htmlFor="email" className="input-label">Email</label>
+            <input 
+              id="email"
+              type="email" 
+              placeholder="Enter your email" 
+              onInput={(e)=>checkEmail(e)}
+              className={emailError ? 'input-error':''}
+            />
             {emailError && <p className='txtError'>{emailError}</p>}
           </div>
 
-          <div className='input-container'> 
-            <input onChange={(e)=>checkPassword(e)} type="password" placeholder="Password" className={passwordError ? 'input-error' : ''}/>
+          <div className='input-container'>
+            <label htmlFor="password" className="input-label">Password</label>
+            <input 
+              id="password"
+              type="password" 
+              placeholder="Enter your password"
+              onChange={(e)=>checkPassword(e)} 
+              className={passwordError ? 'input-error' : ''}
+            />
             {passwordError && <p className='txtError'>{passwordError}</p>}
           </div>
 
           <div className='input-container'>
-            <input onChange={(e)=>checkConfirmPassword(e)} type="password" placeholder="Confirm Password" className={confirmError ? 'input-error' : ''}/>
+            <label htmlFor="confirmPassword" className="input-label">Confirm Password</label>
+            <input 
+              id="confirmPassword"
+              type="password" 
+              placeholder="Confirm your password"
+              onChange={(e)=>checkConfirmPassword(e)} 
+              className={confirmError ? 'input-error' : ''}
+            />
             {confirmError && <p className='txtError'>{confirmError}</p>}
           </div>
 
@@ -140,7 +159,7 @@ function Register() {
           </button>
         </div>
 
-          <p>Already have an Account? <NavLink to='./login' className="link-text">Login</NavLink></p>
+          <p className='form-footer'>Already have an Account? <NavLink to='./login' className="link-text">Login</NavLink></p>
       </div>
 
     </div>
