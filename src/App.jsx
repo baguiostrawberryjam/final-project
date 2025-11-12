@@ -8,8 +8,6 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import EditProfile from "./pages/Setup/editProfile/EditProfile";
-import AddToDo from "./pages/Dashboard/ToDos/addToDo/AddToDo";
-import EditToDo from "./pages/Dashboard/ToDos/editToDo/EditToDo";
 import Setup from "./pages/Setup/Setup";
 import "./App.css";
 import "./components/styles/main.css";
@@ -86,8 +84,6 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/edit-profile" element={<EditProfile />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/add-todo" element={<AddToDo />} />
-            <Route path="/edit-todo/:id" element={<EditToDo />} />
             <Route path="/add-project/:id" element={<AddProject />} />
             <Route path="/view-project/" element={<ViewProject />} />
             <Route
