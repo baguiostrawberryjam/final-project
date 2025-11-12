@@ -4,6 +4,8 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "../../../../firebase-config";
 import { onValue, ref, update } from "firebase/database";
 import { NavLink } from "react-router";
+import AddProject from "../addProjects/AddProject";
+import VPAddTodo from "./vpAddToDo/VPAddToDo";
 
 function ViewProject() {
   const [projects, setProjects] = useState(null);
@@ -52,9 +54,7 @@ function ViewProject() {
         </div>
 
         <div>
-          {user && (
-            <NavLink to={`/add-project/${user.uid}`}><button><i className="fa fa-plus"></i></button></NavLink>
-          )}
+          {user && <AddProject />}
         </div>
 
       </div>
@@ -73,7 +73,7 @@ function ViewProject() {
                   </div>
                   <div>
                     <button onClick={()=>handleStatus(key)}><i className="fa fa-check"></i> Mark as Done</button>
-                    <NavLink to={`/view-project/add-todo/${key}`}><button><i className="fa fa-plus"></i> Add Task</button></NavLink>
+                    {user && <VPAddTodo />}
                   </div>
 
                 </div>
