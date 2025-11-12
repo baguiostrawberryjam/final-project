@@ -6,7 +6,6 @@ import { NavLink } from 'react-router';
 import { ref, set } from 'firebase/database';
 import { storage } from '../../firebase-config';
 import { getDownloadURL, uploadBytes, ref as sref } from 'firebase/storage';
-import { update } from 'firebase/database';
 import setupHero from "../../assets/images/login-hero.jpg";
 
 function Setup() {
@@ -138,9 +137,6 @@ function Setup() {
       lastName: lastName,
       contactNumber: contactNumber,
       profileURL: profileURL || null,
-      firstName: firstName,
-      lastName: lastName,
-      contactNumber: contactNumber,
       projects: {
         [projectId]: {
           title: "Getting Started",
