@@ -42,7 +42,7 @@ function Register() {
         setEmailError("Input required");
         setIsEmailValid(false);
     } else if(email.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)==null){
-        setEmailError("Invalid email");
+        setEmailError("Invalid email address");
         setIsEmailValid(false);
     }   else {
         setEmailError("");
@@ -60,7 +60,7 @@ function Register() {
           setPasswordError("Input required");
           setIsPasswordValid(false);
       } else if(!passwordRegex.test(pass)){
-          setPasswordError("Invalid Password (8-20 chars, upper, lower, number, symbol)");
+          setPasswordError("Must contain at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character");
           setIsPasswordValid(false);
       } else {
           setPasswordError("");
@@ -73,7 +73,7 @@ function Register() {
     setConfirmPassword(confirm);
 
     if (confirm.trim().length <= 0) {
-      setConfirmError("Input Required");
+      setConfirmError("Input required");
       setIsConfirmValid(false);
     } else if (confirm !== password) {
       setConfirmError("Passwords do not match");
@@ -94,7 +94,7 @@ function Register() {
       <div className='right-section'>
 
         <div className='header'>
-          <h1 className='title-bold'>SIGNUP</h1>
+          <h1 className='title-bold'>SIGN-UP</h1>
           <p className='subtitle-regular'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi commodi exercitationem</p>
         </div>
 
@@ -138,7 +138,7 @@ function Register() {
           <div className='form-options'>
             <label className='remember-option'>
               <input type="checkbox"/>
-              <span>I agree with the Terms and Conditions</span>
+              <span>I agree with the <NavLink to='#' className="link-text">Terms and Conditions</NavLink></span>
             </label>
           </div>
 
@@ -159,7 +159,7 @@ function Register() {
           </button>
         </div>
 
-          <p className='form-footer'>Already have an Account? <NavLink to='./login' className="link-text">Login</NavLink></p>
+          <p className='form-footer'>Already have an account? <NavLink to='./login' className="link-text">Login</NavLink></p>
       </div>
 
     </div>
