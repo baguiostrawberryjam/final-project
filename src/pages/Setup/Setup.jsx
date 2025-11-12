@@ -31,10 +31,10 @@ function Setup() {
         setFirstName(fName);
 
         if(fName.trim().length <= 0){
-            setFNameError("Blankspaces are not allowed");
+            setFNameError("Blank spaces are not allowed");
             setIsFirstNameValid(false);
         } else if(fName.trim().length <= 3){
-            setFNameError("Atleast 3 Characters")
+            setFNameError("Must contain at least 3 characters")
             setIsFirstNameValid(false);
         } else {
             setFNameError("");
@@ -48,10 +48,10 @@ function Setup() {
         setLastName(lName);
 
         if(lName.trim().length <= 0){
-            setLNameError("Blankspaces are not allowed");
+            setLNameError("Blank spaces are not allowed");
             setIsLastNameValid(false);
         } else if(lName.trim().length <= 3){
-           setLNameError("Atleast 3 Characters");
+           setLNameError("Must contain at least 3 characters");
             setIsLastNameValid(false);
         } else {
             setLNameError("");
@@ -65,15 +65,15 @@ function Setup() {
         setContactNumber(contact);
 
         if(contact.trim().length <= 0){
-            setContactError("Input Required");
+            setContactError("Input required");
             setIsContactValid(false);
         } else if(!contact.startsWith("09")){
-            setContactError("Must Start with 09");
+            setContactError("Must begin with 09");
             setIsContactValid(false);
         } else if(contact.trim().length !== 11){
-            setContactError("11 Digits only");
+            setContactError("Must contain only 11 digits");
         } else if(!/^\d+$/.test(contact)){
-            setContactError("Numbers only");
+            setContactError("Must contain numbers only");
             setIsContactValid(false);
         } else {
             setContactError("");
@@ -116,7 +116,7 @@ function Setup() {
         getDownloadURL(sref(storage, `/profile/${user.uid}`)).then((url) => {
             // Save the Firebase URL (not the preview)
             setProfileURL(url);
-            console.log("Profile Picture Uploaded Successfully!");
+            console.log("Profile picture uploaded successfully!");
         });
     })
     .catch((error) => {
@@ -139,7 +139,7 @@ function Setup() {
       profileURL: profileURL || null,
       projects: {
         [projectId]: {
-          title: "Getting Started",
+          title: "Getting started",
           description:
             "This is your first project! You can edit or delete this project and add new projects to manage your tasks effectively.",
           targetDate: getDate,
@@ -182,7 +182,7 @@ function Setup() {
       <div className='right-section'>
 
         <div className='header'>
-          <h1 className='title-bold'>SETUP</h1>
+          <h1 className='title-bold'>SET-UP</h1>
           <p className='subtitle-regular'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi commodi exercitationem</p>
         </div>
 
@@ -245,8 +245,8 @@ function Setup() {
           </div>
           
 
-          <button className='auth-btn' onClick={saveData} disabled={!isFirstNameValid || !isLastNameValid || !isContactValid}>Get Started</button>
-          <p className='form-footer'>Not your account? <NavLink onClick={logOut} className="link-text">Sign Out</NavLink></p>
+          <button className='auth-btn' onClick={saveData} disabled={!isFirstNameValid || !isLastNameValid || !isContactValid}>Get started</button>
+          <p className='form-footer'>Not your account? <NavLink onClick={logOut} className="link-text">Sign-out</NavLink></p>
         
         </div>
       

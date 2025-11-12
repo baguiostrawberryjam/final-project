@@ -36,7 +36,7 @@ function Login() {
         setEmailError("Input required");
         setIsEmailValid(false);
     } else if(email.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)==null){
-        setEmailError("Invalid email");
+        setEmailError("Invalid email address");
         setIsEmailValid(false);
     } else {
         setEmailError("");
@@ -105,7 +105,7 @@ function Login() {
               <input type="checkbox" checked={remember} onChange={(e)=>setRemember(e.target.checked)} />
               <span>Remember me</span>
             </label>
-            <NavLink to="/forgot" className='link-text'>Forgot Password?</NavLink>
+            <NavLink to="/forgot" className='link-text'>Forgot password?</NavLink>
           </div>
 
           <button className='auth-btn' onClick={handleLogin} disabled={!isEmailValid || !isPasswordValid}>Login</button>
@@ -124,7 +124,7 @@ function Login() {
         </div>
         
         
-        <p className='form-footer'>Don't have an account? <NavLink to="/register" className="link-text">Register</NavLink></p>
+        <p className='form-footer'>Don't have an account? <NavLink to="/register" className="link-text">Sign-up</NavLink></p>
 
       </div>
       
