@@ -2,72 +2,102 @@ import { useState } from "react";
 import "./add-project.css";
 import { push, ref } from "firebase/database";
 import { auth, db } from "../../../../firebase-config";
-import { NavLink } from "react-router";
 
 function AddProject() {
+  const [showModal, setShowModal] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [targetDate, setTargetDate] = useState("");
-  const [folderColor, setFolderColor] = useState("#000000");
+  const [folderColor, setFolderColor] = useState("#3b82f6");
 
   const today = new Date().toISOString().split("T")[0];
 
   function handleAddProject() {
-    const user = auth.currentUser; 
+    const user = auth.currentUser;
+    
     if (!user) {
       alert("You must be logged in to add a project");
+      return;
+    }
+
+    if (!title.trim()) {
+      alert("Please enter a project title");
       return;
     }
 
     const getDate = new Date().toISOString().split("T")[0];
 
     push(ref(db, `users/${user.uid}/projects`), {
-      title: title,
-      description: description,
-      targetDate: targetDate,
+      title: title.trim(),
+      description: description.trim(),
+      targetDate: targetDate || null,
       folderColor: folderColor,
       createdAt: getDate,
       status: 'pending',
     })
       .then(() => {
         alert("Project added successfully!");
-        setTitle("");
-        setDescription("");
-        setTargetDate("");
-        setFolderColor("#000000");
-        window.location.href = `/final-project/view-project`;
+        handleCancel();
       })
       .catch((error) => {
         console.log("Error adding project: " + error.message);
+        alert("Failed to add project. Please try again.");
       });
   }
 
-  const user = auth.currentUser; // for Return button link
+  function handleCancel() {
+    setTitle("");
+    setDescription("");
+    setTargetDate("");
+    setFolderColor("#3b82f6");
+    setShowModal(false);
+  }
 
   return (
-    <div className="add-project-container">
-      <div className="add-project-card">
-        <h2>Add New Project</h2>
+    <>
+      <button onClick={() => setShowModal(true)} className="add-project-btn">
+        <i className="fa fa-plus"></i>
+        Add Project
+      </button>
 
-        <input type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
+      {showModal && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h3>Add New Project</h3>
+            
+            <div className="form-container">
+              <div className="form-group">
+                <label>Project Title</label>
+                <input type="text" placeholder="Enter project title" value={title} onChange={(e) => setTitle(e.target.value)} required />
+              </div>
 
-        <textarea placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} ></textarea>
+              <div className="form-group">
+                <label>Description</label>
+                <textarea placeholder="Enter project description" value={description} onChange={(e) => setDescription(e.target.value)} rows="4" />
+              </div>
 
-        <label>Target Date to finish the project: </label>
-        <input type="date"value={targetDate}onChange={(e) => setTargetDate(e.target.value)} min={today}/>
+              <div className="form-group">
+                <label>Target Completion Date</label>
+                <input type="date" value={targetDate} onChange={(e) => setTargetDate(e.target.value)} min={today} />
+              </div>
 
-        <label>Folder Color: </label>
-        <input type="color" value={folderColor} onChange={(e) => setFolderColor(e.target.value)} />
+              <div className="form-group">
+                <label>Folder Color</label>
+                <div className="color-picker-wrapper">
+                  <input type="color" value={folderColor}onChange={(e) => setFolderColor(e.target.value)}className="color-picker" />
+                  <span className="color-preview" style={{ backgroundColor: folderColor }}> {folderColor} </span>
+                </div>
+              </div>
 
-        <button onClick={handleAddProject}>New Project</button>
-
-        {user && (
-          <NavLink to={`/view-project`}>
-            <button className="return-btn">Return to Projects</button>
-          </NavLink>
-        )}
-      </div>
-    </div>
+              <div className="modal-actions">
+                <button onClick={handleCancel} className="cancel-btn"> Cancel </button>
+                <button onClick={handleAddProject} className="save-btn"> Add Project </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 

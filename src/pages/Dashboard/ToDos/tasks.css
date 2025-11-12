@@ -194,12 +194,14 @@
 
 .form-group input,
 .form-group textarea{
-  width: 93%;
+  width: 100%;
   padding: 0.5rem 0.75rem;
   border: 1px solid #d1d5db;
   border-radius: 0.5rem;
   font-size: 1rem;
   transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+  margin: 0; /* remove default margin above/below textarea */
 }
 .form-group select {
   width: 100%;
@@ -221,6 +223,8 @@
 .form-group textarea {
   resize: none;
   font-family: inherit;
+  margin-top: 0; /* ensure no extra space above */
+  margin-bottom: 0; /* ensure no extra space below */
 }
 
 .form-group select {
