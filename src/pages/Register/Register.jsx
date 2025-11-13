@@ -11,6 +11,7 @@ function Register() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [agreeTerms, setAgreeTerms] = useState(false);
   
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [isPasswordValid, setIsPasswordValid] = useState(false);
@@ -19,6 +20,7 @@ function Register() {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [confirmError, setConfirmError] = useState('');
+  
 
   {/* Handle Registration of Information */}
   function handleRegister(){
@@ -137,13 +139,21 @@ function Register() {
 
           <div className='form-options'>
             <label className='remember-option'>
-              <input type="checkbox"/>
+              <input 
+                type="checkbox"
+                checked={agreeTerms}
+                onChange={(e) => setAgreeTerms(e.target.checked)}
+                />
+                
               <span>I agree with the <NavLink to='#' className="link-text">Terms and Conditions</NavLink></span>
             </label>
           </div>
 
           <button className='auth-btn' onClick={handleRegister} 
-          disabled={!isEmailValid || !isPasswordValid ||!isConfirmValid}>Continue</button>
+          disabled={!isEmailValid || !isPasswordValid ||!isConfirmValid || !agreeTerms}>
+            Continue
+          </button>
+          
         </div>
           
 

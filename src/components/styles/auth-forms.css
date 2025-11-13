@@ -238,7 +238,8 @@ html, body {
     color: var(--warning-text);
     font-size: var(--font-sm);
     transition: all 0.2s ease-in-out;
-    margin: var(--margin-sm);
+    margin-top: var(--margin-xs);
+    margin-bottom: var(--margin-xs);
     text-align: left;
 }
 
@@ -292,34 +293,37 @@ html, body {
 
 .upload-btn {
     position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    background-color: transparent;
-    color: var(--background);
-    border: none;
+    bottom: -6px;
+    right: -6px;
+    width: 36px;
+    height: 36px;
+    background-color: var(--primary);
+    color: #ffffff;
+    border: 2px solid var(--card-bg);
     border-radius: 50%;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2rem;
-    transition: all 0.2s ease-in-out;
+    font-size: 1rem;
+    box-shadow: 0 6px 14px rgba(79,70,229,0.18);
+    transition: transform 0.12s ease, background-color 0.12s ease;
     padding: 0;
-    opacity: 0;
+    opacity: 1;
+    z-index: 2;
 }
 
 .profile-picture:hover .upload-btn {
-    background-color: var(--profile-hover);
-    opacity: 1;
+    transform: scale(1.05);
+    background-color: var(--secondary);
 }
 
 .upload-btn:hover {
-    background-color: var(--upload-hover);
+    transform: scale(1.08);
 }
 
 .upload-btn:active {
-    background-color: var(--upload-active);
+    transform: scale(0.98);
 }
 
 .setup-avatar:hover {
