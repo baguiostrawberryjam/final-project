@@ -6,7 +6,7 @@ import { NavLink } from 'react-router';
 import { ref, set } from 'firebase/database';
 import { storage } from '../../firebase-config';
 import { getDownloadURL, uploadBytes, ref as sref } from 'firebase/storage';
-import setupHero from "../../assets/images/login-hero.jpg";
+import setupHero from "../../assets/images/setup-hero.jpg";
 
 function Setup() {
 

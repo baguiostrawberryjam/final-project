@@ -3,7 +3,7 @@ import "../../components/styles/auth-forms.css";
 import { NavLink } from 'react-router';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase-config';
-import registerHero from "../../assets/images/login-hero.jpg";
+import registerHero from "../../assets/images/register-hero.jpg";
 import { FaGoogle, FaApple } from 'react-icons/fa';
 
 function Register() {
