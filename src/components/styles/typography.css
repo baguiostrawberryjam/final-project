@@ -61,6 +61,7 @@
   --avatar-size: 100px;
 
   /* MARGINS (commonly used) */
+  --margin-xs: -4px;
   --margin-sm: 5px;
   --margin-md: 10px;
   --margin-lg: 24px;
