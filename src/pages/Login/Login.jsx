@@ -100,6 +100,8 @@ function Login() {
               {passwordError && <p className='txtError'>{passwordError}</p>}
           </div>
 
+          <button className='auth-btn' onClick={handleLogin} disabled={!isEmailValid || !isPasswordValid}>Login</button>
+          
           <div className='form-options'>
             <label className='remember-option'>
               <input type="checkbox" checked={remember} onChange={(e)=>setRemember(e.target.checked)} />
@@ -108,8 +110,6 @@ function Login() {
             <NavLink to="/forgot" className='link-text'>Forgot password?</NavLink>
           </div>
 
-          <button className='auth-btn' onClick={handleLogin} disabled={!isEmailValid || !isPasswordValid}>Login</button>
-          
         </div>
 
         <p>or</p>

@@ -33,12 +33,11 @@ function Setup() {
         if(fName.trim().length <= 0){
             setFNameError("Blank spaces are not allowed");
             setIsFirstNameValid(false);
-        } else if(fName.trim().length <= 3){
+        } else if(fName.trim().length < 3){
             setFNameError("Must contain at least 3 characters")
             setIsFirstNameValid(false);
         } else {
             setFNameError("");
-            setFirstName(fName);
             setIsFirstNameValid(true);
         }
     }
@@ -50,12 +49,11 @@ function Setup() {
         if(lName.trim().length <= 0){
             setLNameError("Blank spaces are not allowed");
             setIsLastNameValid(false);
-        } else if(lName.trim().length <= 3){
-           setLNameError("Must contain at least 3 characters");
+        } else if(lName.trim().length < 3){
+            setLNameError("Must contain at least 3 characters");
             setIsLastNameValid(false);
         } else {
             setLNameError("");
-            setLastName(lName);
             setIsLastNameValid(true);
         }
     }
@@ -72,12 +70,12 @@ function Setup() {
             setIsContactValid(false);
         } else if(contact.trim().length !== 11){
             setContactError("Must contain only 11 digits");
+            setIsContactValid(false);
         } else if(!/^\d+$/.test(contact)){
             setContactError("Must contain numbers only");
             setIsContactValid(false);
         } else {
             setContactError("");
-            setContactNumber(contact);
             setIsContactValid(true);
         }
     }
@@ -188,6 +186,7 @@ function Setup() {
 
         <div className='profile-picture'>
           <img
+              onClick={triggerUpload}
               className="setup-avatar"
               src={profilePreview || user?.photoURL || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23E5E7EB'/%3E%3Ccircle cx='50' cy='35' r='15' fill='%239CA3AF'/%3E%3Cpath d='M 20 80 Q 20 60 50 60 Q 80 60 80 80' fill='%239CA3AF'/%3E%3C/svg%3E"}
               alt="User Profile Picture"
@@ -195,6 +194,7 @@ function Setup() {
             <button onClick={triggerUpload} className="upload-btn" title="Upload Profile Picture">
               <i className="fa fa-camera"></i>
             </button>
+
             <input 
               onChange={(e)=>handleFile(e.target.files[0])} 
               id="inpProfilePicture" 
