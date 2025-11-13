@@ -86,10 +86,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/add-project/:id" element={<AddProject />} />
             <Route path="/view-project/" element={<ViewProject />} />
-            <Route
-              path="/view-project/add-todo/:projectKey"
-              element={<VPAddTodo />}
-            />
+            <Route path="/view-project/add-todo/:projectKey"element={<VPAddTodo />}/>
             <Route path="*" element={<Navigate to="/dashboard" />} />
           </>
         )}

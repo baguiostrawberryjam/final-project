@@ -10,7 +10,6 @@ function Register() {
 
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const [confirmPassword, setConfirmPassword] = useState('');
   
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [isPasswordValid, setIsPasswordValid] = useState(false);
@@ -70,7 +69,6 @@ function Register() {
 
   function checkConfirmPassword(e){
     let confirm = e.target.value;
-    setConfirmPassword(confirm);
 
     if (confirm.trim().length <= 0) {
       setConfirmError("Input required");
