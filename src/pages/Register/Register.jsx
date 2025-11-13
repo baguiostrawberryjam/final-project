@@ -72,7 +72,6 @@ function Register() {
 
   function checkConfirmPassword(e){
     let confirm = e.target.value;
-    setConfirmPassword(confirm);
 
     if (confirm.trim().length <= 0) {
       setConfirmError("Input required");
