@@ -10,7 +10,9 @@ import VPAddTodo from "./vpAddToDo/VPAddToDo";
 function ViewProject() {
   const [projects, setProjects] = useState(null);
   const [user, setUser] = useState(null);
-  const [openTodos, setOpenTodos] = useState({}); // Track which project's todos are open
+  const [openTodos, setOpenTodos] = useState({}); // Track which project's todos are open]
+  
+  const today = new Date().toISOString().split("T")[0];
 
   useEffect(() => {
     onAuthStateChanged(auth, (u) => {
@@ -22,6 +24,8 @@ function ViewProject() {
         });
       }
     });
+
+
   }, []);
 
   // Toggle todos dropdown for a specific project
@@ -61,7 +65,6 @@ function ViewProject() {
       <div className="project-list">
 
         {projects ? ( Object.keys(projects).filter(key => projects[key].status !== "completed").map((key) => (
-
             <div key={key} className="project-item">
 
               <div className="project-icon">
@@ -69,7 +72,7 @@ function ViewProject() {
                 <div className="project-header">
                   
                   <div>
-                    <h3>{projects[key].title}</h3>
+                    <h3>{projects[key].title} {projects[key].targetDate < today && (<span className="overdue-text">(Overdue)</span>)}</h3>
                   </div>
                   <div>
                     <button onClick={()=>handleStatus(key)}><i className="fa fa-check"></i> Mark as Done</button>
@@ -95,7 +98,7 @@ function ViewProject() {
                     {projects[key].todos ? (Object.keys(projects[key].todos).map((todoKey) => (
 
                         <div key={todoKey} className="todo-item">
-                            <p> - {projects[key].todos[todoKey].title} <i className="fa fa-calendar"></i> {projects[key].todos[todoKey].due} Status:
+                            <p> - {projects[key].todos[todoKey].title} {projects[key].todos[todoKey].due < today && projects[key].todos[todoKey].status !== "completed" && (<span className="overdue-text">(Overdue)</span>)} <i className="fa fa-calendar"></i> {projects[key].todos[todoKey].due} Status:
                             <span className={`status-${projects[key].todos[todoKey].status}`}> {projects[key].todos[todoKey].status.charAt(0).toUpperCase() + projects[key].todos[todoKey].status.slice(1)}</span></p>
                         </div>
                       ))

@@ -163,7 +163,7 @@ function Tasks() {
                         .map((taskKey) => (
                             <div key={taskKey} className="tasks-card">
                                 <div className="card-header">
-                                    <h3>{tasks[taskKey].title}</h3>
+                                    <h3>{tasks[taskKey].title} {tasks[taskKey].due < today && (<span className="overdue-text">(Overdue)</span>)}</h3>
                                     <div className="card-actions">
                                         <button onClick={() => handleEdit(taskKey)} className="edit-btn" title="Edit task">
                                             <i className="fa fa-edit"></i>

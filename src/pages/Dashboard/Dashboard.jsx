@@ -11,6 +11,7 @@ function Dashboard() {
     const [user, setUser] = useState();
     const [userData, setUserData] = useState();
     const [projects, setProjects] = useState(null);
+    const today = new Date().toISOString().split("T")[0];
 
     useEffect(()=>{
         onAuthStateChanged(auth, (u)=>{
@@ -82,7 +83,7 @@ function Dashboard() {
                                                     className="fa fa-folder"
                                                     style={{ color: projects[key].folderColor || '#3b82f6', fontSize: '2rem' }}
                                                 />
-                                                <h3>{projects[key].title}</h3>
+                                                <h3>{projects[key].title} {projects[key].targetDate < today && (<span className="overdue-text">(Overdue)</span>)}</h3>
                                             </div>
                                             <p className="project-description">{projects[key].description}</p>
                                             <p className="project-date">Created: {projects[key].createdAt}</p>
