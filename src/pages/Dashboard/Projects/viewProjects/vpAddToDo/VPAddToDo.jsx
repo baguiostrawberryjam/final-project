@@ -11,6 +11,7 @@ function VPAddTodo() {
   const [due, setDue] = useState("");
   const [project, setProject] = useState([]);
   const [selectedProject, setSelectedProject] = useState("");
+  const [titleError, setTitleError] = useState('');
 
   const today = new Date().toISOString().split("T")[0];
 
@@ -71,6 +72,19 @@ function VPAddTodo() {
     setShowModal(false);
   }
 
+  function checkTitle(e) {
+        let title = e.target.value;
+        setTitle(title);
+
+        if (title.trim().length > 0 && title.trim().length <= 3) {
+            setTitleError("Title must be more than 3 characters long");
+        } else if (title.trim().length >= 100) {
+            setTitleError("Title cannot exceed 100 characters");
+        } else {
+            setTitleError('');
+        }
+    }
+
   return (
     <>
       <button onClick={() => setShowModal(true)} className="add-task-btn">
@@ -86,13 +100,8 @@ function VPAddTodo() {
             <div className="form-container">
               <div className="form-group">
                 <label>Task Title</label>
-                <input
-                  type="text"
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                  placeholder="Enter task title"
-                  required
-                />
+                <input type="text" value={title} onChange={(e) => checkTitle(e)} placeholder="Enter task title" required/>
+                {titleError && <p className="error-message">{titleError}</p>}
               </div>
 
               <div className="form-group">
@@ -114,21 +123,12 @@ function VPAddTodo() {
 
               <div className="form-group">
                 <label>Due Date</label>
-                <input
-                  type="date"
-                  value={due}
-                  onChange={(e) => setDue(e.target.value)}
-                  min={today}
-                />
+                <input type="date" value={due} onChange={(e) => setDue(e.target.value)} min={today} />
               </div>
 
               <div className="form-group">
                 <label>Select Project</label>
-                <select
-                  value={selectedProject}
-                  onChange={(e) => setSelectedProject(e.target.value)}
-                  required
-                >
+                <select value={selectedProject} onChange={(e) => setSelectedProject(e.target.value)} required>
                   <option value="">-- Select project --</option>
                   {project &&
                     Object.keys(project)
