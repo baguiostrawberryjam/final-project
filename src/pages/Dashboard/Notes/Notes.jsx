@@ -10,6 +10,7 @@ function Notes() {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [editingNoteId, setEditingNoteId] = useState(null);
+    const [titleError, setTitleError] = useState('');
     const today = new Date().toISOString().split('T')[0];
 
     useEffect(()=>{
@@ -36,6 +37,7 @@ function Notes() {
             alert("Note added successfully!");
             setTitle('');
             setDescription('');
+            setTitleError('');
             setShowModal(false);
         })
         .catch((error) => {
@@ -66,6 +68,7 @@ function Notes() {
             alert("Note updated successfully!");
             setTitle('');
             setDescription('');
+            setTitleError('');
             setEditingNoteId(null);
             setShowEditModal(false);
         })
@@ -91,14 +94,29 @@ function Notes() {
     function handleCancel(){
         setTitle('');
         setDescription('');
+        setTitleError('');
         setShowModal(false);
     }
 
     function handleEditCancel(){
         setTitle('');
         setDescription('');
+        setTitleError('');
         setEditingNoteId(null);
         setShowEditModal(false);
+    }
+
+    function checkTitle(e) {
+        let title = e.target.value;
+        setTitle(title);
+
+        if (title.trim().length > 0 && title.trim().length <= 3) {
+            setTitleError("Title must be more than 3 characters long");
+        } else if (title.trim().length >= 100) {
+            setTitleError("Title cannot exceed 100 characters");
+        } else {
+            setTitleError('');
+        }
     }
 
     return (
@@ -143,22 +161,12 @@ function Notes() {
                     <div className="form-container">
                         <div className="form-group">
                             <label>Title</label>
-                            <input 
-                                type="text" 
-                                value={title}
-                                onChange={(e)=>setTitle(e.target.value)} 
-                                placeholder="Enter Note Title" 
-                                required 
-                            />
+                            <input type="text" value={title} onChange={(e)=>checkTitle(e)} placeholder="Enter Note Title" required />
+                            {titleError && <p className="error-message">{titleError}</p>}
                         </div>
                         <div className="form-group">
                             <label>Description</label>
-                            <textarea 
-                                value={description}
-                                onChange={(e)=>setDescription(e.target.value)} 
-                                rows="4" 
-                                placeholder="Enter Note Description" 
-                            />
+                            <textarea value={description} onChange={(e)=>setDescription(e.target.value)} rows="4" placeholder="Enter Note Description" />
                         </div>
                         <div className="modal-actions">
                             <button onClick={handleCancel} className="cancel-btn">Cancel</button>
@@ -177,22 +185,12 @@ function Notes() {
                     <div className="form-container">
                         <div className="form-group">
                             <label>Title</label>
-                            <input 
-                                type="text" 
-                                value={title}
-                                onChange={(e)=>setTitle(e.target.value)} 
-                                placeholder="Enter Note Title" 
-                                required 
-                            />
+                            <input type="text" value={title} onChange={(e)=>checkTitle(e)} placeholder="Enter Note Title" minLength={3} maxLength={100} required/>
+                            {titleError && <p className="error-message">{titleError}</p>}
                         </div>
                         <div className="form-group">
                             <label>Description</label>
-                            <textarea 
-                                value={description}
-                                onChange={(e)=>setDescription(e.target.value)} 
-                                rows="4" 
-                                placeholder="Enter Note Description" 
-                            />
+                            <textarea value={description} onChange={(e)=>setDescription(e.target.value)} rows="4" placeholder="Enter Note Description"/>
                         </div>
                         <div className="modal-actions">
                             <button onClick={handleEditCancel} className="cancel-btn">Cancel</button>

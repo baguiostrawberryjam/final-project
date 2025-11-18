@@ -1,10 +1,9 @@
 import { onAuthStateChanged } from 'firebase/auth';
 import { useEffect, useState } from 'react'
-import { auth, db, storage } from '../../firebase-config';
-import { onValue, ref, update } from 'firebase/database';
+import { auth, db } from '../../firebase-config';
+import { onValue, ref } from 'firebase/database';
 import { NavLink } from 'react-router';
 import './dashboard.css';
-import { getDownloadURL, uploadBytes, ref as sref } from 'firebase/storage';
 import Notes from './Notes/Notes';
 import Tasks from './ToDos/Tasks';
 
@@ -12,6 +11,7 @@ function Dashboard() {
     const [user, setUser] = useState();
     const [userData, setUserData] = useState();
     const [projects, setProjects] = useState(null);
+    const today = new Date().toISOString().split("T")[0];
 
     useEffect(()=>{
         onAuthStateChanged(auth, (u)=>{
@@ -35,32 +35,6 @@ function Dashboard() {
     function logOut(){
         auth.signOut();
     }
-
-    {/* Trigger file upload for profile picture */}
-    function triggerUpload(){
-        document.getElementById('inpProfilePicture').click();
-    }
-    
-    function handleFile(f){
-        if (!f) return;
-        
-        uploadBytes(sref(storage, `/profile/${user.uid}`), f)
-        .then(() => {    
-            getDownloadURL(sref(storage, `/profile/${user.uid}`)).then((url) => {
-                update(ref(db, `/users/${user.uid}`),{profileURL:url}).then(()=>{
-                    alert("Profile Picture Updated Successfully!");
-                })
-                .catch((error) => {
-                    console.log("Update error:", error);
-                    alert("Error updating profile picture");
-                });
-            });
-        })
-        .catch((error) => {
-            console.log("Upload error:", error);
-            alert("Error uploading profile picture");
-        });
-    }
     
     return (
         <>
@@ -72,30 +46,16 @@ function Dashboard() {
                             <h2>Dashboard</h2>
                         </div>
                         <div className="nav-right">
-                            <div className="nav-profile-wrapper">
-                                <img
-                                    className="nav-avatar"
-                                    src={userData.profileURL || `https://avatar.iran.liara.run/username?username=${userData.firstName}+${userData.lastName}&background=1F2937&color=F9FAFB`}
-                                    alt={`${userData.firstName} ${userData.lastName}`}
-                                />
-                                <button onClick={triggerUpload} className="upload-btn" title="Upload Profile Picture">
-                                    <i className="fa fa-camera"/>
-                                </button>
-                                <input 
-                                    onChange={(e)=>handleFile(e.target.files[0])} 
-                                    id="inpProfilePicture" 
-                                    style={{display: "none"}} 
-                                    type="file"
-                                    accept="image/*"
-                                />
-                            </div>
-                            <div className="nav-user">
-                                <div className="nav-user-name">{userData.firstName} {userData.lastName}</div>
-                                <div className="nav-user-email">{user.email}</div>
-                            </div>
-                            <NavLink to="/edit-profile" className="nav-link">
-                                <button className="nav-btn">Edit Profile</button>
+                            <NavLink to="/profile" className="nav-user-info">
+                                <div className="nav-profile-wrapper">
+                                    <img className="nav-avatar" src={userData.profileURL || `https://avatar.iran.liara.run/username?username=${userData.firstName}+${userData.lastName}&background=1F2937&color=F9FAFB`} alt={`${userData.firstName} ${userData.lastName}`}/>
+                                </div>
+                                <div className="nav-user">
+                                    <div className="nav-user-name">{userData.firstName} {userData.lastName}</div>
+                                    {/*<div className="nav-user-email">{user.email}</div>*/}
+                                </div>
                             </NavLink>
+                            {/* <NavLink to="/edit-profile" className="nav-link"> <button className="nav-btn">Edit Profile</button></NavLink> */}
                             <button onClick={logOut} className="nav-btn nav-logout">Sign Out</button>
                         </div>
                     </header>
@@ -123,7 +83,7 @@ function Dashboard() {
                                                     className="fa fa-folder"
                                                     style={{ color: projects[key].folderColor || '#3b82f6', fontSize: '2rem' }}
                                                 />
-                                                <h3>{projects[key].title}</h3>
+                                                <h3>{projects[key].title} {projects[key].targetDate < today && (<span className="overdue-text">(Overdue)</span>)}</h3>
                                             </div>
                                             <p className="project-description">{projects[key].description}</p>
                                             <p className="project-date">Created: {projects[key].createdAt}</p>

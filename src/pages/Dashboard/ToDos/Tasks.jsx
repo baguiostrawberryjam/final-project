@@ -13,6 +13,7 @@ function Tasks() {
     const [description, setDescription] = useState("");
     const [statusFilter, setStatusFilter] = useState("all");
     const [editingTaskId, setEditingTaskId] = useState(null);
+    const [titleError, setTitleError] = useState('');
     const today = new Date().toISOString().split("T")[0];
     const user = auth.currentUser;
 
@@ -24,13 +25,14 @@ function Tasks() {
 
     function checkTitle(e) {
         let title = e.target.value;
-        let eTitle = document.querySelector("#eTitle");
-        eTitle.innerHTML = "";
-
         setTitle(title);
 
-        if (title.trim().length <= 0) {
-            eTitle.innerHTML = "Blankspaces are not allowed";
+        if (title.trim().length > 0 && title.trim().length <= 3) {
+            setTitleError("Title must be more than 3 characters long");
+        } else if (title.trim().length >= 100) {
+            setTitleError("Title cannot exceed 100 characters");
+        } else {
+            setTitleError('');
         }
     }
 
@@ -161,7 +163,7 @@ function Tasks() {
                         .map((taskKey) => (
                             <div key={taskKey} className="tasks-card">
                                 <div className="card-header">
-                                    <h3>{tasks[taskKey].title}</h3>
+                                    <h3>{tasks[taskKey].title} {tasks[taskKey].due < today && (<span className="overdue-text">(Overdue)</span>)}</h3>
                                     <div className="card-actions">
                                         <button onClick={() => handleEdit(taskKey)} className="edit-btn" title="Edit task">
                                             <i className="fa fa-edit"></i>
@@ -195,14 +197,8 @@ function Tasks() {
                         <div className="form-container">
                             <div className="form-group">
                                 <label>Title</label>
-                                <input
-                                    type="text"
-                                    value={title}
-                                    onChange={(e) => checkTitle(e)}
-                                    placeholder="Enter Task Title"
-                                    required
-                                />
-                                <p className="txtError" id="eTitle"></p>
+                                <input type="text" value={title} onChange={(e) => checkTitle(e)} placeholder="Enter Task Title" minLength={3} maxLength={100} required/>
+                                {titleError && <p className="error-message">{titleError}</p>}
                             </div>
                             <div className="form-group">
                                 <label>Description</label>
@@ -253,13 +249,8 @@ function Tasks() {
                         <div className="form-container">
                             <div className="form-group">
                                 <label>Title</label>
-                                <input
-                                    type="text"
-                                    value={title}
-                                    onChange={(e) => setTitle(e.target.value)}
-                                    placeholder="Enter Task Title"
-                                    required
-                                />
+                                <input type="text" value={title} onChange={(e) => checkTitle(e)} placeholder="Enter Task Title"  required/>
+                                {titleError && <p className="error-message">{titleError}</p>}
                             </div>
                             <div className="form-group">
                                 <label>Description</label>

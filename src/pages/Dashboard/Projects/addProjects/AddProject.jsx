@@ -9,6 +9,7 @@ function AddProject() {
   const [description, setDescription] = useState("");
   const [targetDate, setTargetDate] = useState("");
   const [folderColor, setFolderColor] = useState("#3b82f6");
+  const [titleError, setTitleError] = useState('');
 
   const today = new Date().toISOString().split("T")[0];
 
@@ -53,6 +54,19 @@ function AddProject() {
     setShowModal(false);
   }
 
+  function checkTitle(e) {
+        let title = e.target.value;
+        setTitle(title);
+
+        if (title.trim().length > 0 && title.trim().length <= 3) {
+            setTitleError("Title must be more than 3 characters long");
+        } else if (title.trim().length >= 100) {
+            setTitleError("Title cannot exceed 100 characters");
+        } else {
+            setTitleError('');
+        }
+    }
+
   return (
     <>
       <button onClick={() => setShowModal(true)} className="add-project-btn">
@@ -68,7 +82,8 @@ function AddProject() {
             <div className="form-container">
               <div className="form-group">
                 <label>Project Title</label>
-                <input type="text" placeholder="Enter project title" value={title} onChange={(e) => setTitle(e.target.value)} required />
+                <input type="text" placeholder="Enter project title" value={title} onChange={(e) => checkTitle(e)} required />
+                {titleError && <p className="error-message">{titleError}</p>}
               </div>
 
               <div className="form-group">

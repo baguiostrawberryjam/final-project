@@ -108,12 +108,10 @@
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
-/* Error Text */
-.txtError {
-  color: #ef4444;
-  font-size: 0.75rem;
+.error-message {
+  color: #dc2626;
+  font-size: 0.875rem;
   margin-top: 0.25rem;
-  min-height: 1rem;
 }
 
 /* Modal Actions */

@@ -231,12 +231,10 @@
   cursor: pointer;
 }
 
-/* Error Text */
-.txtError {
-  color: #ef4444;
-  font-size: 0.75rem;
+.error-message {
+  color: #dc2626;
+  font-size: 0.875rem;
   margin-top: 0.25rem;
-  min-height: 1rem;
 }
 
 /* Modal Actions */
