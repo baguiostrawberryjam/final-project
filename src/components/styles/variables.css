@@ -30,9 +30,9 @@
     --input-placeholder: #9CA3AF; /* Placeholder text */
 
       /* States */
-    --hover-bg: #EEF2FF;       /* Hover background for buttons/cards */
-    --active-bg: #E0E7FF;      /* Active or selected state background */
-    --focus-ring: #A5B4FC;     /* Outline glow when focused */
+    --hover-bg-state: #EEF2FF;       /* Hover background for buttons/cards */
+    --active-bg-state: #E0E7FF;      /* Active or selected state background */
+    --focus-ring-state: #A5B4FC;     /* Outline glow when focused */
     --disabled-bg: #E5E7EB;    /* Disabled background */
     --disabled-text: #9CA3AF;  /* Disabled text color */
     

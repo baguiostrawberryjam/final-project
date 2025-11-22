@@ -112,7 +112,7 @@ html, body {
 .input-container input:focus {
     outline: none;
     border-color: var(--input-border-focus);
-    box-shadow: 0 0 0 3px var(--focus-ring);
+    box-shadow: 0 0 0 3px var(--focus-ring-state);
 }
 
 .input-container input:hover {

@@ -1,0 +1,80 @@
+/* Topbar */
+
+/* Navigation Bar */
+.topbar {
+    font-family: var(--font-title);
+    background-color: #939393;
+    color: rgb(166, 166, 166);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin:  20px 10px 0 10px;
+    border-radius: 10px 10px 0px 0px;
+    padding: 10px;
+}
+
+.topbar-left {
+  flex: 1;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.topbar-avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+/* User Info in Topbar */
+.topbar-user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.topbar-user-name {
+  font-weight: var(--quicksand-600);
+  color: var(--text-primary);
+}
+
+.topbar-user-email {
+  font-size: 0.75rem;
+  color: #d1d5db;
+}
+
+/* Topbar Buttons */
+.topbar-logout-btn {
+  background-color: black;
+  border: 1px solid #4b5563;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.topbar-logout-btn:hover {
+  background-color: #374151;
+  border-color: #6b7280;
+}
+
+.topbar-user-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.topbar-avatar-wrapper {
+  display: flex;
+  align-items: center;
+}
