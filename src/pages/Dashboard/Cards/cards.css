@@ -1,0 +1,54 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.cards-section {
+    display: flex;
+    justify-content: space-between; /* space between cards */
+    gap: 1rem;                      /* modern spacing support */
+    flex-wrap: wrap;                 /* allows wrapping on smaller screens */
+}
+
+.card {
+    flex: 1 1 calc(25% - 0.75rem); /* 4 cards per row, minus gaps */
+    display: flex;
+    flex-direction: column; /* stack items vertically */
+    align-items: flex-start;
+    padding: 1.5rem;
+    background-color: var(--card-bg);
+    border: 1px solid var(--stroke-light);
+    border-radius: 0.5rem;
+    min-width: 200px;
+    min-height: 180px;
+}
+
+.card-icon {
+    width: 40px;
+    height: 40px;
+    background-color: var(--stroke-light, #ccc);
+    border-radius: 50%; /* circle */
+    margin-bottom: 0.5rem;
+}
+
+/* Header */
+.card-header {
+    font-size: 1rem;
+    font-weight: var(--quicksand-700, 700);
+    margin-bottom: 4px;
+}
+
+/* Info */
+.card-info {
+    font-size: 2rem;
+    font-weight: var(--quicksand-700, 700);
+    margin-bottom: 4px;
+}
+
+/* Subtitle */
+.card-subtitle {
+    font-size: 0.875rem; /* slightly smaller than header */
+    font-weight: var(--quicksand-400, 400);
+    margin-bottom: 0; /* no margin */
+}

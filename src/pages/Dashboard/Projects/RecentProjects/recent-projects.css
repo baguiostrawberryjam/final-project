@@ -1,0 +1,52 @@
+/* Dashboard.css */
+
+.dashboard-content {
+}
+
+/* Projects Section */
+.project-section {
+}
+
+.project-container {
+  flex: 1 1;
+  padding: 1.5rem;
+  background-color: var(--card-bg);
+  border: 1px solid var(--stroke-light);
+  border-radius: 0.5rem;
+}
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.project-header h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1f2937;
+  margin: 0;
+}
+
+.view-all-btn {
+  background-color: #3b82f6;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-size: 0.875rem;
+}
+
+.view-all-btn:hover {
+  background-color: #2563eb;
+}
+
+/* Project Grid */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
