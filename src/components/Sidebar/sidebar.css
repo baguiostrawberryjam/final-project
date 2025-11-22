@@ -1,0 +1,213 @@
+/* ===========================
+   RESET
+=========================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===========================
+   SIDEBAR WRAPPER
+=========================== */
+.sidebar {
+  width: 200px;
+  height: 100vh;
+  padding: 10px;
+  background-color: var(--base-clr);
+  transition: width 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.sidebar.close {
+  width: 60px;
+}
+
+.sidebar.close .sidebar-header{
+  justify-content: center;
+}
+
+.sidebar.close .logo-container{
+  opacity: 0;
+  transform: translateX(-20px);
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+/* ===========================
+   SIDEBAR HEADER
+=========================== */
+.sidebar-header {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* center everything when collapsed */
+.sidebar.close .sidebar-header {
+  justify-content: center;
+}
+
+/* ===========================
+   LOGO
+=========================== */
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.logo {
+  font-family: var(--font-title);
+  font-size: 1.2rem;
+  font-weight: var(--dosis-700);
+  color: var(--text-clr);
+}
+
+/* hide text smoothly when closed */
+.sidebar.close .logo {
+  opacity: 0;
+  transform: translateX(-20px);
+  pointer-events: none;
+}
+
+/* ===========================
+   TOGGLE BUTTON
+=========================== */
+.toggle-btn {
+  position: absolute;
+  right: 5px;
+  padding: 5px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--text-clr);
+  transition: transform 0.3s ease;
+  font-size: 24px;
+}
+
+.toggle-btn:hover {
+  background-color: var(--hover-clr);
+  border-radius: 5px;
+}
+
+/* ===========================
+   SIDEBAR SECTIONS
+=========================== */
+.sidebar-section {
+  margin-bottom: 20px;
+  font-family: var(--font-subtitle);
+  font-weight: var(--quicksand-600);
+}
+
+.section-title {
+  font-family: var(--font-title);
+  margin-bottom: 10px;
+  padding-left: 5px;
+  font-size: 0.8rem;
+  color: var(--accent-clr);
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar.close .section-title {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+}
+
+.sidebar-section ul {
+  list-style: none;
+}
+
+.sidebar-section li {
+  margin-bottom: 5px;
+}
+
+/* ===========================
+   LINKS + DROPDOWNS
+=========================== */
+.sidebar-section a,
+.sidebar-section .dropdown-btn {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  border-radius: 6px;
+  text-decoration: none;
+  color: var(--text-clr);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  border: none;
+  background: none;
+}
+
+.sidebar-section a:hover,
+.sidebar-section .dropdown-btn:hover {
+  background-color: var(--hover-bg);
+}
+
+.sidebar-section a span:nth-child(1),
+.sidebar-section .dropdown-btn span:nth-child(1) {
+  font-size: 20px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.sidebar-section a span:nth-child(2),
+.sidebar-section .dropdown-btn span:nth-child(2) {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar.close .sidebar-section a span:nth-child(2),
+.sidebar.close .sidebar-section .dropdown-btn span:nth-child(2) {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+}
+
+/* dropdown container */
+.sub-menu {
+  margin-top: 5px;
+  margin-left: 20px;
+  display: none;
+  list-style: none;
+}
+
+.sub-menu.show {
+  display: block;
+}
+
+.sub-menu li a {
+  padding: 8px;
+  font-size: 0.9rem;
+  border-radius: 4px;
+}
+
+.sub-menu li a:hover {
+  background-color: var(--hover-clr);
+}
+
+

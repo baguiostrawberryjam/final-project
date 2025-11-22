@@ -1,2 +1,7 @@
 @import './variables.css';
 @import './typography.css';
+
+*{
+    margin: 0;
+    padding: 0;
+}
