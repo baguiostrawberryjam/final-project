@@ -1,6 +1,8 @@
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 
 function SidebarItem({ to, label, icon, dropdownOpen, toggleDropdown, subItems }) {
+  const location = useLocation();
+  const isActive = to && location.pathname === to;
   if (subItems) {
     return (
       <li>
@@ -23,7 +25,7 @@ function SidebarItem({ to, label, icon, dropdownOpen, toggleDropdown, subItems }
 
   return (
     <li>
-      <Link to={to}>
+      <Link to={to} className={isActive ? "active" : ""}>
         <span>{icon}</span>
         <span>{label}</span>
       </Link>

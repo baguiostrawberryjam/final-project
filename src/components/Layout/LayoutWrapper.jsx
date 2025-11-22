@@ -3,7 +3,7 @@ import { useState } from "react";
 import SidebarContainer from "../Sidebar/SidebarContainer";
 import MainContent from "./MainContent";
 import "./layout-wrapper.css"; // Your layout styling
-import Topbar from "../../components/Topbar/Topbar";
+import Topbar from "../../components/Topbar/topbar";
 
 function LayoutWrapper({ children, user, userData, logOut }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);

@@ -2,7 +2,7 @@
 
 /* Navigation Bar */
 .topbar {
-    font-family: var(--font-title);
+    font-family: var(--font-subtitle);
     background-color: var(--card-bg);
     color: rgb(166, 166, 166);
     display: flex;

@@ -20,10 +20,11 @@
   flex-direction: column;
   overflow-y: auto;
   overflow-x: hidden;
+  flex-shrink: 0;
 }
 
 .sidebar.close {
-  width: 60px;
+  width: 70px;
 }
 
 .sidebar.close .sidebar-header{
@@ -88,18 +89,22 @@
 .toggle-btn {
   position: absolute;
   right: 5px;
-  padding: 5px;
+  padding: 6px;
   border: none;
   background: none;
   cursor: pointer;
   color: var(--text-clr);
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
   font-size: 24px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .toggle-btn:hover {
-  background-color: var(--hover-clr);
-  border-radius: 5px;
+  background-color: var(--hover-bg);
+  color: var(--primary);
 }
 
 /* ===========================
@@ -162,6 +167,16 @@
 .sidebar-section a:hover,
 .sidebar-section .dropdown-btn:hover {
   background-color: var(--hover-bg);
+}
+
+.sidebar-section a.active {
+  background-color: var(--primary);
+  color: white;
+  font-weight: 600;
+}
+
+.sidebar-section a.active:hover {
+  background-color: var(--secondary);
 }
 
 .sidebar-section a span:nth-child(1),

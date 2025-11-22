@@ -50,7 +50,7 @@ function Dashboard() {
                         
                         {/* Row 1: Dashboard Header (Full Width) */}
                         <div className="header-wrapper">
-                            <Header header = "Akira"/>
+                            <Header header = {userData?.firstName || user?.displayName || "User"}/>
                         </div>
                         
                         {/* Row 1: Dashboard Header (Full Width) */}
