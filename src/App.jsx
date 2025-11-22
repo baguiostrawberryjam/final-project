@@ -16,6 +16,8 @@ import AddProject from "./pages/Dashboard/Projects/addProjects/AddProject";
 import ViewProject from "./pages/Dashboard/Projects/viewProjects/ViewProject";
 import VPAddTodo from "./pages/Dashboard/Projects/viewProjects/vpAddToDo/VPAddToDo";
 import LayoutWrapper from "./components/Layout/LayoutWrapper";
+import Tasks from "./pages/Dashboard/ToDos/Tasks";
+import Notes from "./pages/Dashboard/Notes/Notes";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -82,17 +84,49 @@ function App() {
         {user && !isAdmin && hasData && (
           <>
             {/* User dashboard routes */}
-              {/* Main Pages*/}
-              <Route path="/dashboard" element={<LayoutWrapper><Dashboard /></LayoutWrapper>} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/project/" element={<LayoutWrapper><ViewProject /></LayoutWrapper>} />
-              <Route path="*" element={<Navigate to="/dashboard" />} />
+            {/* Main Pages*/}
+            <Route
+              path="/dashboard"
+              element={
+                <LayoutWrapper>
+                  <Dashboard />
+                </LayoutWrapper>
+              }
+            />
+            <Route path="/profile" element={<Profile />} />
+            <Route
+              path="/project/"
+              element={
+                <LayoutWrapper>
+                  <ViewProject />
+                </LayoutWrapper>
+              }
+            />
+            <Route
+              path="/task"
+              element={
+                <LayoutWrapper>
+                  <Tasks />
+                </LayoutWrapper>
+              }
+            />
+            <Route
+              path="/notes"
+              element={
+                <LayoutWrapper>
+                  <Notes />
+                </LayoutWrapper>
+              }
+            />
+            <Route path="*" element={<Navigate to="/dashboard" />} />
 
-              {/* Ibang Components */}
-              <Route path="/edit-profile" element={<EditProfile />} />
-              <Route path="/add-project/:id" element={<AddProject />} />
-              <Route path="/view-project/add-todo/:projectKey"element={<VPAddTodo />}/>
-
+            {/* Ibang Components */}
+            <Route path="/edit-profile" element={<EditProfile />} />
+            <Route path="/add-project/:id" element={<AddProject />} />
+            <Route
+              path="/view-project/add-todo/:projectKey"
+              element={<VPAddTodo />}
+            />
           </>
         )}
       </Routes>

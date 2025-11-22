@@ -1,11 +1,7 @@
-/* Page Layout */
-.notes-page {
-  background-color: #f3f4f6;
-}
 
 .notes-container {
   max-width: 64rem;
-  margin: 0 auto;
+  margin: 20px auto;
   background-color: white;
   border-radius: 0.5rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
