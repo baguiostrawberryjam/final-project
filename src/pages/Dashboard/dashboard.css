@@ -1,0 +1,12 @@
+.dashboard-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 3rem;
+    box-sizing: border-box;
+}
+
+.cards-wrapper {
+    flex: 1;
+    margin-bottom: 1rem;
+}

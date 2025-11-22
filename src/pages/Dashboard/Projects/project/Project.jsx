@@ -23,7 +23,7 @@ function Projects() {
     <div className='project-section'>
       <div className='project-container'>
         <div className='project-header'>
-          <h2>Projects</h2>
+          <h2>Recent Projects</h2>
           <NavLink to={`/project`}>
             <button className="view-all-btn">View All Projects</button>
           </NavLink>

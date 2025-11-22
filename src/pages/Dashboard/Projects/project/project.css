@@ -5,16 +5,14 @@
 
 /* Projects Section */
 .project-section {
-
 }
 
 .project-container {
-  max-width: 64rem;
-  margin: 0 auto;
-  background-color: white;
-  border-radius: 0.5rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  flex: 1 1;
   padding: 1.5rem;
+  background-color: var(--card-bg);
+  border: 1px solid var(--stroke-light);
+  border-radius: 0.5rem;
 }
 
 .project-header {
@@ -54,11 +52,11 @@
 }
 
 .project-card {
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--stroke-light);
+  background-color: var(--dark-card-bg);
   border-radius: 0.5rem;
   padding: 1rem;
   transition: box-shadow 0.2s, transform 0.2s;
-  background-color: white;
 }
 
 .project-card:hover {

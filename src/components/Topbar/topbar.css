@@ -3,15 +3,16 @@
 /* Navigation Bar */
 .topbar {
     font-family: var(--font-title);
-    background-color: #939393;
+    background-color: var(--card-bg);
     color: rgb(166, 166, 166);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin:  20px 10px 0 10px;
-    border-radius: 10px 10px 0px 0px;
+    /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    */margin:  10px 10px 0 0px;
+    border-radius: 24px 24px 0px 0px;
     padding: 10px;
+    border: 1px solid var(--stroke-light);
 }
 
 .topbar-left {

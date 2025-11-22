@@ -16,7 +16,7 @@ function SidebarContainer({ isOpen, toggleSidebar }) {
       <div className="sidebar-header">
         <div className="logo-container">
           <img src={logoSidebar} alt="Atom-Logo"  className="logo-img"/>
-          <span className="logo">Atom</span>
+          <span className="logo">atom</span>
         </div>
 
         <button onClick={toggleSidebar} className="toggle-btn"><FaAngleDoubleLeft/></button>

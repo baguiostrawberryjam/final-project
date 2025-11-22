@@ -6,6 +6,8 @@ import { NavLink } from 'react-router';
 import './dashboard.css';
 import Notes from './Notes/Notes';
 import Tasks from './ToDos/Tasks';
+import Header from '../../components/Header/Header'
+import Cards from './Cards/Cards'
 import Projects from './Projects/project/Project';
 
 
@@ -46,16 +48,26 @@ function Dashboard() {
                     {/* Main Dashboard Content */}
                     <div className="dashboard-content">
                         
-                        {/* Row 1: Projects (Full Width) */}
+                        {/* Row 1: Dashboard Header (Full Width) */}
+                        <div className="header-wrapper">
+                            <Header header = "Akira"/>
+                        </div>
+                        
+                        {/* Row 1: Dashboard Header (Full Width) */}
+                        <div className="cards-wrapper">
+                            <Cards/>
+                        </div>
+                        
+                        {/* Row 2: Projects (Full Width) */}
                         <div className="projects-wrapper">
                             <Projects/>
                         </div>
 
-                        {/* Row 2: Tasks & Notes (2 Columns) */}
+                        {/* Row 2: Tasks & Notes (2 Columns)
                         <div className="bottom-row">
                             <Tasks/>
                             <Notes/>
-                        </div>
+                        </div> */}
 
                     </div>
                 </>

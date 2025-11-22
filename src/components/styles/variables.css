@@ -11,6 +11,9 @@
     --card-bg: #FFFFFF;        /* Cards, panels, modals */
     --hover-bg: #EEF2FF;       /* Button or card hover background */
     --active-bg: #E0E7FF;      /* Active state background */
+    --stroke-light: #D8D8D8;   /* Component stroke color */
+    --dark-card-bg: #FCFCFC;
+
 
     /* Core Colors */
     --primary: #4F46E5;        /* Main brand color */
