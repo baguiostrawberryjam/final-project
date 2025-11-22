@@ -63,11 +63,18 @@ function Dashboard() {
                             <Projects/>
                         </div>
 
-                        {/* Row 2: Tasks & Notes (2 Columns)
+                        {/* Row 2: Tasks & Notes (2 Columns) */}
                         <div className="bottom-row">
-                            <Tasks/>
-                            <Notes/>
-                        </div> */}
+
+                            <div className='tasks-wrapper'>
+                                <Tasks/>
+                            </div>
+
+                            <div className='notes-wrapper'>
+                                <Notes/>
+                            </div>
+                            
+                        </div>
 
                     </div>
                 </>

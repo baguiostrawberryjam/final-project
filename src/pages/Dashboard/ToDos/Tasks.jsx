@@ -135,7 +135,6 @@ function Tasks() {
     }
 
     return (
-        <div className="tasks-page">
             <div className="tasks-container">
                 <div className="tasks-header">
                     <h2>Tasks List</h2>
@@ -187,7 +186,6 @@ function Tasks() {
                         <p className="empty-state">No tasks yet. Click the + button to add one!</p>
                     )}
                 </div>
-            </div>
 
             {/* Add Task Modal */}
             {showModal && (
