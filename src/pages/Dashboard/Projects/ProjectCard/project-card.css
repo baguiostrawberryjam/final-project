@@ -1,0 +1,49 @@
+.project-card {
+  border: 1px solid var(--stroke-light);
+  background-color: var(--dark-card-bg);
+  border-radius: 0.5rem;
+  min-height: 180px;   /* minimum height for all cards */
+  max-height: 180px;   /* optional max height */
+  height: auto;
+  padding: 1rem;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.project-card:hover {
+  box-shadow: 0 0px 6px rgba(0, 0, 0, 0.05);
+  transform: translateY(-1px);
+}
+
+.project-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.project-card-header h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+}
+
+.project-description {
+  color: #4b5563;
+  font-size: 0.875rem;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.5;
+}
+
+.project-date {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  margin: 0;
+}
+
+.empty-state {
+  text-align: center;
+  color: #9ca3af;
+  padding: 2rem 0;
+  grid-column: 1 / -1;
+}
