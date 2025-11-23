@@ -26,7 +26,7 @@
 }
 
 .project-header h2 {
-  font-size: 1.5rem;
+  font-size: var(--font-ml);
   font-weight: bold;
   color: #1f2937;
   margin: 0;
@@ -84,15 +84,10 @@
   background-color: var(--dark-card-bg);
   border-radius: 0.5rem;
   padding: 1rem;
-  min-height: 140px;
   display: flex;
   flex-direction: column;
-  transition: box-shadow 0.2s;
 }
 
-.project-card:hover {
-  box-shadow: 0 0px 8px rgba(0, 0, 0, 0.1);
-}
 
 .project-color-line {
   width: 4px;
