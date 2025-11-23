@@ -1,7 +1,7 @@
 import { useState } from "react";
 import SidebarSection from "./SidebarSection";
 import "./sidebar.css";
-import {FaTachometerAlt, FaProjectDiagram, FaTasks,FaStickyNote,FaAngleDoubleLeft} from "react-icons/fa";
+import { LayoutDashboard, FolderOpen, CheckSquare, BookOpen, Star, PanelRight } from "lucide-react";
 import logoSidebar from "../../assets/images/atom-logo.png";
 
 function SidebarContainer({ isOpen, toggleSidebar }) {
@@ -19,7 +19,7 @@ function SidebarContainer({ isOpen, toggleSidebar }) {
           <span className="logo">atom</span>
         </div>
 
-        <button onClick={toggleSidebar} className="toggle-btn"><FaAngleDoubleLeft/></button>
+        <button onClick={toggleSidebar} className="toggle-btn"><PanelRight/></button>
       </div>
 
       {/* Menu Section */}
@@ -27,10 +27,10 @@ function SidebarContainer({ isOpen, toggleSidebar }) {
       
         title="Menu"
         items={[
-          { to: "/dashboard", label: "Dashboard", icon: <FaTachometerAlt/> },
-          { to: "/project", label: "Projects", icon: <FaProjectDiagram/> },
-          { to: "/task", label: "Tasks", icon: <FaTasks/> },
-          { to: "/notes", label: "Notes", icon: <FaStickyNote/> },
+          { to: "/dashboard", label: "Dashboard", icon: <LayoutDashboard/> },
+          { to: "/project", label: "Projects", icon: <FolderOpen/> },
+          { to: "/task", label: "Tasks", icon: <CheckSquare/> },
+          { to: "/notes", label: "Notes", icon: <BookOpen/> },
         ]}
         
       />
@@ -41,7 +41,7 @@ function SidebarContainer({ isOpen, toggleSidebar }) {
         items={[
           {
             label: "Rawr",
-            icon: "📁",
+            icon: <FolderOpen size={20} />,
             subItems: ["Folder", "Document", "Project"],
             dropdownOpen: openDropdown === "create",
             toggleDropdown: () => toggleDropdown("create"),
@@ -55,7 +55,7 @@ function SidebarContainer({ isOpen, toggleSidebar }) {
         items={[
           {
             label: "Whats",
-            icon: "⭐",
+            icon: <Star size={20} />,
             subItems: ["Work", "Private", "Coding", "Gardening", "School"],
             dropdownOpen: openDropdown === "todo",
             toggleDropdown: () => toggleDropdown("todo"),

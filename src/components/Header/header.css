@@ -2,6 +2,32 @@
     flex: 1;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     font-weight: var(--quicksand-700);
     font-size: 2rem;
+}
+
+.add-project-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--padding-sm) var(--padding-md);
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    font-family: var(--font-subtitle);
+    font-weight: var(--quicksand-600);
+    font-size: var(--font-sm);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.add-project-btn:hover {
+    background-color: var(--secondary);
+    transform: scale(1.05);
+}
+
+.add-project-btn:active {
+    transform: scale(0.98);
 }

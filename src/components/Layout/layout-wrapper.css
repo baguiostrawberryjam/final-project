@@ -7,4 +7,5 @@
   flex: 1;
   display: flex;
   flex-direction: column; /* Topbar on top, content below */
+  transition: flex 0.3s ease;
 }
