@@ -1,5 +1,5 @@
 .layout-wrapper {
-  display: flex; /* Use flex for sidebar + main content */
+  display: flex;
   min-height: 100vh;
   overflow: hidden;
 }
@@ -7,6 +7,11 @@
 .main-content-container {
   flex: 1;
   display: flex;
-  flex-direction: column; /* Topbar on top, content below */
-  transition: flex 0.3s ease;
+  flex-direction: column;
+  margin-left: 250px;
+  transition: margin-left 0.3s ease;
+}
+
+.layout-wrapper .sidebar.close ~ .main-content-container {
+  margin-left: 70px;
 }

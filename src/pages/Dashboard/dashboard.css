@@ -49,7 +49,8 @@
   background-color: var(--card-bg);
   border: 1px solid var(--stroke-light);
   border-radius: 0.5rem;
-  max-height: fit-content;
+  overflow-y: auto;
+  min-height: 0;
 }
 
 /* Add Project Modal Styles */

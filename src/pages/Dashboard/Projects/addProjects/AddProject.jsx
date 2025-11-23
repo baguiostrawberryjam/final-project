@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./add-project.css";
 import { push, ref } from "firebase/database";
 import { auth, db } from "../../../../firebase-config";
+import { Plus } from "lucide-react";
 
 function AddProject() {
   const [showModal, setShowModal] = useState(false);
@@ -70,7 +71,7 @@ function AddProject() {
   return (
     <>
       <button onClick={() => setShowModal(true)} className="add-project-page-btn">
-        <i className="fa fa-plus"></i>
+        <Plus size={15}/>
         Add Project
       </button>
 

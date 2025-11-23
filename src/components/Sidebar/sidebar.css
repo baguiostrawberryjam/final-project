@@ -11,6 +11,9 @@
    SIDEBAR WRAPPER
 =========================== */
 .sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
   width: 250px;
   height: 100vh;
   padding: 10px;
@@ -21,6 +24,7 @@
   overflow-y: auto;
   overflow-x: hidden;
   flex-shrink: 0;
+  z-index: 50;
 }
 
 .sidebar.close {
@@ -116,9 +120,32 @@
   font-weight: var(--quicksand-600);
 }
 
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+  min-height: 24px;
+  cursor: pointer;
+}
+
+.section-title-container {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+
+.section-toggle-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
 .section-title {
   font-family: var(--font-subtitle);
-  margin-bottom: 10px;
+  margin-bottom: 0;
   padding-left: 5px;
   font-size: 0.8rem;
   color: var(--accent-clr);
@@ -128,6 +155,28 @@
   text-overflow: ellipsis;
   opacity: 1;
   transition: opacity 0.3s ease;
+  flex: 1;
+}
+
+.section-collapse-btn {
+  background: none;
+  border: none;
+  color: var(--accent-clr);
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.section-collapse-btn svg.collapsed {
+  transform: rotate(-90deg);
+}
+
+.section-collapse-btn:hover {
+  color: var(--primary);
 }
 
 .sidebar.close .section-title {
@@ -229,6 +278,12 @@
 
 .sub-menu li a:hover {
   background-color: var(--hover-clr);
+}
+
+.sidebar.close .sub-menu {
+  display: none !important;
+  opacity: 0;
+  pointer-events: none;
 }
 
 

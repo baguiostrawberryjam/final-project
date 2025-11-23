@@ -1,9 +1,16 @@
-/* Page Layout */
 .notes-page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
 }
 
 .notes-container {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
 }
 
 /* Header */
@@ -12,6 +19,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1.5rem;
+  flex-shrink: 0;
 }
 
 .notes-header h2 {
@@ -35,10 +43,38 @@
   font-size: 0.875rem;
   font-family: var(--font-subtitle);
   font-weight: var(--quicksand-400);
+  flex-shrink: 0;
 }
 
 .add-note-btn:hover {
   background-color: var(--primary-hover);
+}
+
+/* Notes Grid */
+.notes-grid {
+  display: grid;
+  gap: 1rem;
+  overflow-y: auto;
+  min-height: 0;
+  flex: 1;
+  padding-right: 0.5rem;
+}
+
+.notes-grid::-webkit-scrollbar {
+  width: 6px;
+}
+
+.notes-grid::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.notes-grid::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 3px;
+}
+
+.notes-grid::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
 }
 
 /* Error Message */
@@ -48,12 +84,6 @@
   margin-top: 0.25rem;
   min-height: 1rem;
   display: block;
-}
-
-/* Notes Grid */
-.notes-grid {
-  display: grid;
-  gap: 1rem;
 }
 
 .note-card {

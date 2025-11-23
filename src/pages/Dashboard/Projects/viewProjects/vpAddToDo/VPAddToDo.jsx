@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Plus } from "lucide-react";
 import { ref, push, onValue } from "firebase/database";
 import "./vp-add-to-do.css";
 import { auth, db } from "../../../../../firebase-config";
@@ -88,7 +89,7 @@ function VPAddTodo() {
   return (
     <>
       <button onClick={() => setShowModal(true)} className="add-task-btn">
-        <i className="fa fa-plus"></i>
+        <Plus size={16} style={{marginRight: 4}} />
         Add Task
       </button>
 
