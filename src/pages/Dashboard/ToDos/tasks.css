@@ -24,7 +24,7 @@
 }
 
 .tasks-header h2 {
-  font-size: 1.5rem;
+  font-size: var(--font-ml);
   font-weight: bold;
   color: #1f2937;
   margin: 0;
@@ -152,14 +152,12 @@
 
 .tasks-card {
   border: 1px solid #e5e7eb;
+  background-color: white;
   border-radius: 0.5rem;
   padding: 1rem;
   transition: box-shadow 0.2s;
 }
 
-.tasks-card:hover {
-  box-shadow: 0 0px 8px rgba(0, 0, 0, 0.1);
-}
 
 .tasks-card h3 {
   font-size: 1.125rem;

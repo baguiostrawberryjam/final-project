@@ -27,7 +27,7 @@
     border: 1px solid var(--stroke-light);
     border-radius: 0.5rem;
     min-width: 200px;
-    min-height: 180px;
+    min-height: 150px;
 }
 
 .card-icon {
