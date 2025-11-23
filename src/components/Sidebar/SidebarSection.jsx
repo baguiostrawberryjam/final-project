@@ -1,6 +1,6 @@
 import SidebarItem from "./SidebarItem";
 
-export default function SidebarSection({ title, items }) {
+export default function SidebarSection({ title, items, onItemClick }) {
   return (
     <div className="sidebar-section">
       {title && <h4 className="section-title">{title}</h4>}
@@ -14,6 +14,7 @@ export default function SidebarSection({ title, items }) {
             subItems={item.subItems}
             dropdownOpen={item.dropdownOpen}
             toggleDropdown={item.toggleDropdown}
+            onClick={item.onClick}
           />
         ))}
       </ul>

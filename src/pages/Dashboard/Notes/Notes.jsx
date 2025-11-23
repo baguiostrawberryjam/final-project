@@ -6,6 +6,7 @@ import { auth, db } from '../../../firebase-config'
 function Notes() {
     const [showModal, setShowModal] = useState(false);
     const [showEditModal, setShowEditModal] = useState(false);
+    const [selectedNote, setSelectedNote] = useState(null);
     const [notes, setNotes] = useState([])
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -131,14 +132,33 @@ function Notes() {
             <div className="notes-grid">
             {notes ? (
                 Object.keys(notes).map(noteKey => (
-                    <div key={noteKey} className="note-card">
+                    <div 
+                        key={noteKey} 
+                        className="note-card"
+                        onClick={() => setSelectedNote({ key: noteKey, ...notes[noteKey] })}
+                        style={{ cursor: 'pointer' }}
+                    >
                         <div className="card-header">
                             <h3>{notes[noteKey].title}</h3>
                             <div className="card-actions">
-                                <button onClick={() => handleEdit(noteKey)} className="edit-btn" title="Edit note">
+                                <button 
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleEdit(noteKey);
+                                    }} 
+                                    className="edit-btn" 
+                                    title="Edit note"
+                                >
                                     <i className="fa fa-edit"></i>
                                 </button>
-                                <button onClick={() => handleDelete(noteKey)} className="delete-btn" title="Delete note">
+                                <button 
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleDelete(noteKey);
+                                    }} 
+                                    className="delete-btn" 
+                                    title="Delete note"
+                                >
                                     <i className="fa fa-trash"></i>
                                 </button>
                             </div>
@@ -200,7 +220,35 @@ function Notes() {
                 </div>
             </div>
         )}
-        
+
+        {/* Note Detail Modal */}
+        {selectedNote && (
+            <div className="modal-overlay" onClick={() => setSelectedNote(null)}>
+                <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                    <button 
+                        className="modal-close-btn" 
+                        onClick={() => setSelectedNote(null)}
+                    >
+                        <i className="fa fa-times"></i>
+                    </button>
+                    <div className="detail-header">
+                        <h2>{selectedNote.title}</h2>
+                    </div>
+                    <div className="detail-content">
+                        <div className="detail-section">
+                            <h3>Content</h3>
+                            <p>{selectedNote.description || 'No content'}</p>
+                        </div>
+                        <div className="detail-grid">
+                            <div className="detail-item">
+                                <span className="detail-label">Created:</span>
+                                <span className="detail-value">{selectedNote.dateCreated}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )}
         </div>
     )
 }

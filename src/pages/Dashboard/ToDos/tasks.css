@@ -317,3 +317,137 @@
 .edit-btn:hover {
   color: #2563eb;
 }
+
+/* Detail Modal Styles */
+.modal-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #666;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.modal-close-btn:hover {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.detail-header {
+  padding: 20px 0;
+  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.detail-header h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+  color: #333;
+}
+
+.overdue-badge {
+  background-color: #fee2e2;
+  color: #7f1d1d;
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.detail-content {
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.detail-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.detail-section h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.detail-section p {
+  font-size: 14px;
+  color: #333;
+  line-height: 1.5;
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.detail-item {
+  padding: 12px;
+  background-color: #f9f9f9;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.detail-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.detail-value {
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+  width: fit-content;
+}
+
+.status-badge.status-pending {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.status-badge.status-ongoing,
+.status-badge.status-in_progress {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.status-badge.status-complete,
+.status-badge.status-completed {
+  background-color: #d1fae5;
+  color: #065f46;
+}

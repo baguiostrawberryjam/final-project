@@ -4,8 +4,7 @@
     flex-direction: column;
     padding: 2rem;
     box-sizing: border-box;
-    height: calc(100vh - 10px - 6rem); /* example: viewport minus total padding/margin */
-    overflow: hidden;
+    overflow-y: auto;
 }
 
 .header-wrapper {
@@ -24,7 +23,7 @@
     flex: 1;
     display: flex;
     gap: 1rem;
-    overflow: hidden;  
+    overflow-y: auto;  
 }
 
 .tasks-wrapper {
@@ -41,4 +40,5 @@
   background-color: var(--card-bg);
   border: 1px solid var(--stroke-light);
   border-radius: 0.5rem;
+  max-height: fit-content;
 }

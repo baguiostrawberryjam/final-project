@@ -6,6 +6,7 @@ import { auth, db } from "../../../firebase-config";
 function Tasks() {
     const [showModal, setShowModal] = useState(false);
     const [showEditModal, setShowEditModal] = useState(false);
+    const [selectedTask, setSelectedTask] = useState(null);
     const [tasks, setTasks] = useState([]);
     const [title, setTitle] = useState("");
     const [status, setStatus] = useState("pending");
@@ -160,14 +161,33 @@ function Tasks() {
                         .filter((taskKey) => tasks[taskKey].status !== "deleted") 
                         .filter((taskKey) => statusFilter === "all" || tasks[taskKey].status === statusFilter)
                         .map((taskKey) => (
-                            <div key={taskKey} className="tasks-card">
+                            <div 
+                                key={taskKey} 
+                                className="tasks-card"
+                                onClick={() => setSelectedTask({ key: taskKey, ...tasks[taskKey] })}
+                                style={{ cursor: 'pointer' }}
+                            >
                                 <div className="card-header">
                                     <h3>{tasks[taskKey].title} {tasks[taskKey].due < today && (<span className="overdue-text">(Overdue)</span>)}</h3>
                                     <div className="card-actions">
-                                        <button onClick={() => handleEdit(taskKey)} className="edit-btn" title="Edit task">
+                                        <button 
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                handleEdit(taskKey);
+                                            }} 
+                                            className="edit-btn" 
+                                            title="Edit task"
+                                        >
                                             <i className="fa fa-edit"></i>
                                         </button>
-                                        <button onClick={() => handleDelete(taskKey)} className="delete-btn" title="Delete task">
+                                        <button 
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                handleDelete(taskKey);
+                                            }} 
+                                            className="delete-btn" 
+                                            title="Delete task"
+                                        >
                                             <i className="fa fa-trash"></i>
                                         </button>
                                     </div>
@@ -285,6 +305,48 @@ function Tasks() {
                                 <button onClick={handleUpdate} className="save-btn">
                                     Update Task
                                 </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Task Detail Modal */}
+            {selectedTask && (
+                <div className="modal-overlay" onClick={() => setSelectedTask(null)}>
+                    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                        <button 
+                            className="modal-close-btn" 
+                            onClick={() => setSelectedTask(null)}
+                        >
+                            <i className="fa fa-times"></i>
+                        </button>
+                        <div className="detail-header">
+                            <h2>{selectedTask.title}</h2>
+                            {selectedTask.due < today && (
+                                <span className="overdue-badge">(Overdue)</span>
+                            )}
+                        </div>
+                        <div className="detail-content">
+                            <div className="detail-section">
+                                <h3>Description</h3>
+                                <p>{selectedTask.description || 'No description provided'}</p>
+                            </div>
+                            <div className="detail-grid">
+                                <div className="detail-item">
+                                    <span className="detail-label">Status:</span>
+                                    <span className={`status-badge status-${selectedTask.status}`}>
+                                        {selectedTask.status.charAt(0).toUpperCase() + selectedTask.status.slice(1)}
+                                    </span>
+                                </div>
+                                <div className="detail-item">
+                                    <span className="detail-label">Due Date:</span>
+                                    <span className="detail-value">{selectedTask.due || 'No due date'}</span>
+                                </div>
+                                <div className="detail-item">
+                                    <span className="detail-label">Created:</span>
+                                    <span className="detail-value">{selectedTask.dateCreated}</span>
+                                </div>
                             </div>
                         </div>
                     </div>

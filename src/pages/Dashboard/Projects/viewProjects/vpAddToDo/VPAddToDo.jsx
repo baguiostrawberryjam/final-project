@@ -123,7 +123,7 @@ function VPAddTodo() {
 
               <div className="form-group">
                 <label>Due Date</label>
-                <input type="date" value={due} onChange={(e) => setDue(e.target.value)} min={today} />
+                <input type="date" value={due} onChange={(e) => setDue(e.target.value)} min={today} max={due} />
               </div>
 
               <div className="form-group">

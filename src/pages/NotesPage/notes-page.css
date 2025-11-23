@@ -1,0 +1,21 @@
+.notes-page-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.notes-header-wrapper {
+    margin-bottom: 1rem;
+}
+
+.notes-page-wrapper {
+    flex: 1;
+    padding: 1.5rem;
+    background-color: var(--card-bg);
+    border: 1px solid var(--stroke-light);
+    border-radius: 0.5rem;
+    overflow-y: auto;
+}
