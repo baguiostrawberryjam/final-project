@@ -24,7 +24,9 @@ function SidebarItem({
           <ul className="sub-menu">
             {subItems.map((item) => (
               <li key={item}>
-                <Link to="#">{item}</Link>
+                <Link to="#">
+                  <span>{item}</span>
+                </Link>
               </li>
             ))}
           </ul>

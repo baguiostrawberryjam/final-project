@@ -18,6 +18,8 @@ function SidebarContainer({ isOpen, toggleSidebar }) {
   const [openDropdown, setOpenDropdown] = useState(null);
   const [projects, setProjects] = useState(null);
   const [selectedProject, setSelectedProject] = useState(null);
+  const [projectsCollapsed, setProjectsCollapsed] = useState(false);
+  const [favoritesCollapsed, setFavoritesCollapsed] = useState(false);
 
   const toggleDropdown = (name) => {
     setOpenDropdown(openDropdown === name ? null : name);
@@ -78,7 +80,8 @@ function SidebarContainer({ isOpen, toggleSidebar }) {
                 }))
             : []
         }
-        onItemClick={(project) => setSelectedProject(project)}
+        isCollapsed={projectsCollapsed}
+        onToggleCollapse={() => setProjectsCollapsed(!projectsCollapsed)}
       />
 
       {/* Favorite Section */}
@@ -93,6 +96,8 @@ function SidebarContainer({ isOpen, toggleSidebar }) {
             toggleDropdown: () => toggleDropdown("todo"),
           },
         ]}
+        isCollapsed={favoritesCollapsed}
+        onToggleCollapse={() => setFavoritesCollapsed(!favoritesCollapsed)}
       />
 
       {/* Profile Section
