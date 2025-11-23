@@ -24,9 +24,16 @@ function SidebarContainer({ isOpen, toggleSidebar }) {
   };
 
   useEffect(() => {
-    onValue(ref(db, `users/${auth.currentUser.uid}/projects`), (snapshot) => {
-      setProjects(snapshot.val());
-    });
+    if (auth.currentUser) {
+      onValue(ref(db, `users/${auth.currentUser.uid}/projects`),(snapshot) => {
+          if (snapshot.exists()) {
+            setProjects(snapshot.val());
+          } else {
+            setProjects(null);
+          }
+        }
+      );
+    }
   }, []);
 
   return (
@@ -59,7 +66,6 @@ function SidebarContainer({ isOpen, toggleSidebar }) {
         items={
           projects && typeof projects === "object"
             ? Object.entries(projects)
-                .slice(0, 4)
                 .filter(([, project]) => project.status !== "completed")
                 .map(([key, project]) => ({
                   label:
