@@ -85,7 +85,7 @@ function RecentProjects() {
 
                     <div className="project-footer">
                       <p className="project-date">
-                        Created: {projects[key].createdAt}
+                        Due Date: {projects[key].targetDate}
                       </p>
                       <p className="project-task-count">
                         {taskCounts[key] || 0} Tasks

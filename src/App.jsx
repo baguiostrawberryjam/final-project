@@ -15,8 +15,8 @@ import Profile from "./pages/Profile/Profile";
 import AddProject from "./pages/Dashboard/Projects/addProjects/AddProject";
 import ViewProject from "./pages/Dashboard/Projects/viewProjects/ViewProject";
 import LayoutWrapper from "./components/Layout/LayoutWrapper";
-import Tasks from "./pages/Dashboard/ToDos/Tasks";
-import Notes from "./pages/Dashboard/Notes/Notes";
+import Tasks from "./pages/Tasks/Tasks";
+import Notes from "./pages/Notes/Notes";
 
 function App() {
   const [user, setUser] = useState(null);

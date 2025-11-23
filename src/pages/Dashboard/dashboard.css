@@ -2,8 +2,8 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    padding: 2rem 2rem 0rem 2rem;
-    height: calc(100vh - 10px - 6rem);
+    padding: 2rem;
+    height: calc(100vh - 6rem);
     box-sizing: border-box;
     overflow: hidden;
 }
