@@ -14,7 +14,6 @@ import "./components/styles/main.css";
 import Profile from "./pages/Profile/Profile";
 import AddProject from "./pages/Dashboard/Projects/addProjects/AddProject";
 import ViewProject from "./pages/Dashboard/Projects/viewProjects/ViewProject";
-import VPAddTodo from "./pages/Dashboard/Projects/viewProjects/vpAddToDo/VPAddToDo";
 import LayoutWrapper from "./components/Layout/LayoutWrapper";
 import Tasks from "./pages/Dashboard/ToDos/Tasks";
 import Notes from "./pages/Dashboard/Notes/Notes";
@@ -133,10 +132,6 @@ function App() {
                   <AddProject />
                 </LayoutWrapper>
               }
-            />
-            <Route
-              path="/view-project/add-todo/:projectKey"
-              element={<VPAddTodo />}
             />
           </>
         )}
