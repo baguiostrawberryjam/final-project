@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Plus } from "lucide-react";
 import "./notes.css";
 import { onValue, push, ref, update, remove } from "firebase/database";
 import { auth, db } from "../../../firebase-config";
@@ -125,7 +126,8 @@ function Notes() {
         <div className="notes-header">
           <h2>Notes List</h2>
           <button onClick={() => setShowModal(true)} className="add-note-btn">
-            <i className="fa fa-plus"></i>Add Note
+            <Plus size={15} />
+            New Note
           </button>
         </div>
         <div className="notes-grid">

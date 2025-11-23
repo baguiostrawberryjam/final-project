@@ -1,6 +1,6 @@
-/* Add Project Button */
-.add-project-btn {
-  background-color: #3b82f6;
+/* Add Project Button - Scoped to AddProject component only */
+.add-project-page-btn {
+  background-color: var(--primary);
   color: white;
   padding: 0.5rem 1rem;
   border: none;
@@ -11,10 +11,11 @@
   gap: 0.5rem;
   transition: background-color 0.2s;
   font-size: 1rem;
+  font-family: var(--font-subtitle);
 }
 
-.add-project-btn:hover {
-  background-color: #2563eb;
+.add-project-page-btn:hover {
+  background-color: var(--secondary);
 }
 
 /* Modal Overlay */
@@ -136,31 +137,34 @@
 .cancel-btn,
 .save-btn {
   flex: 1;
-  padding: 0.5rem 1rem;
+  padding: 0.75rem;
+  border: none;
   border-radius: 0.5rem;
+  font-weight: var(--quicksand-400);
+  font-family: var(--font-subtitle);
+  font-size: 0.875rem;
   cursor: pointer;
-  font-size: 1rem;
   transition: background-color 0.2s;
 }
 
 .cancel-btn {
   background-color: white;
-  border: 1px solid #d1d5db;
-  color: #374151;
+  color: var(--text-primary);
+  border: 2px solid var(--border-button);
 }
 
 .cancel-btn:hover {
-  background-color: #f9fafb;
+  background-color: var(--hover-bg-state);
+  border-color: var(--primary);
 }
 
 .save-btn {
-  background-color: #3b82f6;
-  border: none;
+  background-color: var(--primary);
   color: white;
 }
 
 .save-btn:hover {
-  background-color: #2563eb;
+  background-color: var(--primary-hover);
 }
 
 /* Scrollbar Styling */

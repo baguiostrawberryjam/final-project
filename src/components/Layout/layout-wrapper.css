@@ -1,6 +1,7 @@
 .layout-wrapper {
   display: flex; /* Use flex for sidebar + main content */
   min-height: 100vh;
+  overflow: hidden;
 }
 
 .main-content-container {

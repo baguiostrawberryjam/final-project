@@ -1,16 +1,28 @@
+.project-section {
+  width: 100%;
+  display: flex;
+  background-color: #FFFFFF;
+}
+
 .project-container {
-  flex: 1 1;
+  flex: 1 1 100%;
   padding: 1.5rem;
-  background-color: var(--card-bg);
+  background-color: #FFFFFF;
   border: 1px solid var(--stroke-light);
   border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
 }
 
 .project-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
+  flex-shrink: 0;
 }
 
 .project-header h2 {
@@ -21,18 +33,21 @@
 }
 
 .view-all-btn {
-  background-color: #3b82f6;
-  color: white;
+  background-color: white;
+  color: var(--text-primary);
   padding: 0.5rem 1rem;
-  border: none;
+  border: 2px solid var(--border-button);
   border-radius: 0.5rem;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.2s;
   font-size: 0.875rem;
+  font-family: var(--font-subtitle);
+  font-weight: var(--quicksand-400);
 }
 
 .view-all-btn:hover {
-  background-color: #2563eb;
+  background-color: var(--hover-bg-state);
+  border-color: var(--primary);
 }
 
 /* Project Grid */
@@ -40,4 +55,113 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
+  overflow-y: auto;
+  flex: 1;
+  padding-right: 0.5rem;
+  align-content: start;
+  min-height: 0;
+}
+
+.project-grid::-webkit-scrollbar {
+  width: 6px;
+}
+
+.project-grid::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.project-grid::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 3px;
+}
+
+.project-grid::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+.project-card {
+  border: 1px solid var(--stroke-light);
+  background-color: var(--dark-card-bg);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s;
+}
+
+.project-card:hover {
+  box-shadow: 0 0px 8px rgba(0, 0, 0, 0.1);
+}
+
+.project-color-line {
+  width: 4px;
+  height: 42px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.project-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.title-container {
+  min-width: 0;
+  flex: 1;
+}
+
+.project-card-header h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1f2937;
+  word-break: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.project-description {
+  color: #4b5563;
+  font-size: 0.875rem;
+  margin: 0;
+  line-height: 1.5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.project-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.75rem;
+}
+
+.project-date {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  margin: 0;
+}
+
+.project-task-count {
+  font-size: 0.75rem;
+  color: #6366f1;
+  font-weight: 600;
+  margin: 0;
+}
+
+.empty-state {
+  text-align: center;
+  color: #9ca3af;
+  padding: 2rem 0;
+  grid-column: 1 / -1;
 }

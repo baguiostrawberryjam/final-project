@@ -47,7 +47,7 @@ function ViewProject() {
   }
 
   return (
-    <div className="project-container">
+    <div className="view-project-container">
 
       <NavLink to="/dashboard"><button className="back-btn"><i className="fa fa-chevron-left"></i> Return</button></NavLink>
 

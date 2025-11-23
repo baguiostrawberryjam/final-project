@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { Plus } from "lucide-react";
+import { NavLink } from "react-router";
 import "./tasks.css";
 import { onValue, push, ref, update } from "firebase/database";
 import { auth, db } from "../../../firebase-config";
@@ -138,23 +140,31 @@ function Tasks() {
   return (
     <div className="tasks-container">
       <div className="tasks-header">
-        <h2>Tasks List</h2>
-        <button onClick={() => setShowModal(true)} className="add-note-btn">
-          <i className="fa fa-plus"></i>Add Task
-        </button>
+        <h2>Priority Tasks</h2>
+        
+        <div className="button-container">
+          <div className="filter-container">
+            <label>Filter by Status: </label>
+            <select
+              value={statusFilter}
+              onChange={(e) => setStatusFilter(e.target.value)}
+            >
+              <option value="all">All</option>
+              <option value="complete">Completed</option>
+              <option value="pending">Pending</option>
+              <option value="ongoing">Ongoing</option>
+            </select>
+          </div>
+          <NavLink to="/task">
+            <button className="view-all-btn">View All</button>
+          </NavLink>
+          <button onClick={() => setShowModal(true)} className="add-note-btn">
+            <Plus size={15} />
+            New Task
+          </button>
+        </div>
       </div>
-      <div className="filter-container">
-        <label>Filter by Status: </label>
-        <select
-          value={statusFilter}
-          onChange={(e) => setStatusFilter(e.target.value)}
-        >
-          <option value="all">All</option>
-          <option value="complete">Completed</option>
-          <option value="pending">Pending</option>
-          <option value="ongoing">Ongoing</option>
-        </select>
-      </div>
+      <div className="tasks-scroll-wrapper">
       <div className="tasks-grid">
         {tasks ? (
           Object.keys(tasks)
@@ -224,6 +234,7 @@ function Tasks() {
             No tasks yet. Click the + button to add one!
           </p>
         )}
+      </div>
       </div>
 
       {/* Add Task Modal */}

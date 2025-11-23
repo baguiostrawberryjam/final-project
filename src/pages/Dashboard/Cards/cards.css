@@ -5,10 +5,16 @@
 }
 
 .cards-section {
+    width: 100%;
+    display: flex;
+}
+
+.cards-container {
     display: flex;
     justify-content: space-between; /* space between cards */
     gap: 1rem;                      /* modern spacing support */
     flex-wrap: wrap;                 /* allows wrapping on smaller screens */
+    width: 100%;
 }
 
 .card {

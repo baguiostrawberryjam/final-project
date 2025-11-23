@@ -5,33 +5,34 @@ function Cards() {
     return (
         <>
             <div className="cards-section">
+                <div className="cards-container">
+                    <div className="card">
+                        <div className="card-icon"></div>
+                        <div className="card-header">Total Projects</div>
+                        <div className="card-info">3</div>
+                        <div className="card-subtitle">from yesterday</div>
+                    </div>
 
-                <div className="card">
-                    <div className="card-icon"></div>
-                    <div className="card-header">Total Projects</div>
-                    <div className="card-info">3</div>
-                    <div className="card-subtitle">from yesterday</div>
-                </div>
+                    <div className="card">
+                        <div className="card-icon"></div>
+                        <div className="card-header">Total Projects</div>
+                        <div className="card-info">3</div>
+                        <div className="card-subtitle">from yesterday</div>
+                    </div>
 
-                <div className="card">
-                    <div className="card-icon"></div>
-                    <div className="card-header">Total Projects</div>
-                    <div className="card-info">3</div>
-                    <div className="card-subtitle">from yesterday</div>
-                </div>
+                    <div className="card">
+                        <div className="card-icon"></div>
+                        <div className="card-header">Total Projects</div>
+                        <div className="card-info">3</div>
+                        <div className="card-subtitle">from yesterday</div>
+                    </div>
 
-                <div className="card">
-                    <div className="card-icon"></div>
-                    <div className="card-header">Total Projects</div>
-                    <div className="card-info">3</div>
-                    <div className="card-subtitle">from yesterday</div>
-                </div>
-
-                <div className="card">
-                    <div className="card-icon"></div>
-                    <div className="card-header">Total Projects</div>
-                    <div className="card-info">3</div>
-                    <div className="card-subtitle">from yesterday</div>
+                    <div className="card">
+                        <div className="card-icon"></div>
+                        <div className="card-header">Total Projects</div>
+                        <div className="card-info">3</div>
+                        <div className="card-subtitle">from yesterday</div>
+                    </div>
                 </div>
             </div>
         </>

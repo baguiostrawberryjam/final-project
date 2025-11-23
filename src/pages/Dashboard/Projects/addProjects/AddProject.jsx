@@ -69,7 +69,7 @@ function AddProject() {
 
   return (
     <>
-      <button onClick={() => setShowModal(true)} className="add-project-btn">
+      <button onClick={() => setShowModal(true)} className="add-project-page-btn">
         <i className="fa fa-plus"></i>
         Add Project
       </button>

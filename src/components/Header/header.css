@@ -7,29 +7,28 @@
     font-size: 2rem;
 }
 
-.add-project-btn {
+.header-section .add-project-btn {
     display: flex;
     align-items: center;
-    gap: var(--space-sm);
-    padding: var(--padding-sm) var(--padding-md);
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
     background-color: var(--primary);
     color: white;
     border: none;
-    border-radius: var(--radius-md);
+    border-radius: 0.5rem;
     font-family: var(--font-subtitle);
-    font-weight: var(--quicksand-600);
-    font-size: var(--font-sm);
+    font-weight: var(--quicksand-400);
+    font-size: 0.875rem;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: background-color 0.2s;
 }
 
-.add-project-btn:hover {
-    background-color: var(--secondary);
-    transform: scale(1.05);
+.header-section .add-project-btn:hover {
+    background-color: var(--primary-hover);
 }
 
-.add-project-btn:active {
-    transform: scale(0.98);
+.header-section .add-project-btn:active {
+    opacity: 0.9;
 }
 
 .nav-link {

@@ -17,8 +17,10 @@
 
     /* Core Colors */
     --primary: #4F46E5;        /* Main brand color */
+    --primary-hover: #4338CA;  /* Darker primary for button hover */
     --secondary: #A5B4FC;      /* Accent and hover highlights */
     --border: #E5E7EB;         /* Card and input borders */
+    --border-button: #CCCCCC;  /* Button border color */
     --shadow: rgba(0, 0, 0, 0.05); /* Light shadow for cards */
 
     /* Icons color */

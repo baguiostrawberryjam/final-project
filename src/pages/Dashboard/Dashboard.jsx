@@ -8,7 +8,7 @@ import Notes from "./Notes/Notes";
 import Tasks from "./ToDos/Tasks";
 import Header from "../../components/Header/Header";
 import Cards from "./Cards/Cards";
-import Projects from "./Projects/project/Project";
+import RecentProjects from "./Projects/RecentProjects/RecentProjects";
 
 function Dashboard() {
   const [user, setUser] = useState();
@@ -106,7 +106,7 @@ function Dashboard() {
 
             {/* Row 2: Projects (Full Width) */}
             <div className="projects-wrapper">
-              <Projects />
+              <RecentProjects />
             </div>
 
             {/* Row 2: Tasks & Notes (2 Columns) */}
