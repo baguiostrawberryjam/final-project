@@ -1,8 +1,18 @@
 import { Link, useLocation } from "react-router";
 
-function SidebarItem({ to, label, icon, dropdownOpen, toggleDropdown, subItems }) {
+function SidebarItem({
+  to,
+  label,
+  icon,
+  dropdownOpen,
+  toggleDropdown,
+  subItems,
+  onClick,
+  isClickable,
+}) {
   const location = useLocation();
   const isActive = to && location.pathname === to;
+
   if (subItems) {
     return (
       <li>
@@ -23,6 +33,18 @@ function SidebarItem({ to, label, icon, dropdownOpen, toggleDropdown, subItems }
     );
   }
 
+  // If clickable (for projects), render as button
+  if (isClickable && onClick) {
+    return (
+      <li>
+        <button onClick={onClick} className="sidebar-item-btn">
+          <span>{icon}</span>
+          <span>{label}</span>
+        </button>
+      </li>
+    );
+  }
+
   return (
     <li>
       <Link to={to} className={isActive ? "active" : ""}>
@@ -32,5 +54,5 @@ function SidebarItem({ to, label, icon, dropdownOpen, toggleDropdown, subItems }
     </li>
   );
 }
- 
+
 export default SidebarItem;

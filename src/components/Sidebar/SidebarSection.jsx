@@ -14,6 +14,8 @@ export default function SidebarSection({ title, items }) {
             subItems={item.subItems}
             dropdownOpen={item.dropdownOpen}
             toggleDropdown={item.toggleDropdown}
+            onClick={item.onClick}
+            isClickable={item.isClickable}
           />
         ))}
       </ul>

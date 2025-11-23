@@ -67,26 +67,29 @@ function ViewProject() {
         {projects ? ( Object.keys(projects).filter(key => projects[key].status !== "completed").map((key) => (
             <div key={key} className="project-item">
 
-              <div className="project-icon">
-
-                <div className="project-header">
-                  
-                  <div>
+              {/* Top section with icon, title and buttons */}
+              <div className="project-top">
+                <i className="fa fa-folder" style={{color: projects[key].folderColor || "#888"}}></i>
+                
+                <div className="project-info">
+                  <div className="project-title-section">
                     <h3>{projects[key].title} {projects[key].targetDate < today && (<span className="overdue-text">(Overdue)</span>)}</h3>
+                    <p>{projects[key].description}</p>
                   </div>
-                  <div>
+                  
+                  <div className="project-actions">
                     <button onClick={()=>handleStatus(key)}><i className="fa fa-check"></i> Mark as Done</button>
                     {user && <VPAddTodo />}
                   </div>
-
                 </div>
-                <i className="fa fa-folder" style={{color: projects[key].folderColor || "#888", fontSize: "3rem"}}></i>
               </div>
 
-                <p>Description: {projects[key].description}</p>
-                <p>Date Created: {projects[key].createdAt}</p>
-                <p>Target Date: {projects[key].targetDate}</p>
-                <p>Status: <span className={`status-${projects[key].status}`}> {projects[key].status.charAt(0).toUpperCase() + projects[key].status.slice(1)}</span></p>
+              {/* Project details */}
+              <div className="project-details">
+                <p><strong>Created:</strong> <span>{projects[key].createdAt}</span></p>
+                <p><strong>Target Date:</strong> <span>{projects[key].targetDate}</span></p>
+                <p><strong>Status:</strong> <span className={`status-${projects[key].status}`}>{projects[key].status.charAt(0).toUpperCase() + projects[key].status.slice(1)}</span></p>
+              </div>
 
               {/* Todos Dropdown Button */}
               <div className="todos-section">
@@ -98,7 +101,8 @@ function ViewProject() {
                     {projects[key].todos ? (Object.keys(projects[key].todos).map((todoKey) => (
 
                         <div key={todoKey} className="todo-item">
-                            <p> - {projects[key].todos[todoKey].title} {projects[key].todos[todoKey].due < today && projects[key].todos[todoKey].status !== "completed" && (<span className="overdue-text">(Overdue)</span>)} <i className="fa fa-calendar"></i> {projects[key].todos[todoKey].due} Status:
+                            <p><i className="fa fa-check-square"></i> {projects[key].todos[todoKey].title} {projects[key].todos[todoKey].due < today && projects[key].todos[todoKey].status !== "completed" && (<span className="overdue-text">(Overdue)</span>)}</p>
+                            <p><i className="fa fa-calendar"></i> {projects[key].todos[todoKey].due} | Status:
                             <span className={`status-${projects[key].todos[todoKey].status}`}> {projects[key].todos[todoKey].status.charAt(0).toUpperCase() + projects[key].todos[todoKey].status.slice(1)}</span></p>
                         </div>
                       ))

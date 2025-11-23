@@ -148,7 +148,8 @@
    LINKS + DROPDOWNS
 =========================== */
 .sidebar-section a,
-.sidebar-section .dropdown-btn {
+.sidebar-section .dropdown-btn,
+.sidebar-section .sidebar-item-btn {
   width: 100%;
   padding: 10px;
   display: flex;
@@ -165,7 +166,8 @@
 }
 
 .sidebar-section a:hover,
-.sidebar-section .dropdown-btn:hover {
+.sidebar-section .dropdown-btn:hover,
+.sidebar-section .sidebar-item-btn:hover {
   background-color: var(--hover-bg);
 }
 
@@ -177,6 +179,10 @@
 
 .sidebar-section a.active:hover {
   background-color: var(--secondary);
+}
+
+.sidebar-item-btn {
+  font-family: inherit;
 }
 
 .sidebar-section a span:nth-child(1),
@@ -192,8 +198,6 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  opacity: 1;
-  transition: opacity 0.3s ease;
 }
 
 .sidebar.close .sidebar-section a span:nth-child(2),

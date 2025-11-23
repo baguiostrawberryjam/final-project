@@ -31,3 +31,8 @@
 .add-project-btn:active {
     transform: scale(0.98);
 }
+
+.nav-link {
+    text-decoration: none;
+    color: inherit;
+}
