@@ -1,5 +1,6 @@
 import "./project-details-modal.css";
-
+import { X, ChevronRight, ListChecks, Calendar } from "lucide-react";
+import { FaFolder } from "react-icons/fa";
 function ProjectDetailsModal({ project, onClose }) {
   if (!project) return null;
 
@@ -10,13 +11,13 @@ function ProjectDetailsModal({ project, onClose }) {
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         {/* Close Button */}
         <button className="modal-close-btn" onClick={onClose}>
-          <i className="fa fa-times"></i>
+          <X size={22} />
         </button>
 
         {/* Breadcrumbs */}
         <nav className="breadcrumbs">
           <span className="breadcrumb-item">Projects</span>
-          <i className="fa fa-chevron-right"></i>
+          <ChevronRight size={14} style={{margin: "0 4px"}} />
           <span className="breadcrumb-item active">{project.title}</span>
         </nav>
 
@@ -90,7 +91,7 @@ function ProjectDetailsModal({ project, onClose }) {
                   <div key={todoKey} className="modal-todo-item">
                     <div className="todo-header">
                       <div className="todo-info">
-                        <i className="fa fa-tasks"></i>
+                        <ListChecks size={16} style={{marginRight: 4}} />
                         <span className="todo-title">
                           {project.todos[todoKey].title}
                         </span>
@@ -107,7 +108,7 @@ function ProjectDetailsModal({ project, onClose }) {
                       </span>
                     </div>
                     <div className="todo-date">
-                      <i className="fa fa-calendar"></i>{" "}
+                      <Calendar size={14} style={{marginRight: 4}} />
                       {project.todos[todoKey].due}
                     </div>
                   </div>

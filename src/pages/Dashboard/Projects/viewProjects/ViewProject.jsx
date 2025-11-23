@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Check, ChevronUp, ChevronDown, CheckSquare, Calendar } from "lucide-react";
 import "./view-project.css";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "../../../../firebase-config";
@@ -49,8 +50,6 @@ function ViewProject() {
   return (
     <div className="view-project-container">
 
-      <NavLink to="/dashboard"><button className="back-btn"><i className="fa fa-chevron-left"></i> Return</button></NavLink>
-
       <div className="project-header">
 
         <div>
@@ -78,8 +77,8 @@ function ViewProject() {
                   </div>
                   
                   <div className="project-actions">
-                    <button onClick={()=>handleStatus(key)}><i className="fa fa-check"></i> Mark as Done</button>
-                    {user && <VPAddTodo />}
+                    <button className="primary-action" onClick={()=>handleStatus(key)}><Check size={16} style={{marginRight: 4}} /> Mark as Done</button>
+                    <div className="secondary-action">{user && <VPAddTodo />}</div>
                   </div>
                 </div>
               </div>
@@ -93,7 +92,10 @@ function ViewProject() {
 
               {/* Todos Dropdown Button */}
               <div className="todos-section">
-                <button className="todos-toggle-btn" onClick={() => toggleTodos(key)}>Tasks<i className={`fa fa-chevron-${openTodos[key] ? "up" : "down" }`}></i></button>
+                <button className="todos-toggle-btn" onClick={() => toggleTodos(key)}>
+                  Tasks
+                  {openTodos[key] ? <ChevronUp size={16} style={{marginLeft: 4}} /> : <ChevronDown size={16} style={{marginLeft: 4}} />}
+                </button>
 
                 {/* Todos List - only shows when open */}
                 {openTodos[key] && (
@@ -101,8 +103,8 @@ function ViewProject() {
                     {projects[key].todos ? (Object.keys(projects[key].todos).map((todoKey) => (
 
                         <div key={todoKey} className="todo-item">
-                            <p><i className="fa fa-check-square"></i> {projects[key].todos[todoKey].title} {projects[key].todos[todoKey].due < today && projects[key].todos[todoKey].status !== "completed" && (<span className="overdue-text">(Overdue)</span>)}</p>
-                            <p><i className="fa fa-calendar"></i> {projects[key].todos[todoKey].due} | Status:
+                            <p><CheckSquare size={16} style={{marginRight: 4}} /> {projects[key].todos[todoKey].title} {projects[key].todos[todoKey].due < today && projects[key].todos[todoKey].status !== "completed" && (<span className="overdue-text">(Overdue)</span>)}</p>
+                            <p><Calendar size={16} style={{marginRight: 4}} /> {projects[key].todos[todoKey].due} | Status:
                             <span className={`status-${projects[key].todos[todoKey].status}`}> {projects[key].todos[todoKey].status.charAt(0).toUpperCase() + projects[key].todos[todoKey].status.slice(1)}</span></p>
                         </div>
                       ))

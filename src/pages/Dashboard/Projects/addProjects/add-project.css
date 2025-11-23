@@ -1,17 +1,18 @@
 /* Add Project Button - Scoped to AddProject component only */
 .add-project-page-btn {
-  background-color: var(--primary);
-  color: white;
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 0.5rem;
-  cursor: pointer;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  transition: background-color 0.2s;
-  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
   font-family: var(--font-subtitle);
+  font-weight: var(--quicksand-400);
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
 }
 
 .add-project-page-btn:hover {
