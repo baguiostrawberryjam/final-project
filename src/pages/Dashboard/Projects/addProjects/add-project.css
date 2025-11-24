@@ -5,18 +5,18 @@
   gap: 0.5rem;
   padding: 0.5rem 1rem;
   background-color: var(--primary);
-  color: white;
+  color: #fff;
   border: none;
   border-radius: 0.5rem;
   font-family: var(--font-subtitle);
-  font-weight: var(--quicksand-400);
+  font-weight: var(--quicksand-600);
   font-size: 0.875rem;
   cursor: pointer;
   transition: background-color 0.2s;
 }
 
 .add-project-page-btn:hover {
-  background-color: var(--secondary);
+  background-color: var(--primary-hover);
 }
 
 /* Modal Overlay */
@@ -36,7 +36,7 @@
 
 /* Modal Content */
 .projects-modal-content {
-  background-color: white;
+  background-color: var(--card-bg);
   border-radius: 0.5rem;
   box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
   max-width: 28rem;
@@ -47,9 +47,9 @@
 }
 
 .projects-modal-content h3 {
-  font-size: 1.25rem;
-  font-weight: bold;
-  color: #1f2937;
+  font-size: 1.5rem;
+  font-weight: var(--quicksand-700);
+  color: var(--text-primary);
   margin: 0 0 1rem 0;
 }
 
@@ -79,7 +79,7 @@
 .projects-modal-content .form-group textarea,
 .projects-modal-content .form-group select {
   width: 100%;
-  padding: 0.5rem 0.75rem;
+  padding: 0.6rem 0.75rem;
   border: 1px solid var(--stroke-light);
   border-radius: 0.5rem;
   font-size: 0.95rem;
@@ -122,10 +122,14 @@
   border-radius: 0.5rem;
   cursor: pointer;
   padding: 0.25rem;
+  background-color: #fff;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.projects-modal-content .color-picker:hover {
+.projects-modal-content .color-picker:hover,
+.projects-modal-content .color-picker:focus-within {
   border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
 }
 
 .projects-modal-content .color-preview {
@@ -134,8 +138,9 @@
   border: 1px solid var(--stroke-light);
   border-radius: 0.5rem;
   font-size: 0.875rem;
-  font-family: monospace;
-  color: #374151;
+  font-family: var(--font-subtitle);
+  color: var(--text-primary);
+  background-color: #fff;
   text-align: center;
 }
 
@@ -150,7 +155,6 @@
 .projects-modal-content .projects-save-btn {
   flex: 1;
   padding: 0.75rem;
-  border: none;
   border-radius: 0.5rem;
   font-weight: var(--quicksand-500);
   font-family: var(--font-subtitle);
@@ -160,7 +164,7 @@
 }
 
 .projects-modal-content .projects-cancel-btn {
-  background-color: white;
+  background-color: #fff;
   color: var(--text-primary);
   border: 2px solid var(--border-button);
 }
@@ -172,7 +176,8 @@
 
 .projects-modal-content .projects-save-btn {
   background-color: var(--primary);
-  color: white;
+  border: none;
+  color: #fff;
 }
 
 .projects-modal-content .projects-save-btn:hover {

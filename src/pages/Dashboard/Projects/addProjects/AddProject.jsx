@@ -71,8 +71,8 @@ function AddProject() {
   return (
     <>
       <button onClick={() => setShowModal(true)} className="add-project-page-btn">
-        <Plus size={15}/>
-        Add Project
+        <Plus size={15} />
+        New Project
       </button>
 
       {showModal && (

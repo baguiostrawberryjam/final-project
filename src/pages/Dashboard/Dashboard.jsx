@@ -4,6 +4,7 @@ import { auth, db } from "../../firebase-config";
 import { onValue, ref, push } from "firebase/database";
 import { NavLink } from "react-router";
 import "./dashboard.css";
+import "./Projects/addProjects/add-project.css";
 import Notes from "./Notes/Notes";
 import Tasks from "./ToDos/Tasks";
 import Header from "../../components/Header/Header";
@@ -123,19 +124,22 @@ function Dashboard() {
 
           {/* Add Project Modal */}
           {showAddProjectModal && (
-            <div className="modal-overlay" onClick={handleCancelAddProject}>
+            <div
+              className="projects-modal-overlay"
+              onClick={handleCancelAddProject}
+            >
               <div
-                className="modal-content"
+                className="projects-modal-content"
                 onClick={(e) => e.stopPropagation()}
               >
-                <h3>Add New Project</h3>
+                <h3>Create New Project</h3>
 
                 <div className="form-container">
                   <div className="form-group">
-                    <label>Project Title</label>
+                    <label>Title</label>
                     <input
                       type="text"
-                      placeholder="Enter project title"
+                      placeholder="Enter Project Title"
                       value={projectTitle}
                       onChange={(e) => checkProjectTitle(e)}
                       required
@@ -148,7 +152,7 @@ function Dashboard() {
                   <div className="form-group">
                     <label>Description</label>
                     <textarea
-                      placeholder="Enter project description"
+                      placeholder="Enter Project Description"
                       value={projectDescription}
                       onChange={(e) => setProjectDescription(e.target.value)}
                       rows="4"
@@ -156,7 +160,7 @@ function Dashboard() {
                   </div>
 
                   <div className="form-group">
-                    <label>Target Completion Date</label>
+                    <label>Due Date</label>
                     <input
                       type="date"
                       value={projectTargetDate}
@@ -178,8 +182,7 @@ function Dashboard() {
                         className="color-preview"
                         style={{ backgroundColor: projectFolderColor }}
                       >
-                        {" "}
-                        {projectFolderColor}{" "}
+                        {projectFolderColor}
                       </span>
                     </div>
                   </div>
@@ -187,14 +190,15 @@ function Dashboard() {
                   <div className="modal-actions">
                     <button
                       onClick={handleCancelAddProject}
-                      className="cancel-btn"
+                      className="projects-cancel-btn"
                     >
-                      {" "}
-                      Cancel{" "}
+                      Cancel
                     </button>
-                    <button onClick={handleAddProject} className="save-btn">
-                      {" "}
-                      Add Project{" "}
+                    <button
+                      onClick={handleAddProject}
+                      className="projects-save-btn"
+                    >
+                      Save Project
                     </button>
                   </div>
                 </div>
