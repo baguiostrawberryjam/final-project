@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Plus, Edit2, Trash2, BookOpen, Calendar } from "lucide-react";
+import { Plus, Edit2, Trash2 } from "lucide-react";
 import { NavLink } from "react-router";
 import "./notes.css";
 import { onValue, push, ref, update, remove } from "firebase/database";
@@ -132,40 +132,16 @@ function Notes() {
         <div className="notes-scroll-wrapper">
           <div className="notes-grid">
             {notes ? (
-              Object.keys(notes).map((noteKey) => {
-                const note = notes[noteKey];
-                const preview = note.description
-                  ? note.description.length > 80
-                    ? `${note.description.substring(0, 80)}...`
-                    : note.description
-                  : "-";
-
-                return (
-                  <div
-                    key={noteKey}
-                    className="note-card"
-                    onClick={() => setSelectedNote(note)}
-                    style={{ cursor: "pointer" }}
-                  >
-                    <div className="note-title-column">
-                      <div className="note-icon">
-                        <BookOpen size={18} />
-                      </div>
-                      <div className="note-title" title={note.title}>
-                        {note.title}
-                      </div>
-                    </div>
-                    <div
-                      className="note-description-column"
-                      title={note.description || ""}
-                    >
-                      {preview}
-                    </div>
-                    <div className="note-date-column">
-                      <Calendar size={14} />
-                      {note.dateCreated}
-                    </div>
-                    <div className="note-actions">
+              Object.keys(notes).map((noteKey) => (
+                <div
+                  key={noteKey}
+                  className="note-card"
+                  onClick={() => setSelectedNote(notes[noteKey])}
+                  style={{ cursor: "pointer" }}
+                >
+                  <div className="card-header">
+                    <h3>{notes[noteKey].title}</h3>
+                    <div className="card-actions">
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
@@ -188,8 +164,12 @@ function Notes() {
                       </button>
                     </div>
                   </div>
-                );
-              })
+                  <p className="note-description">{notes[noteKey].description}</p>
+                  <p className="note-date">
+                    Created: {notes[noteKey].dateCreated}
+                  </p>
+                </div>
+              ))
             ) : (
               <p className="empty-state">
                 No notes yet. Click the + button to add one!
@@ -230,7 +210,7 @@ function Notes() {
 
             <div className="modal-header">
               <div className="modal-title-section">
-                <BookOpen size={28} className="notes-detail-icon" />
+                <i className="fa fa-sticky-note"></i>
                 <h2>{selectedNote.title}</h2>
               </div>
             </div>
@@ -239,7 +219,10 @@ function Notes() {
               {selectedNote.description && (
                 <div className="modal-section">
                   <h3 className="section-title">Content</h3>
-                  <p className="section-content">
+                  <p
+                    className="section-content"
+                    style={{ whiteSpace: "pre-wrap", wordBreak: "break-word" }}
+                  >
                     {selectedNote.description}
                   </p>
                 </div>

@@ -47,10 +47,42 @@ function App() {
     });
   }, []);
 
+  // ---------------------------------------------------------
+  // LOADING STATE (Replaces "Connecting to server...")
+  // ---------------------------------------------------------
   if (loading) {
-    return <h1>Connecting to server...</h1>;
+    return (
+      <div className="skeleton-container">
+        <div className="skeleton-card">
+          {/* Skeleton Image/Header Area */}
+          <div className="skeleton skeleton-img"></div>
+          
+          {/* Skeleton Text Lines */}
+          <div 
+            className="skeleton skeleton-text" 
+            style={{ width: '80%', height: '2rem', marginBottom: '1.5rem' }}
+          ></div>
+          
+          <div 
+            className="skeleton skeleton-text" 
+            style={{ width: '100%', height: '1rem' }}
+          ></div>
+          <div 
+            className="skeleton skeleton-text" 
+            style={{ width: '90%', height: '1rem' }}
+          ></div>
+          <div 
+            className="skeleton skeleton-text" 
+            style={{ width: '60%', height: '1rem' }}
+          ></div>
+        </div>
+      </div>
+    );
   }
 
+  // ---------------------------------------------------------
+  // MAIN APP ROUTES
+  // ---------------------------------------------------------
   return (
     <BrowserRouter basename="/final-project/">
       <Routes>
