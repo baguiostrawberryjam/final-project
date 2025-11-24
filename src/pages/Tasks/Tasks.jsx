@@ -128,25 +128,62 @@ function Tasks() {
       due: due || null,
     };
 
-    const updatePath = projectId
-      ? `users/${user.uid}/projects/${projectId}/todos/${editingTaskId}`
-      : `users/${user.uid}/todos/${editingTaskId}`;
+    // Check if the task was originally in standalone todos and is being moved to a project
+    const wasStandalone = !tasks[editingTaskId]?.projectId;
+    const isMovingToProject = projectId && wasStandalone;
 
-    update(ref(db, updatePath), updateData)
-      .then(() => {
-        alert("Task updated successfully!");
-        setTitle("");
-        setDescription("");
-        setStatus("pending");
-        setDue("");
-        setProjectId("");
-        setEditingTaskId(null);
-        setShowEditModal(false);
-      })
-      .catch((error) => {
-        console.log("Error updating task: " + error.message);
-        alert("Failed to update task. Please try again.");
-      });
+    if (isMovingToProject) {
+      // Move task from standalone to project: delete from standalone and create in project
+      const deletePromise = update(
+        ref(db, `users/${user.uid}/todos/${editingTaskId}`),
+        {
+          status: "deleted",
+          deletedAt: new Date().toISOString(),
+        }
+      );
+
+      const createPromise = push(
+        ref(db, `users/${user.uid}/projects/${projectId}/todos`),
+        updateData
+      );
+
+      Promise.all([deletePromise, createPromise])
+        .then(() => {
+          alert("Task moved to project successfully!");
+          setTitle("");
+          setDescription("");
+          setStatus("pending");
+          setDue("");
+          setProjectId("");
+          setEditingTaskId(null);
+          setShowEditModal(false);
+        })
+        .catch((error) => {
+          console.log("Error moving task: " + error.message);
+          alert("Failed to move task. Please try again.");
+        });
+    } else {
+      // Update task in place
+      const updatePath = projectId
+        ? `users/${user.uid}/projects/${projectId}/todos/${editingTaskId}`
+        : `users/${user.uid}/todos/${editingTaskId}`;
+
+      update(ref(db, updatePath), updateData)
+        .then(() => {
+          alert("Task updated successfully!");
+          setTitle("");
+          setDescription("");
+          setStatus("pending");
+          setDue("");
+          setProjectId("");
+          setEditingTaskId(null);
+          setShowEditModal(false);
+        })
+        .catch((error) => {
+          console.log("Error updating task: " + error.message);
+          alert("Failed to update task. Please try again.");
+        });
+    }
   }
 
   function handleCancel() {
@@ -185,8 +222,6 @@ function Tasks() {
   }
 
   return (
-    
-
     <div className="tasks-container">
       <div className="tasks-header">
         <h2>Priority Tasks</h2>
@@ -252,90 +287,92 @@ function Tasks() {
         </div>
       </div>
       <div className="tasks-wrapper">
-      <div className="tasks-scroll-wrapper">
-        <div className="tasks-grid">
-          {tasks ? (
-            Object.keys(tasks)
-              .filter((taskKey) => tasks[taskKey].status !== "deleted")
-              .filter(
-                (taskKey) =>
-                  statusFilter === "all" ||
-                  tasks[taskKey].status === statusFilter
-              )
-              .map((taskKey) => {
-                const task = tasks[taskKey];
-                const isOverdue = task.due && task.due < today;
-                const statusDisplay = task.status === "ongoing"
-                  ? "On-going" 
-                  : task.status.charAt(0).toUpperCase() + task.status.slice(1);
+        <div className="tasks-scroll-wrapper">
+          <div className="tasks-grid">
+            {tasks ? (
+              Object.keys(tasks)
+                .filter((taskKey) => tasks[taskKey].status !== "deleted")
+                .filter(
+                  (taskKey) =>
+                    statusFilter === "all" ||
+                    tasks[taskKey].status === statusFilter
+                )
+                .map((taskKey) => {
+                  const task = tasks[taskKey];
+                  const isOverdue = task.due && task.due < today;
+                  const statusDisplay =
+                    task.status === "ongoing"
+                      ? "On-going"
+                      : task.status.charAt(0).toUpperCase() +
+                        task.status.slice(1);
 
-                return (
-                  <div
-                    key={taskKey}
-                    className="tasks-card"
-                    onClick={() => setSelectedTask(task)}
-                  >
-                    <div className="task-content-left">
-                      <div className="task-title">{task.title}</div>
-                      <div
-                        className="task-description"
-                        title={task.description || ""}
-                      >
-                        {task.description
-                          ? task.description.length > 60
-                            ? task.description.substring(0, 60) + "..."
-                            : task.description
-                          : "-"}
+                  return (
+                    <div
+                      key={taskKey}
+                      className="tasks-card"
+                      onClick={() => setSelectedTask(task)}
+                    >
+                      <div className="task-content-left">
+                        <div className="task-title">{task.title}</div>
+                        <div
+                          className="task-description"
+                          title={task.description || ""}
+                        >
+                          {task.description
+                            ? task.description.length > 60
+                              ? task.description.substring(0, 60) + "..."
+                              : task.description
+                            : "-"}
+                        </div>
+                        <div className="overdue-badge-container">
+                          {isOverdue && (
+                            <div className="overdue-badge">Overdue</div>
+                          )}
+                        </div>
+                        <div className={`status-badge status-${task.status}`}>
+                          {statusDisplay}
+                        </div>
+                        <div className="task-due-date-container">
+                          {task.due && (
+                            <div className="task-due-date">
+                              <Calendar size={14} />
+                              {task.due}
+                            </div>
+                          )}
+                        </div>
                       </div>
-                      <div className="overdue-badge-container">
-                        {isOverdue && (
-                          <div className="overdue-badge">Overdue</div>
-                        )}
-                      </div>
-                      <div className={`status-badge status-${task.status}`}>
-                        {statusDisplay}
-                      </div>
-                      <div className="task-due-date-container">
-                        {task.due && (
-                          <div className="task-due-date">
-                            <Calendar size={14} />
-                            {task.due}
-                          </div>
-                        )}
+                      <div className="actions-cell">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleEdit(taskKey);
+                          }}
+                          className="edit-btn"
+                          title="Edit task"
+                        >
+                          <Edit2 size={16} />
+                        </button>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleDelete(taskKey);
+                          }}
+                          className="delete-btn"
+                          title="Delete task"
+                        >
+                          <Trash2 size={16} />
+                        </button>
                       </div>
                     </div>
-                    <div className="actions-cell">
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleEdit(taskKey);
-                        }}
-                        className="edit-btn"
-                        title="Edit task"
-                      >
-                        <Edit2 size={16} />
-                      </button>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleDelete(taskKey);
-                        }}
-                        className="delete-btn"
-                        title="Delete task"
-                      >
-                        <Trash2 size={16} />
-                      </button>
-                    </div>
-                  </div>
-                );
-              })
-          ) : (
-            <div className="empty-state">
-              No tasks yet. Click the + button to add one!
-            </div>
-          )}
+                  );
+                })
+            ) : (
+              <div className="empty-state">
+                No tasks yet. Click the + button to add one!
+              </div>
+            )}
+          </div>
         </div>
-      </div>
       </div>
 
       {/* Add Task Modal */}
