@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Plus, Edit2, Trash2, Filter, ChevronDown, Calendar } from "lucide-react";
+import {
+  Plus,
+  Edit2,
+  Trash2,
+  Filter,
+  ChevronDown,
+  Calendar,
+} from "lucide-react";
 import { NavLink } from "react-router";
 import "./tasks.css";
 import { onValue, push, ref, update } from "firebase/database";
@@ -10,10 +17,12 @@ function Tasks() {
   const [showEditModal, setShowEditModal] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
   const [tasks, setTasks] = useState([]);
+  const [projects, setProjects] = useState([]);
   const [title, setTitle] = useState("");
   const [status, setStatus] = useState("pending");
   const [due, setDue] = useState("");
   const [description, setDescription] = useState("");
+  const [projectId, setProjectId] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [editingTaskId, setEditingTaskId] = useState(null);
   const [titleError, setTitleError] = useState("");
@@ -28,15 +37,22 @@ function Tasks() {
   }, [user.uid]);
 
   useEffect(() => {
+    onValue(ref(db, `users/${user.uid}/projects`), (snapshot) => {
+      const projectsData = snapshot.val();
+      setProjects(projectsData ? projectsData : {});
+    });
+  }, [user.uid]);
+
+  useEffect(() => {
     const handleClickOutside = (event) => {
-      if (filterDropdownOpen && !event.target.closest('.filter-container')) {
+      if (filterDropdownOpen && !event.target.closest(".filter-container")) {
         setFilterDropdownOpen(false);
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [filterDropdownOpen]);
 
@@ -59,20 +75,27 @@ function Tasks() {
       return;
     }
 
-    push(ref(db, `users/${user.uid}/todos`), {
+    const taskData = {
       title: title.trim(),
       description: description.trim(),
       status: status,
       due: due || null,
       dateCreated: today,
       deletedAt: "",
-    })
+    };
+
+    const taskPath = projectId
+      ? `users/${user.uid}/projects/${projectId}/todos`
+      : `users/${user.uid}/todos`;
+
+    push(ref(db, taskPath), taskData)
       .then(() => {
         alert("Task added successfully!");
         setTitle("");
         setDescription("");
         setStatus("pending");
         setDue("");
+        setProjectId("");
         setShowModal(false);
       })
       .catch((error) => {
@@ -88,6 +111,7 @@ function Tasks() {
     setDescription(task.description || "");
     setStatus(task.status);
     setDue(task.due || "");
+    setProjectId(task.projectId || "");
     setShowEditModal(true);
   }
 
@@ -97,18 +121,25 @@ function Tasks() {
       return;
     }
 
-    update(ref(db, `users/${user.uid}/todos/${editingTaskId}`), {
+    const updateData = {
       title: title.trim(),
       description: description.trim(),
       status: status,
       due: due || null,
-    })
+    };
+
+    const updatePath = projectId
+      ? `users/${user.uid}/projects/${projectId}/todos/${editingTaskId}`
+      : `users/${user.uid}/todos/${editingTaskId}`;
+
+    update(ref(db, updatePath), updateData)
       .then(() => {
         alert("Task updated successfully!");
         setTitle("");
         setDescription("");
         setStatus("pending");
         setDue("");
+        setProjectId("");
         setEditingTaskId(null);
         setShowEditModal(false);
       })
@@ -123,6 +154,7 @@ function Tasks() {
     setDescription("");
     setStatus("pending");
     setDue("");
+    setProjectId("");
     setShowModal(false);
   }
 
@@ -131,6 +163,7 @@ function Tasks() {
     setDescription("");
     setStatus("pending");
     setDue("");
+    setProjectId("");
     setEditingTaskId(null);
     setShowEditModal(false);
   }
@@ -155,7 +188,7 @@ function Tasks() {
     <div className="tasks-container">
       <div className="tasks-header">
         <h2>Priority Tasks</h2>
-        
+
         <div className="button-container">
           <div className="filter-container">
             <button
@@ -164,7 +197,10 @@ function Tasks() {
             >
               <Filter size={16} />
               Filter by Status
-              <ChevronDown size={16} className={filterDropdownOpen ? "open" : ""} />
+              <ChevronDown
+                size={16}
+                className={filterDropdownOpen ? "open" : ""}
+              />
             </button>
             {filterDropdownOpen && (
               <div className="filter-dropdown">
@@ -223,15 +259,18 @@ function Tasks() {
               .filter((taskKey) => tasks[taskKey].status !== "deleted")
               .filter(
                 (taskKey) =>
-                  statusFilter === "all" || tasks[taskKey].status === statusFilter
+                  statusFilter === "all" ||
+                  tasks[taskKey].status === statusFilter
               )
               .map((taskKey) => {
                 const task = tasks[taskKey];
                 const isOverdue = task.due && task.due < today;
-                const statusDisplay = task.status === "ongoing" 
-                  ? "On-going" 
-                  : task.status.charAt(0).toUpperCase() + task.status.slice(1);
-                
+                const statusDisplay =
+                  task.status === "ongoing"
+                    ? "On-going"
+                    : task.status.charAt(0).toUpperCase() +
+                      task.status.slice(1);
+
                 return (
                   <div
                     key={taskKey}
@@ -240,11 +279,14 @@ function Tasks() {
                   >
                     <div className="task-content-left">
                       <div className="task-title">{task.title}</div>
-                      <div className="task-description" title={task.description || ""}>
-                        {task.description 
-                          ? (task.description.length > 60 
-                              ? task.description.substring(0, 60) + "..." 
-                              : task.description)
+                      <div
+                        className="task-description"
+                        title={task.description || ""}
+                      >
+                        {task.description
+                          ? task.description.length > 60
+                            ? task.description.substring(0, 60) + "..."
+                            : task.description
                           : "-"}
                       </div>
                       <div className="overdue-badge-container">
@@ -344,6 +386,23 @@ function Tasks() {
                   onChange={(e) => setDue(e.target.value)}
                   min={today}
                 />
+              </div>
+              <div className="form-group">
+                <label>Project (Optional)</label>
+                <select
+                  value={projectId}
+                  onChange={(e) => setProjectId(e.target.value)}
+                >
+                  <option value="">No Project</option>
+                  {projects &&
+                    Object.keys(projects)
+                      .filter((key) => projects[key].status !== "completed")
+                      .map((key) => (
+                        <option key={key} value={key}>
+                          {projects[key].title}
+                        </option>
+                      ))}
+                </select>
               </div>
               <div className="modal-actions">
                 <button onClick={handleCancel} className="cancel-btn">
@@ -464,6 +523,23 @@ function Tasks() {
                   value={due}
                   onChange={(e) => setDue(e.target.value)}
                 />
+              </div>
+              <div className="form-group">
+                <label>Project (Optional)</label>
+                <select
+                  value={projectId}
+                  onChange={(e) => setProjectId(e.target.value)}
+                >
+                  <option value="">No Project</option>
+                  {projects &&
+                    Object.keys(projects)
+                      .filter((key) => projects[key].status !== "completed")
+                      .map((key) => (
+                        <option key={key} value={key}>
+                          {projects[key].title}
+                        </option>
+                      ))}
+                </select>
               </div>
               <div className="modal-actions">
                 <button onClick={handleEditCancel} className="cancel-btn">

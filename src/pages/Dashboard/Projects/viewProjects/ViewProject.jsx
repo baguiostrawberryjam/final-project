@@ -97,7 +97,9 @@ function ViewProject() {
     if (value && projects && selectedProjectKey) {
       const projectTargetDate = projects[selectedProjectKey].targetDate;
       if (projectTargetDate && value > projectTargetDate) {
-        setTaskDueError(`Task due date cannot be after the project target date (${projectTargetDate})`);
+        setTaskDueError(
+          `Task due date cannot be after the project target date (${projectTargetDate})`
+        );
       } else {
         setTaskDueError("");
       }
@@ -420,9 +422,17 @@ function ViewProject() {
                   value={newTaskDue}
                   onChange={(e) => checkTaskDueDate(e.target.value)}
                   min={today}
-                  max={selectedProjectKey && projects && projects[selectedProjectKey].targetDate ? projects[selectedProjectKey].targetDate : ""}
+                  max={
+                    selectedProjectKey &&
+                    projects &&
+                    projects[selectedProjectKey].targetDate
+                      ? projects[selectedProjectKey].targetDate
+                      : ""
+                  }
                 />
-                {taskDueError && <p className="error-message">{taskDueError}</p>}
+                {taskDueError && (
+                  <p className="error-message">{taskDueError}</p>
+                )}
               </div>
             </div>
 
