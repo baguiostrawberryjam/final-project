@@ -1,15 +1,25 @@
 .notes-page {
   display: flex;
   flex-direction: column;
-  height: auto;
+  height: 100%;
   min-height: 0;
+}
+
+.notes-section-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .notes-container {
   display: flex;
   flex-direction: column;
+  flex: 1;
   min-height: 0;
   overflow: hidden;
+  padding: 1.5rem 1.5rem 0 1.5rem;
 }
 
 /* Header */
@@ -17,36 +27,50 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   flex-shrink: 0;
 }
 
 .notes-header h2 {
-  font-size: 1.5rem;
+  font-size: var(--font-ml);
   font-weight: bold;
   color: #1f2937;
   margin: 0;
 }
 
-.add-note-btn {
-  background-color: var(--primary);
-  color: white;
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 0.5rem;
-  cursor: pointer;
+/* Notes Scroll Wrapper */
+.notes-scroll-wrapper {
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  transition: background-color 0.2s;
-  font-size: 0.875rem;
-  font-family: var(--font-subtitle);
-  font-weight: var(--quicksand-400);
-  flex-shrink: 0;
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+  min-height: 0;
+
+  scrollbar-width: thin;
+  scrollbar-color: #c7c7c7 transparent;
 }
 
-.add-note-btn:hover {
-  background-color: var(--primary-hover);
+.notes-scroll-wrapper::-webkit-scrollbar {
+  width: 8px;
+}
+
+.notes-scroll-wrapper::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+.notes-scroll-wrapper::-webkit-scrollbar-thumb {
+  background-color: #c7c7c7;
+  border-radius: 4px;
+}
+
+.notes-scroll-wrapper::-webkit-scrollbar-thumb:hover {
+  background-color: #a8a8a8;
+}
+
+.notes-scroll-wrapper::-webkit-scrollbar-button {
+  display: none !important;
+  width: 0;
+  height: 0;
 }
 
 /* Notes Grid */
@@ -54,27 +78,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 1rem;
-  overflow-y: auto;
-  min-height: 0;
-  flex: 0 1 auto;
-  padding-right: 0.5rem;
-}
-
-.notes-grid::-webkit-scrollbar {
-  width: 6px;
-}
-
-.notes-grid::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.notes-grid::-webkit-scrollbar-thumb {
-  background: #d1d5db;
-  border-radius: 3px;
-}
-
-.notes-grid::-webkit-scrollbar-thumb:hover {
-  background: #9ca3af;
+  width: 100%;
 }
 
 /* Error Message */
@@ -167,6 +171,56 @@
   text-align: center;
   color: #9ca3af;
   padding: 2rem 0;
+}
+
+/* Bottom Section */
+.notes-bottom-section {
+  min-height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+  border-top: 1px solid var(--stroke-light);
+  padding: 0.5rem;
+  flex-shrink: 0;
+}
+
+.view-all-btn {
+  background-color: white;
+  color: var(--text-primary);
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border-button);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.875rem;
+  font-family: var(--font-subtitle);
+  font-weight: var(--quicksand-400);
+}
+
+.view-all-btn:hover {
+  background-color: var(--hover-bg-state);
+  border-color: var(--primary);
+}
+
+.add-note-btn {
+  background-color: var(--primary);
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background-color 0.2s;
+  font-size: 0.875rem;
+  font-family: var(--font-subtitle);
+  font-weight: var(--quicksand-400);
+}
+
+.add-note-btn:hover {
+  background-color: var(--primary-hover);
 }
 
 /* Modal */

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Plus } from "lucide-react";
+import { NavLink } from "react-router";
 import "./notes.css";
 import { onValue, push, ref, update, remove } from "firebase/database";
 import { auth, db } from "../../../firebase-config";
@@ -122,61 +123,73 @@ function Notes() {
 
   return (
     <div className="notes-page">
+    <div className="notes-section-wrapper">
+
       <div className="notes-container">
         <div className="notes-header">
-          <h2>Notes List</h2>
-          <button onClick={() => setShowModal(true)} className="add-note-btn">
-            <Plus size={15} />
-            New Note
-          </button>
+          <h2>My Notes</h2>
         </div>
-        <div className="notes-grid">
-          {notes ? (
-            Object.keys(notes).map((noteKey) => (
-              <div
-                key={noteKey}
-                className="note-card"
-                onClick={() => setSelectedNote(notes[noteKey])}
-                style={{ cursor: "pointer" }}
-              >
-                <div className="card-header">
-                  <h3>{notes[noteKey].title}</h3>
-                  <div className="card-actions">
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleEdit(noteKey);
-                      }}
-                      className="edit-btn"
-                      title="Edit note"
-                    >
-                      <i className="fa fa-edit"></i>
-                    </button>
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleDelete(noteKey);
-                      }}
-                      className="delete-btn"
-                      title="Delete note"
-                    >
-                      <i className="fa fa-trash"></i>
-                    </button>
+        <div className="notes-scroll-wrapper">
+          <div className="notes-grid">
+            {notes ? (
+              Object.keys(notes).map((noteKey) => (
+                <div
+                  key={noteKey}
+                  className="note-card"
+                  onClick={() => setSelectedNote(notes[noteKey])}
+                  style={{ cursor: "pointer" }}
+                >
+                  <div className="card-header">
+                    <h3>{notes[noteKey].title}</h3>
+                    <div className="card-actions">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleEdit(noteKey);
+                        }}
+                        className="edit-btn"
+                        title="Edit note"
+                      >
+                        <i className="fa fa-edit"></i>
+                      </button>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDelete(noteKey);
+                        }}
+                        className="delete-btn"
+                        title="Delete note"
+                      >
+                        <i className="fa fa-trash"></i>
+                      </button>
+                    </div>
                   </div>
+                  <p className="note-description">{notes[noteKey].description}</p>
+                  <p className="note-date">
+                    Created: {notes[noteKey].dateCreated}
+                  </p>
                 </div>
-                <p className="note-description">{notes[noteKey].description}</p>
-                <p className="note-date">
-                  Created: {notes[noteKey].dateCreated}
-                </p>
-              </div>
-            ))
-          ) : (
-            <p className="empty-state">
-              No notes yet. Click the + button to add one!
-            </p>
-          )}
+              ))
+            ) : (
+              <p className="empty-state">
+                No notes yet. Click the + button to add one!
+              </p>
+            )}
+          </div>
         </div>
       </div>
+
+      <div className="notes-bottom-section">
+        <NavLink to="/notes">
+          <button className="view-all-btn">View All</button>
+        </NavLink>
+        <button onClick={() => setShowModal(true)} className="add-note-btn">
+          <Plus size={15} />
+          New Note
+        </button>
+      </div>
+
+    </div>
 
       {/* Note Detail Modal */}
       {selectedNote && (
