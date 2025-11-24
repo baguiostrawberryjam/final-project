@@ -45,12 +45,13 @@
 
 .notes-wrapper {
   flex: 1;
-  padding: 1.5rem;
   background-color: var(--card-bg);
   border: 1px solid var(--stroke-light);
   border-radius: 0.5rem;
-  overflow-y: auto;
   min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 /* Add Project Modal Styles */
