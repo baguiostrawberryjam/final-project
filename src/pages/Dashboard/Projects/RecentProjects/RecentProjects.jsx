@@ -27,7 +27,9 @@ function RecentProjects() {
                 ref(db, `users/${user.uid}/projects/${projectKey}/todos`),
                 (taskSnapshot) => {
                   counts[projectKey] = taskSnapshot.exists()
-                    ? Object.keys(taskSnapshot.val()).length
+                    ? Object.keys(taskSnapshot.val())
+                    .filter((todoKey) => taskSnapshot.val()[todoKey].status !== "archived")
+                    .length
                     : 0;
                   setTaskCounts({ ...counts });
                 }
@@ -53,7 +55,11 @@ function RecentProjects() {
           <div className="project-grid">
             {projects ? (
               Object.keys(projects)
-                .filter((key) => projects[key].status !== "completed")
+                .filter(
+                  (key) =>
+                    projects[key].status !== "completed" &&
+                    projects[key].status !== "archived"
+                )
                 .slice(0, 3)
                 .map((key) => (
                   <div

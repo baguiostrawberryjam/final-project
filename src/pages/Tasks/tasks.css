@@ -565,10 +565,14 @@
   width: fit-content;
 }
 
-.status-pending,
+.status-pending {
+  background-color: #F2F2F2;
+  color: #6B6B6B;
+}
+
 .status-ongoing {
-  background-color: #fef3c7;
-  color: #92400e;
+  background-color: #dbeafe;
+  color: #1e40af;
 }
 
 .status-complete {

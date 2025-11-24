@@ -23,16 +23,24 @@ function Tasks() {
   const user = auth.currentUser;
 
   useEffect(() => {
-    onValue(ref(db, `users/${user.uid}/todos`), (snapshot) => {
-      setTasks(snapshot.val());
-    });
+    const unsubscribe = onValue(
+      ref(db, `users/${user.uid}/todos`),
+      (snapshot) => {
+        setTasks(snapshot.val());
+      }
+    );
+    return () => unsubscribe();
   }, [user.uid]);
 
   useEffect(() => {
-    onValue(ref(db, `users/${user.uid}/projects`), (snapshot) => {
-      const projectsData = snapshot.val();
-      setProjects(projectsData ? projectsData : {});
-    });
+    const unsubscribe = onValue(
+      ref(db, `users/${user.uid}/projects`),
+      (snapshot) => {
+        const projectsData = snapshot.val();
+        setProjects(projectsData ? projectsData : {});
+      }
+    );
+    return () => unsubscribe();
   }, [user.uid]);
 
   function checkTitle(e) {
@@ -167,7 +175,7 @@ function Tasks() {
     <div className="tasks-container">
       <div className="tasks-header">
         <h2>My Tasks</h2>
-        
+
         <div className="button-container">
           <div className="filter-container">
             <label>Filter by Status: </label>
@@ -320,7 +328,11 @@ function Tasks() {
                   <option value="">No Project</option>
                   {projects &&
                     Object.keys(projects)
-                      .filter((key) => projects[key].status !== "completed")
+                      .filter(
+                        (key) =>
+                          projects[key].status !== "completed" &&
+                          projects[key].status !== "archived"
+                      )
                       .map((key) => (
                         <option key={key} value={key}>
                           {projects[key].title}
@@ -455,7 +467,11 @@ function Tasks() {
                   <option value="">No Project</option>
                   {projects &&
                     Object.keys(projects)
-                      .filter((key) => projects[key].status !== "completed")
+                      .filter(
+                        (key) =>
+                          projects[key].status !== "completed" &&
+                          projects[key].status !== "archived"
+                      )
                       .map((key) => (
                         <option key={key} value={key}>
                           {projects[key].title}
