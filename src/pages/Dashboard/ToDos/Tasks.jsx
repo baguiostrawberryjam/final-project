@@ -265,11 +265,9 @@ function Tasks() {
               .map((taskKey) => {
                 const task = tasks[taskKey];
                 const isOverdue = task.due && task.due < today;
-                const statusDisplay =
-                  task.status === "ongoing"
-                    ? "On-going"
-                    : task.status.charAt(0).toUpperCase() +
-                      task.status.slice(1);
+                const statusDisplay = task.status === "ongoing"
+                  ? "On-going" 
+                  : task.status.charAt(0).toUpperCase() + task.status.slice(1);
 
                 return (
                   <div
