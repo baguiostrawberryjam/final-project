@@ -232,7 +232,11 @@ function ViewProject() {
       <div className="project-list">
         {projects ? (
           Object.keys(projects)
-            .filter((key) => projects[key].status !== "completed")
+            .filter(
+              (key) =>
+                projects[key].status !== "completed" &&
+                projects[key].status !== "archived"
+            )
             .map((key) => (
               <div key={key} className="project-item">
                 {/* Top section with icon, title and buttons */}
@@ -333,7 +337,8 @@ function ViewProject() {
                                 {projects[key].todos[todoKey].title}{" "}
                                 {projects[key].todos[todoKey].due < today &&
                                   projects[key].todos[todoKey].status !==
-                                    "completed" && (
+                                    "completed" && projects[key].todos[todoKey].status !==
+                                    "archived" &&(
                                     <span className="overdue-text">
                                       (Overdue)
                                     </span>

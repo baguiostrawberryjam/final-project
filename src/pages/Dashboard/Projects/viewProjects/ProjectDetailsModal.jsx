@@ -87,7 +87,9 @@ function ProjectDetailsModal({ project, onClose }) {
             <h3 className="section-title">Tasks</h3>
             {project.todos && Object.keys(project.todos).length > 0 ? (
               <div className="tasks-list">
-                {Object.keys(project.todos).map((todoKey) => (
+                {Object.keys(project.todos)
+                .filter((todoKey) => project.todos[todoKey].status !== "archived")
+                .map((todoKey) => (
                   <div key={todoKey} className="modal-todo-item">
                     <div className="todo-header">
                       <div className="todo-info">
