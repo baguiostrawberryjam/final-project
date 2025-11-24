@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import "../../components/styles/auth-forms.css";
 import { onAuthStateChanged } from 'firebase/auth';
+import { Camera } from "lucide-react";
 import { auth, db } from '../../firebase-config';
 import { NavLink } from 'react-router';
 import { ref, set } from 'firebase/database';
