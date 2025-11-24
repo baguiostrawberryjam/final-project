@@ -8,7 +8,7 @@ import {
   Calendar,
 } from "lucide-react";
 import { NavLink } from "react-router";
-import "./tasks.css";
+import "./tasks-dashboard.css";
 import { onValue, push, ref, update } from "firebase/database";
 import { auth, db } from "../../../firebase-config";
 

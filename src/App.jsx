@@ -7,7 +7,6 @@ import AdminDashboard from "./pages/Admin/AdminDashboard";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
-import EditProfile from "./pages/Setup/editProfile/EditProfile";
 import Setup from "./pages/Setup/Setup";
 import "./App.css";
 import "./components/styles/main.css";
@@ -92,7 +91,6 @@ function App() {
                 </LayoutWrapper>
               }
             />
-            <Route path="/profile" element={<Profile />} />
             <Route
               path="/project/"
               element={
@@ -124,7 +122,7 @@ function App() {
             <Route path="*" element={<Navigate to="/dashboard" />} />
 
             {/* Ibang Components */}
-            <Route path="/edit-profile" element={<EditProfile />} />
+            <Route path="/profile" element={<LayoutWrapper><Profile/></LayoutWrapper>}/>
             <Route
               path="/add-project/:id"
               element={
