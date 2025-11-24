@@ -23,8 +23,8 @@
   flex-shrink: 0;
 }
 
-.tasks-header h2 {
-  font-size: var(--font-ml);
+.tasks-header h2{
+  font-size: 1.5rem;
   font-weight: bold;
   color: #1f2937;
   margin: 0;

@@ -166,8 +166,8 @@ function Tasks() {
   return (
     <div className="tasks-container">
       <div className="tasks-header">
-        <h2>Priority Tasks</h2>
-
+        <h2>My Tasks</h2>
+        
         <div className="button-container">
           <div className="filter-container">
             <label>Filter by Status: </label>
