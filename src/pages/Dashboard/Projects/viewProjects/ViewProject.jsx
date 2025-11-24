@@ -25,6 +25,7 @@ function ViewProject() {
   const [newTaskStatus, setNewTaskStatus] = useState("pending");
   const [newTaskDue, setNewTaskDue] = useState("");
   const [taskTitleError, setTaskTitleError] = useState("");
+  const [taskDueError, setTaskDueError] = useState("");
   const [isAddingTask, setIsAddingTask] = useState(false);
 
   const today = new Date().toISOString().split("T")[0];
@@ -75,6 +76,7 @@ function ViewProject() {
     setNewTaskStatus("pending");
     setNewTaskDue("");
     setTaskTitleError("");
+    setTaskDueError("");
   };
 
   // Check task title validation
@@ -89,6 +91,21 @@ function ViewProject() {
     }
   };
 
+  // Check task due date validation
+  const checkTaskDueDate = (value) => {
+    setNewTaskDue(value);
+    if (value && projects && selectedProjectKey) {
+      const projectTargetDate = projects[selectedProjectKey].targetDate;
+      if (projectTargetDate && value > projectTargetDate) {
+        setTaskDueError(`Task due date cannot be after the project target date (${projectTargetDate})`);
+      } else {
+        setTaskDueError("");
+      }
+    } else {
+      setTaskDueError("");
+    }
+  };
+
   // Handle add task submission
   const handleAddTask = () => {
     if (!newTaskTitle.trim()) {
@@ -98,6 +115,11 @@ function ViewProject() {
 
     if (taskTitleError) {
       alert("Please fix the title error");
+      return;
+    }
+
+    if (taskDueError) {
+      alert("Please fix the due date error");
       return;
     }
 
@@ -116,6 +138,12 @@ function ViewProject() {
       createdAt: createdDate,
     })
       .then(() => {
+        // Update project status to "ongoing" if it's still "pending"
+        if (projects[selectedProjectKey].status === "pending") {
+          update(ref(db, `users/${user.uid}/projects/${selectedProjectKey}`), {
+            status: "ongoing",
+          });
+        }
         alert("Task added successfully!");
         closeAddTaskModal();
       })
@@ -390,9 +418,11 @@ function ViewProject() {
                   id="task-due"
                   type="date"
                   value={newTaskDue}
-                  onChange={(e) => setNewTaskDue(e.target.value)}
+                  onChange={(e) => checkTaskDueDate(e.target.value)}
                   min={today}
+                  max={selectedProjectKey && projects && projects[selectedProjectKey].targetDate ? projects[selectedProjectKey].targetDate : ""}
                 />
+                {taskDueError && <p className="error-message">{taskDueError}</p>}
               </div>
             </div>
 
