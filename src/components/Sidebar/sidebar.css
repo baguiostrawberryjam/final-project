@@ -16,8 +16,8 @@
   top: 0;
   width: 250px;
   height: 100vh;
-  padding: 10px;
-  background-color: var(--base-clr);
+  padding: var(--space-md);
+  background-color: var(--card-bg);
   transition: width 0.3s ease;
   display: flex;
   flex-direction: column;
@@ -50,7 +50,9 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--stroke-light);
 }
 
 /* center everything when collapsed */
@@ -75,9 +77,10 @@
 
 .logo {
   font-family: var(--font-subtitle);
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: var(--quicksand-700);
-  color: var(--text-clr);
+  color: var(--text-primary);
+  letter-spacing: 0.5px;
 }
 
 /* hide text smoothly when closed */
@@ -92,22 +95,20 @@
 =========================== */
 .toggle-btn {
   position: absolute;
-  right: 5px;
-  padding: 6px;
+  right: 0;
   border: none;
   background: none;
   cursor: pointer;
-  color: var(--text-clr);
-  transition: all 0.3s ease;
-  font-size: 24px;
-  border-radius: 6px;
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+  border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .toggle-btn:hover {
-  background-color: var(--hover-bg);
+  background-color: var(--hover-bg-state);
   color: var(--primary);
 }
 
@@ -115,25 +116,40 @@
    SIDEBAR SECTIONS
 =========================== */
 .sidebar-section {
-  margin-bottom: 20px;
+  margin-bottom: var(--space-lg);
   font-family: var(--font-subtitle);
-  font-weight: var(--quicksand-600);
 }
 
 .section-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 5px;
-  min-height: 24px;
+  gap: var(--space-xs);
+  min-height: 32px;
+  padding: var(--space-xs) var(--space-sm);
+  margin-bottom: var(--space-xs);
   cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: background-color 0.2s ease;
 }
 
-.section-title-container {
+.section-header:hover {
+  background-color: var(--hover-bg-state);
+}
+
+.sidebar-section .section-title-container {
   display: flex;
   align-items: center;
   flex: 1;
   min-width: 0;
+}
+
+.sidebar-section .section-title:before {
+  content: "";
+  width: 3px;
+  height: 16px;
+  background-color: var(--primary);
+  border-radius: 2px;
 }
 
 .section-toggle-container {
@@ -145,11 +161,13 @@
 
 .section-title {
   font-family: var(--font-subtitle);
-  margin-bottom: 0;
-  padding-left: 5px;
-  font-size: 0.8rem;
-  color: var(--accent-clr);
+  margin: 0;
+  padding: 0;
+  font-size: var(--font-sm);
+  font-weight: var(--quicksand-700);
+  color: var(--text-secondary);
   text-transform: uppercase;
+  letter-spacing: 0.5px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -161,14 +179,15 @@
 .section-collapse-btn {
   background: none;
   border: none;
-  color: var(--accent-clr);
+  color: var(--text-secondary);
   cursor: pointer;
-  padding: 4px;
+  padding: var(--space-xs);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.3s ease;
+  transition: all 0.2s ease;
   flex-shrink: 0;
+  border-radius: var(--radius-sm);
 }
 
 .section-collapse-btn svg.collapsed {
@@ -177,6 +196,11 @@
 
 .section-collapse-btn:hover {
   color: var(--primary);
+  background-color: var(--hover-bg-state);
+}
+
+.sidebar.close .toggle-btn{
+  padding: var(--space-sm);
 }
 
 .sidebar.close .section-title {
@@ -185,12 +209,26 @@
   overflow: hidden;
 }
 
+/* Hide section header when sidebar is closed (for Menu section) */
+.sidebar.close .section-header {
+  display: none;
+  pointer-events: none;
+}
+
+/* Specifically hide Menu section header when closed */
+.sidebar.close #menu .section-header {
+  display: none;
+  pointer-events: none;
+}
+
 .sidebar-section ul {
   list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .sidebar-section li {
-  margin-bottom: 5px;
+  margin-bottom: var(--space-xs);
 }
 
 /* ===========================
@@ -200,36 +238,41 @@
 .sidebar-section .dropdown-btn,
 .sidebar-section .sidebar-item-btn {
   width: 100%;
-  padding: 10px;
+  padding: var(--space-sm) var(--space-md);
   display: flex;
-  gap: 10px;
+  gap: var(--space-md);
   align-items: center;
-  border-radius: 0.5rem;
+  border-radius: var(--radius-md);
   text-decoration: none;
-  color: var(--text-clr);
-  font-size: 0.95rem;
+  color: var(--text-primary);
+  font-size: var(--font-me);
+  font-weight: var(--quicksand-400);
+  font-family: var(--font-subtitle);
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
   border: none;
   background: none;
-  border: 2px solid transparent;
+  border: 1px solid transparent;
+  line-height: 1.5;
 }
 
 .sidebar-section a:hover,
 .sidebar-section .dropdown-btn:hover,
 .sidebar-section .sidebar-item-btn:hover {
-  background-color: var(--hover-bg);
+  background-color: var(--hover-bg-state);
+  color: var(--text-primary);
 }
 
 .sidebar-section a.active {
-  background-color: var(--background);
-  color: var(--text-primary);
+  background-color: var(--hover-bg-state);
+  color: var(--primary);
   font-weight: var(--quicksand-600);
-  border-color: var(--border-button);
+  border-color: var(--primary);
 }
 
 .sidebar-section a.active:hover {
-  background-color: var(--secondary);
+  background-color: var(--hover-bg-state);
+  color: var(--primary);
 }
 
 .sidebar-item-btn {
@@ -237,53 +280,124 @@
 }
 
 .sidebar-section a span:nth-child(1),
-.sidebar-section .dropdown-btn span:nth-child(1) {
-  font-size: 1.2rem;
+.sidebar-section .dropdown-btn span:nth-child(1),
+.sidebar-section .sidebar-item-btn span:nth-child(1) {
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 20px;
+  height: 20px;
+}
+
+/* Center icons when sidebar is closed */
+.sidebar.close .sidebar-section a,
+.sidebar.close .sidebar-section .dropdown-btn,
+.sidebar.close .sidebar-section .sidebar-item-btn {
+  justify-content: center;
+  padding: var(--space-sm);
+  gap: 0;
+}
+
+.sidebar.close .sidebar-section a span:nth-child(1),
+.sidebar.close .sidebar-section .dropdown-btn span:nth-child(1),
+.sidebar.close .sidebar-section .sidebar-item-btn span:nth-child(1) {
+  justify-content: center;
+  margin: 0;
+}
+
+.sidebar-section a span:nth-child(2),
+.sidebar-section .dropdown-btn span:nth-child(2),
+.sidebar-section .sidebar-item-btn span:nth-child(2) {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+  text-align: left;
   display: flex;
   align-items: center;
 }
 
-.sidebar-section a span:nth-child(2),
-.sidebar-section .dropdown-btn span:nth-child(2) {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
 .sidebar.close .sidebar-section a span:nth-child(2),
-.sidebar.close .sidebar-section .dropdown-btn span:nth-child(2) {
+.sidebar.close .sidebar-section .dropdown-btn span:nth-child(2),
+.sidebar.close .sidebar-section .sidebar-item-btn span:nth-child(2) {
   opacity: 0;
   width: 0;
+  min-width: 0;
+  max-width: 0;
   overflow: hidden;
+  margin: 0;
+  padding: 0;
+  flex: 0 0 0;
+  display: none;
 }
 
 /* dropdown container */
 .sub-menu {
-  margin-top: 5px;
-  margin-left: 20px;
+  margin-top: var(--space-xs);
+  margin-left: var(--space-lg);
+  margin-bottom: var(--space-xs);
   display: none;
   list-style: none;
+  padding: 0;
 }
 
 .sub-menu.show {
   display: block;
 }
 
+.sub-menu li {
+  margin-bottom: var(--space-xs);
+}
+
 .sub-menu li a {
-  padding: 8px;
-  font-size: 0.9rem;
-  border-radius: 4px;
+  padding: var(--space-xs) var(--space-sm);
+  font-size: var(--font-xs);
+  font-weight: var(--quicksand-400);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
 }
 
 .sub-menu li a:hover {
-  background-color: var(--hover-clr);
+  background-color: var(--hover-bg-state);
+  color: var(--text-primary);
 }
 
 .sidebar.close .sub-menu {
   display: none !important;
   opacity: 0;
   pointer-events: none;
+}
+
+/* Hide Projects and Favorites sections when sidebar is collapsed */
+.sidebar.close #projects,
+.sidebar.close #favorites {
+  display: none;
+}
+
+/* Ensure left alignment for Projects and Favorites items */
+#projects .sidebar-section a,
+#projects .sidebar-section .sidebar-item-btn,
+#favorites .sidebar-section a,
+#favorites .sidebar-section .dropdown-btn {
+  justify-content: flex-start;
+}
+
+/* Ensure text spans in Projects and Favorites are left-aligned */
+#projects .sidebar-section a span:nth-child(2),
+#projects .sidebar-section .sidebar-item-btn span:nth-child(2),
+#favorites .sidebar-section a span:nth-child(2),
+#favorites .sidebar-section .dropdown-btn span:nth-child(2) {
+  text-align: left;
+  justify-content: flex-start;
+}
+
+/* When sidebar is closed, center icons in Projects and Favorites (before they're hidden) */
+.sidebar.close #projects .sidebar-section a,
+.sidebar.close #projects .sidebar-section .sidebar-item-btn,
+.sidebar.close #favorites .sidebar-section a,
+.sidebar.close #favorites .sidebar-section .dropdown-btn {
+  justify-content: center;
 }
 
 

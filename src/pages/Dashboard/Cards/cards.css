@@ -33,9 +33,12 @@
 .card-icon {
     width: 40px;
     height: 40px;
-    background-color: var(--stroke-light, #ccc);
+    background-color: var(--hover-bg-state);
     border-radius: 50%; /* circle */
     margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Header */

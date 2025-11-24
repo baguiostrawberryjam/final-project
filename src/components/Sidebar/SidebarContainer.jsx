@@ -54,6 +54,7 @@ function SidebarContainer({ isOpen, toggleSidebar }) {
       {/* Menu Section */}
       <SidebarSection
         title="Menu"
+        id="menu"
         items={[
           { to: "/dashboard", label: "Dashboard", icon: <LayoutDashboard /> },
           { to: "/project", label: "Projects", icon: <FolderOpen /> },
@@ -65,10 +66,12 @@ function SidebarContainer({ isOpen, toggleSidebar }) {
       {/* Project Section */}
       <SidebarSection
         title="Projects"
+        id="projects"
         items={
           projects && typeof projects === "object"
             ? Object.entries(projects)
                 .filter(([, project]) => project.status !== "completed")
+                .slice(0, 5)
                 .map(([key, project]) => ({
                   label:
                     typeof project === "object"
@@ -87,11 +90,12 @@ function SidebarContainer({ isOpen, toggleSidebar }) {
       {/* Favorite Section */}
       <SidebarSection
         title="Favorites"
+        id="favorites"
         items={[
           {
             label: "Whats",
             icon: <Star size={20} />,
-            subItems: ["Work", "Private", "Coding", "Gardening", "School"],
+            subItems: ["Work", "Private", "Coding", "Gardening", "School"].slice(0, 5),
             dropdownOpen: openDropdown === "todo",
             toggleDropdown: () => toggleDropdown("todo"),
           },

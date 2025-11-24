@@ -1,9 +1,9 @@
 import SidebarItem from "./SidebarItem";
 import { ChevronDown } from "lucide-react";
 
-export default function SidebarSection({ title, items, isCollapsed, onToggleCollapse }) {
+export default function SidebarSection({ title, items, isCollapsed, onToggleCollapse, id }) {
   return (
-    <div className="sidebar-section">
+    <div className="sidebar-section" id={id}>
       {title && (
         <div
           className="section-header"
