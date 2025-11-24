@@ -51,19 +51,27 @@
 
 /* Topbar Buttons */
 .topbar-logout-btn {
-  background-color: black;
-  border: 1px solid #4b5563;
-  color: white;
+  background-color: white;
+  color: var(--text-primary);
   padding: 0.5rem 1rem;
-  border-radius: 0.375rem;
+  border: 1px solid var(--border-button);
+  border-radius: 0.5rem;
   cursor: pointer;
+  margin-right: 0.5rem;
+  transition: all 0.2s;
   font-size: 0.875rem;
-  transition: background-color 0.2s, border-color 0.2s;
+  font-family: var(--font-subtitle);
+  font-weight: var(--quicksand-400);
 }
 
+/* I added a standard hover effect since 'transition' was included */
 .topbar-logout-btn:hover {
-  background-color: #374151;
-  border-color: #6b7280;
+  background-color: #f3f4f6; /* Light gray background on hover */
+  border-color: var(--primary); /* Slightly darker border on hover */
+}
+
+.topbar-logout-btn:active {
+  background-color: #e5e7eb; /* Darker gray on click */
 }
 
 .topbar-user-profile {
