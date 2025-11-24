@@ -10,10 +10,12 @@ function Tasks() {
   const [showEditModal, setShowEditModal] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
   const [tasks, setTasks] = useState([]);
+  const [projects, setProjects] = useState([]);
   const [title, setTitle] = useState("");
   const [status, setStatus] = useState("pending");
   const [due, setDue] = useState("");
   const [description, setDescription] = useState("");
+  const [projectId, setProjectId] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [editingTaskId, setEditingTaskId] = useState(null);
   const [titleError, setTitleError] = useState("");
@@ -23,6 +25,13 @@ function Tasks() {
   useEffect(() => {
     onValue(ref(db, `users/${user.uid}/todos`), (snapshot) => {
       setTasks(snapshot.val());
+    });
+  }, [user.uid]);
+
+  useEffect(() => {
+    onValue(ref(db, `users/${user.uid}/projects`), (snapshot) => {
+      const projectsData = snapshot.val();
+      setProjects(projectsData ? projectsData : {});
     });
   }, [user.uid]);
 
@@ -45,20 +54,27 @@ function Tasks() {
       return;
     }
 
-    push(ref(db, `users/${user.uid}/todos`), {
+    const taskData = {
       title: title.trim(),
       description: description.trim(),
       status: status,
       due: due || null,
       dateCreated: today,
       deletedAt: "",
-    })
+    };
+
+    const taskPath = projectId
+      ? `users/${user.uid}/projects/${projectId}/todos`
+      : `users/${user.uid}/todos`;
+
+    push(ref(db, taskPath), taskData)
       .then(() => {
         alert("Task added successfully!");
         setTitle("");
         setDescription("");
         setStatus("pending");
         setDue("");
+        setProjectId("");
         setShowModal(false);
       })
       .catch((error) => {
@@ -74,6 +90,7 @@ function Tasks() {
     setDescription(task.description || "");
     setStatus(task.status);
     setDue(task.due || "");
+    setProjectId(task.projectId || "");
     setShowEditModal(true);
   }
 
@@ -83,18 +100,25 @@ function Tasks() {
       return;
     }
 
-    update(ref(db, `users/${user.uid}/todos/${editingTaskId}`), {
+    const updateData = {
       title: title.trim(),
       description: description.trim(),
       status: status,
       due: due || null,
-    })
+    };
+
+    const updatePath = projectId
+      ? `users/${user.uid}/projects/${projectId}/todos/${editingTaskId}`
+      : `users/${user.uid}/todos/${editingTaskId}`;
+
+    update(ref(db, updatePath), updateData)
       .then(() => {
         alert("Task updated successfully!");
         setTitle("");
         setDescription("");
         setStatus("pending");
         setDue("");
+        setProjectId("");
         setEditingTaskId(null);
         setShowEditModal(false);
       })
@@ -109,6 +133,7 @@ function Tasks() {
     setDescription("");
     setStatus("pending");
     setDue("");
+    setProjectId("");
     setShowModal(false);
   }
 
@@ -117,6 +142,7 @@ function Tasks() {
     setDescription("");
     setStatus("pending");
     setDue("");
+    setProjectId("");
     setEditingTaskId(null);
     setShowEditModal(false);
   }
@@ -141,7 +167,7 @@ function Tasks() {
     <div className="tasks-container">
       <div className="tasks-header">
         <h2>Priority Tasks</h2>
-        
+
         <div className="button-container">
           <div className="filter-container">
             <label>Filter by Status: </label>
@@ -165,76 +191,77 @@ function Tasks() {
         </div>
       </div>
       <div className="tasks-scroll-wrapper">
-      <div className="tasks-grid">
-        {tasks ? (
-          Object.keys(tasks)
-            .filter((taskKey) => tasks[taskKey].status !== "deleted")
-            .filter(
-              (taskKey) =>
-                statusFilter === "all" || tasks[taskKey].status === statusFilter
-            )
-            .map((taskKey) => (
-              <div
-                key={taskKey}
-                className="tasks-card"
-                onClick={() => setSelectedTask(tasks[taskKey])}
-                style={{ cursor: "pointer" }}
-              >
-                <div className="card-header">
-                  <h3>
-                    {tasks[taskKey].title}{" "}
-                    {tasks[taskKey].due < today && (
-                      <span className="overdue-text">(Overdue)</span>
-                    )}
-                  </h3>
-                  <div className="card-actions">
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleEdit(taskKey);
-                      }}
-                      className="edit-btn"
-                      title="Edit task"
-                    >
-                      <i className="fa fa-edit"></i>
-                    </button>
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleDelete(taskKey);
-                      }}
-                      className="delete-btn"
-                      title="Delete task"
-                    >
-                      <i className="fa fa-trash"></i>
-                    </button>
+        <div className="tasks-grid">
+          {tasks ? (
+            Object.keys(tasks)
+              .filter((taskKey) => tasks[taskKey].status !== "deleted")
+              .filter(
+                (taskKey) =>
+                  statusFilter === "all" ||
+                  tasks[taskKey].status === statusFilter
+              )
+              .map((taskKey) => (
+                <div
+                  key={taskKey}
+                  className="tasks-card"
+                  onClick={() => setSelectedTask(tasks[taskKey])}
+                  style={{ cursor: "pointer" }}
+                >
+                  <div className="card-header">
+                    <h3>
+                      {tasks[taskKey].title}{" "}
+                      {tasks[taskKey].due < today && (
+                        <span className="overdue-text">(Overdue)</span>
+                      )}
+                    </h3>
+                    <div className="card-actions">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleEdit(taskKey);
+                        }}
+                        className="edit-btn"
+                        title="Edit task"
+                      >
+                        <i className="fa fa-edit"></i>
+                      </button>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDelete(taskKey);
+                        }}
+                        className="delete-btn"
+                        title="Delete task"
+                      >
+                        <i className="fa fa-trash"></i>
+                      </button>
+                    </div>
                   </div>
+                  <p className="tasks-description">
+                    {tasks[taskKey].description}
+                  </p>
+                  <p>
+                    Status:{" "}
+                    <span className={`status-${tasks[taskKey].status}`}>
+                      {" "}
+                      {tasks[taskKey].status.charAt(0).toUpperCase() +
+                        tasks[taskKey].status.slice(1)}
+                    </span>
+                  </p>
+                  {tasks[taskKey].due && (
+                    <p className="tasks-due">Due: {tasks[taskKey].due}</p>
+                  )}
+                  <p className="tasks-date">
+                    Created: {tasks[taskKey].dateCreated}
+                  </p>
                 </div>
-                <p className="tasks-description">
-                  {tasks[taskKey].description}
-                </p>
-                <p>
-                  Status:{" "}
-                  <span className={`status-${tasks[taskKey].status}`}>
-                    {" "}
-                    {tasks[taskKey].status.charAt(0).toUpperCase() +
-                      tasks[taskKey].status.slice(1)}
-                  </span>
-                </p>
-                {tasks[taskKey].due && (
-                  <p className="tasks-due">Due: {tasks[taskKey].due}</p>
-                )}
-                <p className="tasks-date">
-                  Created: {tasks[taskKey].dateCreated}
-                </p>
-              </div>
-            ))
-        ) : (
-          <p className="empty-state">
-            No tasks yet. Click the + button to add one!
-          </p>
-        )}
-      </div>
+              ))
+          ) : (
+            <p className="empty-state">
+              No tasks yet. Click the + button to add one!
+            </p>
+          )}
+        </div>
       </div>
 
       {/* Add Task Modal */}
@@ -283,6 +310,23 @@ function Tasks() {
                   value={due}
                   onChange={(e) => setDue(e.target.value)}
                 />
+              </div>
+              <div className="form-group">
+                <label>Project (Optional)</label>
+                <select
+                  value={projectId}
+                  onChange={(e) => setProjectId(e.target.value)}
+                >
+                  <option value="">No Project</option>
+                  {projects &&
+                    Object.keys(projects)
+                      .filter((key) => projects[key].status !== "completed")
+                      .map((key) => (
+                        <option key={key} value={key}>
+                          {projects[key].title}
+                        </option>
+                      ))}
+                </select>
               </div>
               <div className="modal-actions">
                 <button onClick={handleCancel} className="cancel-btn">
@@ -401,6 +445,23 @@ function Tasks() {
                   value={due}
                   onChange={(e) => setDue(e.target.value)}
                 />
+              </div>
+              <div className="form-group">
+                <label>Project (Optional)</label>
+                <select
+                  value={projectId}
+                  onChange={(e) => setProjectId(e.target.value)}
+                >
+                  <option value="">No Project</option>
+                  {projects &&
+                    Object.keys(projects)
+                      .filter((key) => projects[key].status !== "completed")
+                      .map((key) => (
+                        <option key={key} value={key}>
+                          {projects[key].title}
+                        </option>
+                      ))}
+                </select>
               </div>
               <div className="modal-actions">
                 <button onClick={handleEditCancel} className="cancel-btn">
