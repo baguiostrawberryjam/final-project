@@ -76,38 +76,65 @@ function AddProject() {
       </button>
 
       {showModal && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <h3>Add New Project</h3>
+        <div className="projects-modal-overlay">
+          <div className="projects-modal-content">
+            <h3>Create New Project</h3>
             
             <div className="form-container">
               <div className="form-group">
-                <label>Project Title</label>
-                <input type="text" placeholder="Enter project title" value={title} onChange={(e) => checkTitle(e)} required />
+                <label>Title</label>
+                <input
+                  type="text"
+                  placeholder="Enter Project Title"
+                  value={title}
+                  onChange={(e) => checkTitle(e)}
+                  required
+                />
                 {titleError && <p className="error-message">{titleError}</p>}
               </div>
 
               <div className="form-group">
                 <label>Description</label>
-                <textarea placeholder="Enter project description" value={description} onChange={(e) => setDescription(e.target.value)} rows="4" />
+                <textarea
+                  placeholder="Enter Project Description"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  rows="4"
+                />
               </div>
 
               <div className="form-group">
-                <label>Target Completion Date</label>
-                <input type="date" value={targetDate} onChange={(e) => setTargetDate(e.target.value)} min={today} />
+                <label>Due Date</label>
+                <input
+                  type="date"
+                  value={targetDate}
+                  onChange={(e) => setTargetDate(e.target.value)}
+                  min={today}
+                />
               </div>
 
               <div className="form-group">
                 <label>Folder Color</label>
                 <div className="color-picker-wrapper">
-                  <input type="color" value={folderColor}onChange={(e) => setFolderColor(e.target.value)}className="color-picker" />
-                  <span className="color-preview" style={{ backgroundColor: folderColor }}> {folderColor} </span>
+                  <input
+                    type="color"
+                    value={folderColor}
+                    onChange={(e) => setFolderColor(e.target.value)}
+                    className="color-picker"
+                  />
+                  <span className="color-preview" style={{ backgroundColor: folderColor }}>
+                    {folderColor}
+                  </span>
                 </div>
               </div>
 
               <div className="modal-actions">
-                <button onClick={handleCancel} className="cancel-btn"> Cancel </button>
-                <button onClick={handleAddProject} className="save-btn"> Add Project </button>
+                <button onClick={handleCancel} className="projects-cancel-btn">
+                  Cancel
+                </button>
+                <button onClick={handleAddProject} className="projects-save-btn">
+                  Save Project
+                </button>
               </div>
             </div>
           </div>

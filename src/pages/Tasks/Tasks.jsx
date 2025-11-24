@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Plus } from "lucide-react";
+import {
+  Plus,
+  Edit2,
+  Trash2,
+  Filter,
+  ChevronDown,
+  Calendar,
+} from "lucide-react";
 import { NavLink } from "react-router";
 import "./tasks.css";
 import { onValue, push, ref, update } from "firebase/database";
@@ -19,29 +26,35 @@ function Tasks() {
   const [statusFilter, setStatusFilter] = useState("all");
   const [editingTaskId, setEditingTaskId] = useState(null);
   const [titleError, setTitleError] = useState("");
+  const [filterDropdownOpen, setFilterDropdownOpen] = useState(false);
   const today = new Date().toISOString().split("T")[0];
   const user = auth.currentUser;
 
   useEffect(() => {
-    const unsubscribe = onValue(
-      ref(db, `users/${user.uid}/todos`),
-      (snapshot) => {
-        setTasks(snapshot.val());
-      }
-    );
-    return () => unsubscribe();
+    onValue(ref(db, `users/${user.uid}/todos`), (snapshot) => {
+      setTasks(snapshot.val());
+    });
   }, [user.uid]);
 
   useEffect(() => {
-    const unsubscribe = onValue(
-      ref(db, `users/${user.uid}/projects`),
-      (snapshot) => {
-        const projectsData = snapshot.val();
-        setProjects(projectsData ? projectsData : {});
-      }
-    );
-    return () => unsubscribe();
+    onValue(ref(db, `users/${user.uid}/projects`), (snapshot) => {
+      const projectsData = snapshot.val();
+      setProjects(projectsData ? projectsData : {});
+    });
   }, [user.uid]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (filterDropdownOpen && !event.target.closest(".filter-container")) {
+        setFilterDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [filterDropdownOpen]);
 
   function checkTitle(e) {
     let title = e.target.value;
@@ -172,32 +185,73 @@ function Tasks() {
   }
 
   return (
+    
+
     <div className="tasks-container">
       <div className="tasks-header">
-        <h2>My Tasks</h2>
+        <h2>Priority Tasks</h2>
 
         <div className="button-container">
           <div className="filter-container">
-            <label>Filter by Status: </label>
-            <select
-              value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value)}
+            <button
+              className="filter-btn"
+              onClick={() => setFilterDropdownOpen(!filterDropdownOpen)}
             >
-              <option value="all">All</option>
-              <option value="complete">Completed</option>
-              <option value="pending">Pending</option>
-              <option value="ongoing">Ongoing</option>
-            </select>
+              <Filter size={16} />
+              Filter by Status
+              <ChevronDown
+                size={16}
+                className={filterDropdownOpen ? "open" : ""}
+              />
+            </button>
+            {filterDropdownOpen && (
+              <div className="filter-dropdown">
+                <button
+                  onClick={() => {
+                    setStatusFilter("all");
+                    setFilterDropdownOpen(false);
+                  }}
+                  className={statusFilter === "all" ? "active" : ""}
+                >
+                  All
+                </button>
+                <button
+                  onClick={() => {
+                    setStatusFilter("complete");
+                    setFilterDropdownOpen(false);
+                  }}
+                  className={statusFilter === "complete" ? "active" : ""}
+                >
+                  Completed
+                </button>
+                <button
+                  onClick={() => {
+                    setStatusFilter("pending");
+                    setFilterDropdownOpen(false);
+                  }}
+                  className={statusFilter === "pending" ? "active" : ""}
+                >
+                  Pending
+                </button>
+                <button
+                  onClick={() => {
+                    setStatusFilter("ongoing");
+                    setFilterDropdownOpen(false);
+                  }}
+                  className={statusFilter === "ongoing" ? "active" : ""}
+                >
+                  On-going
+                </button>
+              </div>
+            )}
           </div>
-          <NavLink to="/task">
-            <button className="view-all-btn">View All</button>
-          </NavLink>
           <button onClick={() => setShowModal(true)} className="add-note-btn">
             <Plus size={15} />
             New Task
           </button>
         </div>
       </div>
+      <div className="tasks-wrapper">
       <div className="tasks-scroll-wrapper">
         <div className="tasks-grid">
           {tasks ? (
@@ -208,21 +262,49 @@ function Tasks() {
                   statusFilter === "all" ||
                   tasks[taskKey].status === statusFilter
               )
-              .map((taskKey) => (
-                <div
-                  key={taskKey}
-                  className="tasks-card"
-                  onClick={() => setSelectedTask(tasks[taskKey])}
-                  style={{ cursor: "pointer" }}
-                >
-                  <div className="card-header">
-                    <h3>
-                      {tasks[taskKey].title}{" "}
-                      {tasks[taskKey].due < today && (
-                        <span className="overdue-text">(Overdue)</span>
-                      )}
-                    </h3>
-                    <div className="card-actions">
+              .map((taskKey) => {
+                const task = tasks[taskKey];
+                const isOverdue = task.due && task.due < today;
+                const statusDisplay = task.status === "ongoing"
+                  ? "On-going" 
+                  : task.status.charAt(0).toUpperCase() + task.status.slice(1);
+
+                return (
+                  <div
+                    key={taskKey}
+                    className="tasks-card"
+                    onClick={() => setSelectedTask(task)}
+                  >
+                    <div className="task-content-left">
+                      <div className="task-title">{task.title}</div>
+                      <div
+                        className="task-description"
+                        title={task.description || ""}
+                      >
+                        {task.description
+                          ? task.description.length > 60
+                            ? task.description.substring(0, 60) + "..."
+                            : task.description
+                          : "-"}
+                      </div>
+                      <div className="overdue-badge-container">
+                        {isOverdue && (
+                          <div className="overdue-badge">Overdue</div>
+                        )}
+                      </div>
+                      <div className={`status-badge status-${task.status}`}>
+                        {statusDisplay}
+                      </div>
+                      <div className="task-due-date-container">
+                        {task.due && (
+                          <div className="task-due-date">
+                            <Calendar size={14} />
+                            {task.due}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                    <div className="actions-cell">
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
@@ -231,7 +313,7 @@ function Tasks() {
                         className="edit-btn"
                         title="Edit task"
                       >
-                        <i className="fa fa-edit"></i>
+                        <Edit2 size={16} />
                       </button>
                       <button
                         onClick={(e) => {
@@ -241,41 +323,25 @@ function Tasks() {
                         className="delete-btn"
                         title="Delete task"
                       >
-                        <i className="fa fa-trash"></i>
+                        <Trash2 size={16} />
                       </button>
                     </div>
                   </div>
-                  <p className="tasks-description">
-                    {tasks[taskKey].description}
-                  </p>
-                  <p>
-                    Status:{" "}
-                    <span className={`status-${tasks[taskKey].status}`}>
-                      {" "}
-                      {tasks[taskKey].status.charAt(0).toUpperCase() +
-                        tasks[taskKey].status.slice(1)}
-                    </span>
-                  </p>
-                  {tasks[taskKey].due && (
-                    <p className="tasks-due">Due: {tasks[taskKey].due}</p>
-                  )}
-                  <p className="tasks-date">
-                    Created: {tasks[taskKey].dateCreated}
-                  </p>
-                </div>
-              ))
+                );
+              })
           ) : (
-            <p className="empty-state">
+            <div className="empty-state">
               No tasks yet. Click the + button to add one!
-            </p>
+            </div>
           )}
         </div>
+      </div>
       </div>
 
       {/* Add Task Modal */}
       {showModal && (
-        <div className="modal-overlay">
-          <div className="modal-content">
+        <div className="tasks-modal-overlay">
+          <div className="tasks-modal-content">
             <h3>Create New Task</h3>
             <div className="form-container">
               <div className="form-group">
@@ -307,7 +373,7 @@ function Tasks() {
                   onChange={(e) => setStatus(e.target.value)}
                 >
                   <option value="pending">Pending</option>
-                  <option value="ongoing">Ongoing</option>
+                  <option value="ongoing">On-going</option>
                   <option value="complete">Complete</option>
                 </select>
               </div>
@@ -317,6 +383,7 @@ function Tasks() {
                   type="date"
                   value={due}
                   onChange={(e) => setDue(e.target.value)}
+                  min={today}
                 />
               </div>
               <div className="form-group">
@@ -328,11 +395,7 @@ function Tasks() {
                   <option value="">No Project</option>
                   {projects &&
                     Object.keys(projects)
-                      .filter(
-                        (key) =>
-                          projects[key].status !== "completed" &&
-                          projects[key].status !== "archived"
-                      )
+                      .filter((key) => projects[key].status !== "completed")
                       .map((key) => (
                         <option key={key} value={key}>
                           {projects[key].title}
@@ -341,10 +404,10 @@ function Tasks() {
                 </select>
               </div>
               <div className="modal-actions">
-                <button onClick={handleCancel} className="cancel-btn">
+                <button onClick={handleCancel} className="tasks-cancel-btn">
                   Cancel
                 </button>
-                <button onClick={handleSubmit} className="save-btn">
+                <button onClick={handleSubmit} className="tasks-save-btn">
                   Save Task
                 </button>
               </div>
@@ -355,10 +418,16 @@ function Tasks() {
 
       {/* Task Detail Modal */}
       {selectedTask && (
-        <div className="modal-overlay" onClick={() => setSelectedTask(null)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        <div
+          className="tasks-detail-modal-overlay"
+          onClick={() => setSelectedTask(null)}
+        >
+          <div
+            className="tasks-detail-modal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
             <button
-              className="modal-close-btn"
+              className="tasks-detail-modal-close-btn"
               onClick={() => setSelectedTask(null)}
             >
               ✕
@@ -390,8 +459,10 @@ function Tasks() {
                     <span
                       className={`status-badge status-${selectedTask.status}`}
                     >
-                      {selectedTask.status.charAt(0).toUpperCase() +
-                        selectedTask.status.slice(1)}
+                      {selectedTask.status === "ongoing"
+                        ? "On-going"
+                        : selectedTask.status.charAt(0).toUpperCase() +
+                          selectedTask.status.slice(1)}
                     </span>
                   </div>
                   {selectedTask.due && (
@@ -413,10 +484,10 @@ function Tasks() {
         </div>
       )}
 
-      {/* Add Task Modal */}
+      {/* Edit Task Modal */}
       {showEditModal && (
-        <div className="modal-overlay">
-          <div className="modal-content">
+        <div className="tasks-modal-overlay">
+          <div className="tasks-modal-content">
             <h3>Edit Task</h3>
             <div className="form-container">
               <div className="form-group">
@@ -446,7 +517,7 @@ function Tasks() {
                   onChange={(e) => setStatus(e.target.value)}
                 >
                   <option value="pending">Pending</option>
-                  <option value="ongoing">Ongoing</option>
+                  <option value="ongoing">On-going</option>
                   <option value="complete">Complete</option>
                 </select>
               </div>
@@ -467,11 +538,7 @@ function Tasks() {
                   <option value="">No Project</option>
                   {projects &&
                     Object.keys(projects)
-                      .filter(
-                        (key) =>
-                          projects[key].status !== "completed" &&
-                          projects[key].status !== "archived"
-                      )
+                      .filter((key) => projects[key].status !== "completed")
                       .map((key) => (
                         <option key={key} value={key}>
                           {projects[key].title}
@@ -480,10 +547,10 @@ function Tasks() {
                 </select>
               </div>
               <div className="modal-actions">
-                <button onClick={handleEditCancel} className="cancel-btn">
+                <button onClick={handleEditCancel} className="tasks-cancel-btn">
                   Cancel
                 </button>
-                <button onClick={handleUpdate} className="save-btn">
+                <button onClick={handleUpdate} className="tasks-save-btn">
                   Update Task
                 </button>
               </div>

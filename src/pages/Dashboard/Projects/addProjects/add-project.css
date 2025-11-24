@@ -20,7 +20,7 @@
 }
 
 /* Modal Overlay */
-.modal-overlay {
+.projects-modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -35,7 +35,7 @@
 }
 
 /* Modal Content */
-.modal-content {
+.projects-modal-content {
   background-color: white;
   border-radius: 0.5rem;
   box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
@@ -46,7 +46,7 @@
   overflow-y: auto;
 }
 
-.modal-content h3 {
+.projects-modal-content h3 {
   font-size: 1.25rem;
   font-weight: bold;
   color: #1f2937;
@@ -54,73 +54,84 @@
 }
 
 /* Form Container */
-.form-container {
+.projects-modal-content .form-container {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
 /* Form Groups */
-.form-group {
+.projects-modal-content .form-group {
   display: flex;
   flex-direction: column;
+  gap: 0.4rem;
+  margin: 0;
 }
 
-.form-group label {
-  display: block;
+.projects-modal-content .form-group label {
   font-size: 0.875rem;
-  font-weight: 500;
-  color: #374151;
-  margin-bottom: 0.25rem;
+  font-weight: var(--quicksand-600);
+  font-family: var(--font-subtitle);
+  color: var(--text-primary);
 }
 
-.form-group input,
-.form-group textarea {
-  width: 93%;
+.projects-modal-content .form-group input,
+.projects-modal-content .form-group textarea,
+.projects-modal-content .form-group select {
+  width: 100%;
   padding: 0.5rem 0.75rem;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--stroke-light);
   border-radius: 0.5rem;
-  font-size: 1rem;
+  font-size: 0.95rem;
+  font-family: var(--font-subtitle);
+  color: var(--text-primary);
   transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+  background-color: white;
 }
 
-.form-group input:focus,
-.form-group textarea:focus {
-  outline: none;
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-}
-
-.form-group textarea {
+.projects-modal-content .form-group textarea {
   resize: none;
-  font-family: inherit;
+  min-height: 110px;
   line-height: 1.5;
 }
 
+.projects-modal-content .form-group select {
+  cursor: pointer;
+}
+
+.projects-modal-content .form-group input:focus,
+.projects-modal-content .form-group textarea:focus,
+.projects-modal-content .form-group select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
 /* Color Picker */
-.color-picker-wrapper {
+.projects-modal-content .color-picker-wrapper {
   display: flex;
   align-items: center;
   gap: 0.75rem;
 }
 
-.color-picker {
+.projects-modal-content .color-picker {
   width: 3rem;
   height: 2.5rem;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--stroke-light);
   border-radius: 0.5rem;
   cursor: pointer;
   padding: 0.25rem;
 }
 
-.color-picker:hover {
-  border-color: #3b82f6;
+.projects-modal-content .color-picker:hover {
+  border-color: var(--primary);
 }
 
-.color-preview {
+.projects-modal-content .color-preview {
   flex: 1;
   padding: 0.5rem 0.75rem;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--stroke-light);
   border-radius: 0.5rem;
   font-size: 0.875rem;
   font-family: monospace;
@@ -129,66 +140,66 @@
 }
 
 /* Modal Actions */
-.modal-actions {
+.projects-modal-content .modal-actions {
   display: flex;
   gap: 0.75rem;
-  padding-top: 1rem;
+  margin-top: 1rem;
 }
 
-.cancel-btn,
-.save-btn {
+.projects-modal-content .projects-cancel-btn,
+.projects-modal-content .projects-save-btn {
   flex: 1;
   padding: 0.75rem;
   border: none;
   border-radius: 0.5rem;
-  font-weight: var(--quicksand-400);
+  font-weight: var(--quicksand-500);
   font-family: var(--font-subtitle);
   font-size: 0.875rem;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
 }
 
-.cancel-btn {
+.projects-modal-content .projects-cancel-btn {
   background-color: white;
   color: var(--text-primary);
   border: 2px solid var(--border-button);
 }
 
-.cancel-btn:hover {
+.projects-modal-content .projects-cancel-btn:hover {
   background-color: var(--hover-bg-state);
   border-color: var(--primary);
 }
 
-.save-btn {
+.projects-modal-content .projects-save-btn {
   background-color: var(--primary);
   color: white;
 }
 
-.save-btn:hover {
+.projects-modal-content .projects-save-btn:hover {
   background-color: var(--primary-hover);
 }
 
 /* Scrollbar Styling */
-.modal-content::-webkit-scrollbar {
+.projects-modal-content::-webkit-scrollbar {
   width: 0.5rem;
 }
 
-.modal-content::-webkit-scrollbar-track {
+.projects-modal-content::-webkit-scrollbar-track {
   background: #f3f4f6;
   border-radius: 0.5rem;
 }
 
-.modal-content::-webkit-scrollbar-thumb {
+.projects-modal-content::-webkit-scrollbar-thumb {
   background: #d1d5db;
   border-radius: 0.5rem;
 }
 
-.modal-content::-webkit-scrollbar-thumb:hover {
+.projects-modal-content::-webkit-scrollbar-thumb:hover {
   background: #9ca3af;
 }
 
-.error-message {
+.projects-modal-content .error-message {
   color: #ef4444;
-  font-size: 0.875rem;
-  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  margin-top: 0.2rem;
 }

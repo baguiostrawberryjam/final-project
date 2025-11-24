@@ -193,10 +193,16 @@ function Notes() {
 
       {/* Note Detail Modal */}
       {selectedNote && (
-        <div className="modal-overlay" onClick={() => setSelectedNote(null)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        <div
+          className="notes-detail-modal-overlay"
+          onClick={() => setSelectedNote(null)}
+        >
+          <div
+            className="notes-detail-modal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
             <button
-              className="modal-close-btn"
+              className="notes-detail-modal-close-btn"
               onClick={() => setSelectedNote(null)}
             >
               ✕
@@ -240,8 +246,8 @@ function Notes() {
 
       {/* Add Note Modal */}
       {showModal && (
-        <div className="modal-overlay">
-          <div className="modal-content">
+        <div className="notes-modal-overlay">
+          <div className="notes-modal-content">
             <h3>Create New Note</h3>
             <div className="form-container">
               <div className="form-group">
@@ -265,10 +271,10 @@ function Notes() {
                 />
               </div>
               <div className="modal-actions">
-                <button onClick={handleCancel} className="cancel-btn">
+                <button onClick={handleCancel} className="notes-cancel-btn">
                   Cancel
                 </button>
-                <button onClick={handleSubmit} className="save-btn">
+                <button onClick={handleSubmit} className="notes-save-btn">
                   Save Note
                 </button>
               </div>
@@ -279,8 +285,8 @@ function Notes() {
 
       {/* Edit Note Modal */}
       {showEditModal && (
-        <div className="modal-overlay">
-          <div className="modal-content">
+        <div className="notes-modal-overlay">
+          <div className="notes-modal-content">
             <h3>Edit Note</h3>
             <div className="form-container">
               <div className="form-group">
@@ -306,10 +312,13 @@ function Notes() {
                 />
               </div>
               <div className="modal-actions">
-                <button onClick={handleEditCancel} className="cancel-btn">
+                <button
+                  onClick={handleEditCancel}
+                  className="notes-cancel-btn"
+                >
                   Cancel
                 </button>
-                <button onClick={handleUpdate} className="save-btn">
+                <button onClick={handleUpdate} className="notes-save-btn">
                   Update Note
                 </button>
               </div>

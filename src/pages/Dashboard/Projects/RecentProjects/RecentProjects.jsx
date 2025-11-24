@@ -80,7 +80,7 @@ function RecentProjects() {
                         <h3>
                           {projects[key].title}{" "}
                           {projects[key].targetDate < today && (
-                            <span className="overdue-text">(Overdue)</span>
+                            <span className="project-overdue-badge">Overdue</span>
                           )}
                         </h3>
                         <p className="project-description">

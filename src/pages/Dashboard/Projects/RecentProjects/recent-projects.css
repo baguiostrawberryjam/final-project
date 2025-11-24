@@ -1,3 +1,17 @@
+.project-overdue-badge {
+  display: inline-block;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.375rem;
+  font-size: var(--font-xs);
+  font-weight: var(--quicksand-600);
+  font-family: var(--font-subtitle);
+  background-color: #fee2e2;
+  color: #991b1b;
+  white-space: nowrap;
+  text-align: center;
+  margin-left: 0.5rem;
+}
+
 .project-section {
   width: 100%;
   display: flex;

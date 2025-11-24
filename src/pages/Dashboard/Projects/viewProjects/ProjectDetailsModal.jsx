@@ -7,10 +7,13 @@ function ProjectDetailsModal({ project, onClose }) {
   const today = new Date().toISOString().split("T")[0];
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+    <div className="projects-detail-modal-overlay" onClick={onClose}>
+      <div
+        className="projects-detail-modal-content"
+        onClick={(e) => e.stopPropagation()}
+      >
         {/* Close Button */}
-        <button className="modal-close-btn" onClick={onClose}>
+        <button className="projects-detail-modal-close-btn" onClick={onClose}>
           <X size={22} />
         </button>
 

@@ -339,8 +339,8 @@ function Tasks() {
 
       {/* Add Task Modal */}
       {showModal && (
-        <div className="modal-overlay">
-          <div className="modal-content">
+        <div className="tasks-modal-overlay">
+          <div className="tasks-modal-content">
             <h3>Create New Task</h3>
             <div className="form-container">
               <div className="form-group">
@@ -403,10 +403,10 @@ function Tasks() {
                 </select>
               </div>
               <div className="modal-actions">
-                <button onClick={handleCancel} className="cancel-btn">
+                <button onClick={handleCancel} className="tasks-cancel-btn">
                   Cancel
                 </button>
-                <button onClick={handleSubmit} className="save-btn">
+                <button onClick={handleSubmit} className="tasks-save-btn">
                   Save Task
                 </button>
               </div>
@@ -417,10 +417,16 @@ function Tasks() {
 
       {/* Task Detail Modal */}
       {selectedTask && (
-        <div className="modal-overlay" onClick={() => setSelectedTask(null)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        <div
+          className="tasks-detail-modal-overlay"
+          onClick={() => setSelectedTask(null)}
+        >
+          <div
+            className="tasks-detail-modal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
             <button
-              className="modal-close-btn"
+              className="tasks-detail-modal-close-btn"
               onClick={() => setSelectedTask(null)}
             >
               ✕
@@ -477,10 +483,10 @@ function Tasks() {
         </div>
       )}
 
-      {/* Add Task Modal */}
+      {/* Edit Task Modal */}
       {showEditModal && (
-        <div className="modal-overlay">
-          <div className="modal-content">
+        <div className="tasks-modal-overlay">
+          <div className="tasks-modal-content">
             <h3>Edit Task</h3>
             <div className="form-container">
               <div className="form-group">
@@ -540,10 +546,10 @@ function Tasks() {
                 </select>
               </div>
               <div className="modal-actions">
-                <button onClick={handleEditCancel} className="cancel-btn">
+                <button onClick={handleEditCancel} className="tasks-cancel-btn">
                   Cancel
                 </button>
-                <button onClick={handleUpdate} className="save-btn">
+                <button onClick={handleUpdate} className="tasks-save-btn">
                   Update Task
                 </button>
               </div>
